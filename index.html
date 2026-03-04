@@ -266,10 +266,17 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .gf-btn{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;padding:5px 12px;border:1px solid var(--border);color:var(--text-dim);background:transparent;cursor:pointer;transition:all .2s;text-transform:uppercase;}
 .gf-btn.active{border-color:var(--gold);color:var(--gold);background:var(--gold-faint);}
 .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
-.gallery-card{background:var(--panel);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:border-color .25s,transform .25s;}
+.gallery-card{background:var(--panel);border:1px solid var(--border);overflow:hidden;transition:border-color .25s,transform .25s;}
 .gallery-card:hover{border-color:var(--gold-dim);transform:translateY(-3px);}
-.gallery-img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:var(--panel2);}
-.gallery-img-empty{width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:var(--panel2);font-size:28px;opacity:.25;}
+.gallery-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border2);}
+.gallery-slot{aspect-ratio:16/9;overflow:hidden;position:relative;cursor:pointer;background:var(--panel2);}
+.gallery-slot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s;}
+.gallery-slot:hover img{transform:scale(1.04);}
+.gallery-slot-empty{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:.2;font-size:16px;gap:3px;}
+.gallery-slot-label{position:absolute;top:4px;left:4px;font-family:'Space Mono',monospace;font-size:7px;letter-spacing:1px;padding:1px 5px;background:rgba(0,0,0,.65);color:#fff;}
+.gallery-slot-label.has{background:rgba(201,168,76,.55);color:#fff;}
+.gallery-slot-hover{position:absolute;inset:0;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;font-size:18px;}
+.gallery-slot:hover .gallery-slot-hover{opacity:1;}
 .gallery-info{padding:10px 12px;}
 .gallery-info-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
 .gallery-asset{font-family:'Space Mono',monospace;font-size:9px;color:var(--gold);}
@@ -1185,7 +1192,8 @@ tr:hover td{background:rgba(201,168,76,.015);}
 <!-- lightbox -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-  <img id="lightboxImg" src="" alt="">
+  <img id="lightboxImg" src="" alt="" onclick="event.stopPropagation()">
+  <div id="lightboxNav" style="display:flex;align-items:center;gap:16px;margin-top:14px" onclick="event.stopPropagation()"></div>
   <div class="lightbox-caption" id="lightboxCaption"></div>
 </div>
 
@@ -2647,7 +2655,7 @@ function filterGallery(f,btn){
 function renderGallery(){
   const el=document.getElementById('galleryGrid');
   if(!el)return;
-  let filtered=trades.filter(t=>t.screens&&(t.screens.htf||t.screens.mtf||t.screens.ltf)||true);
+  let filtered;
   if(galleryFilter==='BTC/USD')filtered=trades.filter(t=>t.asset==='BTC/USD');
   else if(galleryFilter==='XAU/USD')filtered=trades.filter(t=>t.asset==='XAU/USD');
   else if(galleryFilter==='win')filtered=trades.filter(t=>!['SL','BE'].includes(t.result));
@@ -2660,39 +2668,104 @@ function renderGallery(){
   if(!filtered.length){el.innerHTML=`<div class="gallery-empty" style="grid-column:1/-1"><div class="empty-icon">📸</div>Aucun trade trouvé pour ce filtre.</div>`;return;}
 
   const rc=r=>r==='SL'?'var(--red)':r==='BE'?'var(--text-dim)':'var(--green)';
+
   el.innerHTML=[...filtered].reverse().map(t=>{
-    const mainScreen=t.screens?.htf||t.screens?.mtf||t.screens?.ltf||null;
-    const imgHtml=mainScreen?`<img class="gallery-img" src="${mainScreen}" alt="${t.asset}" onclick="openLightbox('${mainScreen}','${t.asset} · ${t.date} · ${t.setup}')">`:`<div class="gallery-img-empty">📷</div>`;
-    const tfs=['htf','mtf','ltf'].map(tf=>`<span class="gallery-tf-chip${t.screens?.[tf]?' has-img':''}" onclick="${t.screens?.[tf]?`openLightbox('${t.screens[tf]}','${tf.toUpperCase()} — ${t.asset} · ${t.date}')`:''}">${tf.toUpperCase()}</span>`).join('');
+    // Build 3 slots HTF / MTF / LTF
+    const slots=['htf','mtf','ltf'].map(tf=>{
+      const src=t.screens?.[tf];
+      const safeId=`${t.id}_${tf}`;
+      if(src){
+        return`<div class="gallery-slot" onclick="openLightboxTrade(${t.id},'${tf}')">
+          <img src="${src}" alt="${tf}">
+          <div class="gallery-slot-label has">${tf.toUpperCase()}</div>
+          <div class="gallery-slot-hover">🔍</div>
+        </div>`;
+      } else {
+        return`<div class="gallery-slot" style="cursor:default">
+          <div class="gallery-slot-empty"><span>📷</span><span style="font-family:'Space Mono',monospace;font-size:7px">${tf.toUpperCase()}</span></div>
+          <div class="gallery-slot-label">${tf.toUpperCase()}</div>
+        </div>`;
+      }
+    }).join('');
+
+    const hasAny=t.screens&&(t.screens.htf||t.screens.mtf||t.screens.ltf);
+    const screenCount=['htf','mtf','ltf'].filter(tf=>t.screens?.[tf]).length;
+
     return`<div class="gallery-card">
-      ${imgHtml}
+      <div class="gallery-strip">${slots}</div>
       <div class="gallery-info">
         <div class="gallery-info-top">
           <span class="gallery-asset">${t.asset}</span>
           <span class="gallery-result" style="color:${rc(t.result)}">${t.result} ${t.gain>=0?'+':''}${t.gain}R</span>
         </div>
-        <div style="display:flex;justify-content:space-between">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px">
           <span class="gallery-date">${t.date} · ${t.session}</span>
-          <span style="font-family:'Space Mono',monospace;font-size:8px;padding:1px 6px;border:1px solid var(--gold-dim);color:var(--gold)">${t.setup}</span>
+          <div style="display:flex;gap:5px;align-items:center">
+            <span style="font-family:'Space Mono',monospace;font-size:7px;color:var(--text-dim)">${screenCount}/3 📷</span>
+            <span style="font-family:'Space Mono',monospace;font-size:8px;padding:1px 6px;border:1px solid var(--gold-dim);color:var(--gold)">${t.setup}</span>
+          </div>
         </div>
-        <div class="gallery-tf">${tfs}</div>
         ${t.comments?.lessons?`<div style="font-size:12px;font-style:italic;color:var(--text-dim);margin-top:7px;border-top:1px solid var(--border);padding-top:6px">"${t.comments.lessons.substring(0,80)}${t.comments.lessons.length>80?'...':''}"</div>`:''}
       </div>
     </div>`;
   }).join('');
 }
 
+function openLightboxTrade(tradeId, tf){
+  const t=trades.find(tr=>tr.id===tradeId);
+  if(!t)return;
+  // Build list of available screens in order
+  const available=['htf','mtf','ltf'].filter(k=>t.screens?.[k]);
+  let idx=available.indexOf(tf);
+  if(idx<0)idx=0;
+
+  function show(i){
+    const key=available[i];
+    const src=t.screens[key];
+    const lb=document.getElementById('lightbox');
+    const img=document.getElementById('lightboxImg');
+    const cap=document.getElementById('lightboxCaption');
+    const nav=document.getElementById('lightboxNav');
+    if(!lb||!img)return;
+    img.src=src;
+    if(cap)cap.textContent=`${key.toUpperCase()} — ${t.asset} · ${t.date} · ${t.setup} · ${i+1}/${available.length}`;
+    if(nav){
+      nav.innerHTML=available.length>1?`
+        <button onclick="event.stopPropagation();lbPrev()" style="background:none;border:1px solid rgba(255,255,255,.2);color:#fff;cursor:pointer;padding:6px 14px;font-family:'Space Mono',monospace;font-size:10px;transition:all .2s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(255,255,255,.2)'">← HTF/MTF/LTF</button>
+        <span style="font-family:'Space Mono',monospace;font-size:9px;color:rgba(255,255,255,.4)">${i+1} / ${available.length}</span>
+        <button onclick="event.stopPropagation();lbNext()" style="background:none;border:1px solid rgba(255,255,255,.2);color:#fff;cursor:pointer;padding:6px 14px;font-family:'Space Mono',monospace;font-size:10px;transition:all .2s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(255,255,255,.2)'">HTF/MTF/LTF →</button>
+      `:'';
+    }
+    lb._idx=i;lb._available=available;lb._trade=t;
+    lb.classList.add('open');
+  }
+
+  // Patch prev/next on lightbox
+  window.lbPrev=()=>{const lb=document.getElementById('lightbox');let i=(lb._idx-1+lb._available.length)%lb._available.length;show(i);};
+  window.lbNext=()=>{const lb=document.getElementById('lightbox');let i=(lb._idx+1)%lb._available.length;show(i);};
+
+  show(idx);
+}
+
 function openLightbox(src,caption){
   const lb=document.getElementById('lightbox');
   const img=document.getElementById('lightboxImg');
   const cap=document.getElementById('lightboxCaption');
+  const nav=document.getElementById('lightboxNav');
   if(!lb||!img)return;
   img.src=src;
   if(cap)cap.textContent=caption||'';
+  if(nav)nav.innerHTML='';
   lb.classList.add('open');
 }
 function closeLightbox(){document.getElementById('lightbox')?.classList.remove('open');}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
+document.addEventListener('keydown',e=>{
+  const lb=document.getElementById('lightbox');
+  if(!lb?.classList.contains('open'))return;
+  if(e.key==='Escape')closeLightbox();
+  if(e.key==='ArrowRight'&&window.lbNext)lbNext();
+  if(e.key==='ArrowLeft'&&window.lbPrev)lbPrev();
+});
 
 // ============================================================
 // GOALS
