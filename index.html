@@ -19,6 +19,29 @@
   --orange:#e67e22;--text:#bdb5a6;--text-dim:#5a5448;--white:#ede8dc;
   --nav-h:58px;
 }
+
+/* ---- LIGHT MODE ---- */
+body.light{
+  --black:#f4f0e8;--deep:#ede8dc;--panel:#ffffff;--panel2:#f7f4ed;--border:#ddd8cc;--border2:#ccc8bc;
+  --gold:#a8782a;--gold-light:#c9903a;--gold-dim:#b89050;--gold-faint:rgba(168,120,42,.07);--gold-glow:rgba(168,120,42,.15);
+  --red:#c0392b;--red-bg:rgba(192,57,43,.07);--red-border:rgba(192,57,43,.22);
+  --green:#1a9a52;--green-bg:rgba(26,154,82,.07);--green-border:rgba(26,154,82,.22);
+  --orange:#c96a10;--text:#3a3228;--text-dim:#9a9080;--white:#1a1208;
+}
+body.light::after{opacity:.012;}
+body.light .hero-bg{background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(168,120,42,.06) 0%,transparent 65%);}
+body.light .hero-grid{background-image:linear-gradient(rgba(168,120,42,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(168,120,42,.04) 1px,transparent 1px);}
+body.light #topnav{background:rgba(244,240,232,.97);}
+body.light .sanctuaire-page{background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(168,120,42,.05) 0%,transparent 60%);}
+body.light table tbody tr:hover td{background:rgba(168,120,42,.02);}
+
+/* theme toggle btn */
+#themeToggle{
+  background:none;border:1px solid var(--border);color:var(--text-dim);cursor:pointer;
+  width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+  font-size:15px;transition:all .22s;flex-shrink:0;
+}
+#themeToggle:hover{border-color:var(--gold-dim);color:var(--gold);}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{background:var(--black);color:var(--text);font-family:'Cormorant Garamond',serif;font-size:16px;line-height:1.65;overflow-x:hidden;min-height:100vh;}
@@ -565,7 +588,8 @@ tr:hover td{background:rgba(201,168,76,.015);}
     <button class="nav-link" onclick="gotoPage('outils')">🧮 Outils</button>
   </div>
 
-  <div style="display:flex;align-items:center;gap:12px;">
+  <div style="display:flex;align-items:center;gap:8px;">
+    <button id="themeToggle" onclick="toggleTheme()" title="Mode jour / nuit">🌙</button>
     <div class="nav-session-pill closed" id="navPill">
       <span class="pill-dot"></span>
       <span id="navPillTxt">HORS SESSION</span>
@@ -1932,6 +1956,21 @@ function saveQCard(year,qid){
   saveReview();renderReviewYearPanel(year);
   const btn=document.getElementById(`qsave_${year}_${qid}`);
   if(btn){btn.textContent='✅ Sauvegardé !';btn.classList.add('saved');setTimeout(()=>{btn.textContent='💾 Sauvegarder';btn.classList.remove('saved');},2000);}
+}
+
+// ============================================================
+// THEME TOGGLE
+// ============================================================
+(function(){
+  const saved=localStorage.getItem('ttt_theme');
+  if(saved==='light'){document.body.classList.add('light');const btn=document.getElementById('themeToggle');if(btn)btn.textContent='☀️';}
+})();
+function toggleTheme(){
+  document.body.classList.toggle('light');
+  const isLight=document.body.classList.contains('light');
+  localStorage.setItem('ttt_theme',isLight?'light':'dark');
+  const btn=document.getElementById('themeToggle');
+  if(btn)btn.textContent=isLight?'☀️':'🌙';
 }
 
 // ============================================================
