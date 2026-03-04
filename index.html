@@ -174,8 +174,157 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .rule-val{font-family:'Space Mono',monospace;font-size:11px;color:var(--gold);}
 
 /* ============================================================
-   PAGE PLAN — sections
+   PAGE CALENDRIER
    ============================================================ */
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.cal-month-title{font-family:'Cinzel',serif;font-size:22px;color:var(--gold);letter-spacing:3px;}
+.cal-arrow{background:none;border:1px solid var(--border);color:var(--text-dim);cursor:pointer;padding:7px 14px;font-size:16px;transition:all .2s;}
+.cal-arrow:hover{border-color:var(--gold-dim);color:var(--gold);}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;background:var(--border);}
+.cal-dow{background:var(--panel2);padding:8px 4px;text-align:center;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--gold-dim);text-transform:uppercase;}
+.cal-day{background:var(--panel);min-height:90px;padding:8px;cursor:pointer;transition:background .2s;position:relative;}
+.cal-day:hover{background:var(--panel2);}
+.cal-day.other-month{opacity:.3;}
+.cal-day.today{outline:1px solid var(--gold-dim);}
+.cal-day-num{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);margin-bottom:5px;}
+.cal-day.has-trades .cal-day-num{color:var(--white);}
+.cal-trade-dot{font-family:'Space Mono',monospace;font-size:8px;padding:2px 5px;margin-bottom:2px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;}
+.cal-trade-dot.win{background:rgba(46,204,113,.12);color:var(--green);border-left:2px solid var(--green);}
+.cal-trade-dot.loss{background:rgba(192,57,43,.12);color:var(--red);border-left:2px solid var(--red);}
+.cal-trade-dot.be{background:rgba(90,84,72,.15);color:var(--text-dim);border-left:2px solid var(--text-dim);}
+.cal-day-pnl{position:absolute;bottom:5px;right:6px;font-family:'Space Mono',monospace;font-size:8px;}
+.cal-legend{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;}
+.cal-leg-item{display:flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);letter-spacing:1px;}
+.cal-leg-dot{width:8px;height:8px;border-radius:50%;}
+
+/* ============================================================
+   PAGE GALLERY
+   ============================================================ */
+.gallery-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
+.gf-btn{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;padding:5px 12px;border:1px solid var(--border);color:var(--text-dim);background:transparent;cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.gf-btn.active{border-color:var(--gold);color:var(--gold);background:var(--gold-faint);}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
+.gallery-card{background:var(--panel);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:border-color .25s,transform .25s;}
+.gallery-card:hover{border-color:var(--gold-dim);transform:translateY(-3px);}
+.gallery-img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:var(--panel2);}
+.gallery-img-empty{width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:var(--panel2);font-size:28px;opacity:.25;}
+.gallery-info{padding:10px 12px;}
+.gallery-info-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
+.gallery-asset{font-family:'Space Mono',monospace;font-size:9px;color:var(--gold);}
+.gallery-result{font-family:'Space Mono',monospace;font-size:9px;}
+.gallery-date{font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);}
+.gallery-tf{display:flex;gap:4px;margin-top:6px;}
+.gallery-tf-chip{font-family:'Space Mono',monospace;font-size:7px;padding:2px 6px;border:1px solid var(--border);color:var(--text-dim);}
+.gallery-tf-chip.has-img{border-color:var(--gold-dim);color:var(--gold-dim);}
+.gallery-empty{text-align:center;padding:60px 20px;color:var(--text-dim);font-style:italic;}
+
+/* lightbox */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:2000;display:none;align-items:center;justify-content:center;flex-direction:column;padding:20px;}
+.lightbox.open{display:flex;}
+.lightbox img{max-width:90vw;max-height:80vh;object-fit:contain;border:1px solid var(--border);}
+.lightbox-close{position:absolute;top:20px;right:20px;background:none;border:1px solid var(--border);color:var(--text-dim);cursor:pointer;font-size:18px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.lightbox-close:hover{border-color:var(--red);color:var(--red);}
+.lightbox-caption{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);margin-top:12px;letter-spacing:2px;}
+
+/* ============================================================
+   PAGE OBJECTIFS & GOALS
+   ============================================================ */
+.goal-card{background:var(--panel);border:1px solid var(--border);padding:26px;position:relative;overflow:hidden;}
+.goal-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
+.goal-title{font-family:'Cinzel',serif;font-size:14px;color:var(--gold);letter-spacing:2px;margin-bottom:6px;}
+.goal-desc{font-size:13px;color:var(--text-dim);margin-bottom:18px;}
+.goal-input-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.goal-bar-wrap{background:var(--border);height:6px;border-radius:3px;overflow:hidden;margin-bottom:8px;}
+.goal-bar{height:100%;border-radius:3px;transition:width .8s cubic-bezier(.34,1.56,.64,1);}
+.goal-pct{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);}
+.goal-current{font-family:'Cinzel',serif;font-size:28px;margin-bottom:4px;}
+.goal-target{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);}
+
+.level-strip{display:flex;gap:0;margin-top:32px;border:1px solid var(--border);overflow:hidden;}
+.level-item{flex:1;padding:14px 8px;text-align:center;border-right:1px solid var(--border);transition:background .3s;}
+.level-item:last-child{border-right:none;}
+.level-item.active{background:var(--gold-faint);}
+.level-emoji{font-size:22px;margin-bottom:6px;}
+.level-name{font-family:'Cinzel',serif;font-size:10px;color:var(--text-dim);letter-spacing:1px;}
+.level-item.active .level-name{color:var(--gold);}
+.level-req{font-family:'Space Mono',monospace;font-size:7px;color:var(--text-dim);margin-top:3px;}
+
+/* ============================================================
+   PAGE PRÉ-TRADE
+   ============================================================ */
+.pretrade-wrap{max-width:680px;margin:0 auto;}
+.pretrade-header{text-align:center;margin-bottom:36px;}
+.pretrade-score{font-family:'Cinzel',serif;font-size:72px;font-weight:900;line-height:1;margin-bottom:6px;}
+.pretrade-score-lbl{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:4px;color:var(--text-dim);}
+.checklist-section{margin-bottom:24px;}
+.cl-section-title{font-family:'Cinzel',serif;font-size:12px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.cl-item{display:flex;align-items:center;gap:14px;padding:13px 16px;border:1px solid var(--border);margin-bottom:6px;cursor:pointer;transition:all .22s;user-select:none;}
+.cl-item:hover{border-color:var(--border2);}
+.cl-item.checked{border-color:var(--green-border);background:var(--green-bg);}
+.cl-item.blocked{border-color:var(--red-border);background:var(--red-bg);}
+.cl-box{width:20px;height:20px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;transition:all .2s;}
+.cl-item.checked .cl-box{border-color:var(--green);background:var(--green);color:var(--black);}
+.cl-item.blocked .cl-box{border-color:var(--red);background:var(--red);color:var(--white);}
+.cl-text{font-size:15px;flex:1;}
+.cl-item.checked .cl-text{color:var(--white);}
+.cl-badge{font-family:'Space Mono',monospace;font-size:7px;padding:2px 7px;border:1px solid;}
+.pretrade-verdict{padding:24px;text-align:center;border:1px solid;margin-top:24px;transition:all .3s;}
+.pretrade-verdict.go{border-color:var(--green-border);background:var(--green-bg);}
+.pretrade-verdict.nogo{border-color:var(--red-border);background:var(--red-bg);}
+.pretrade-verdict.pending{border-color:var(--border);background:var(--panel);}
+.verdict-icon{font-size:40px;margin-bottom:8px;}
+.verdict-title{font-family:'Cinzel',serif;font-size:24px;letter-spacing:3px;margin-bottom:6px;}
+.verdict-sub{font-size:15px;color:var(--text-dim);}
+.pretrade-reset{margin-top:16px;}
+
+/* ============================================================
+   PAGE SANCTUAIRE
+   ============================================================ */
+.sanctuaire-page{background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(201,168,76,.04) 0%,transparent 60%);}
+.sanc-hero{text-align:center;padding:52px 24px 36px;position:relative;}
+.sanc-torii{font-size:64px;filter:drop-shadow(0 0 24px rgba(201,168,76,.3));animation:glow 5s ease-in-out infinite;}
+.sanc-title{font-family:'Cinzel',serif;font-size:clamp(22px,5vw,42px);color:var(--gold);letter-spacing:4px;margin-bottom:8px;}
+.sanc-sub{font-size:17px;font-style:italic;color:var(--text-dim);}
+
+.breath-ring{width:160px;height:160px;border-radius:50%;border:2px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;position:relative;cursor:pointer;transition:all .3s;}
+.breath-ring::before{content:'';position:absolute;inset:8px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.08),transparent);transition:all .3s;}
+.breath-ring.inhale{animation:breatheIn 4s ease-in-out forwards;}
+.breath-ring.hold{animation:none;border-color:var(--gold);box-shadow:0 0 28px rgba(201,168,76,.25);}
+.breath-ring.exhale{animation:breatheOut 4s ease-in-out forwards;}
+@keyframes breatheIn{0%{transform:scale(1);}100%{transform:scale(1.35);border-color:var(--gold);box-shadow:0 0 40px rgba(201,168,76,.3);}}
+@keyframes breatheOut{0%{transform:scale(1.35);}100%{transform:scale(1);border-color:var(--gold-dim);box-shadow:none;}}
+.breath-label{font-family:'Cinzel',serif;font-size:14px;letter-spacing:3px;color:var(--gold);}
+.breath-count{font-family:'Space Mono',monospace;font-size:28px;font-weight:700;color:var(--white);margin-top:4px;}
+.breath-instruction{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--text-dim);text-transform:uppercase;margin-top:8px;min-height:16px;}
+
+.mood-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:10px;margin-bottom:24px;}
+.mood-btn{background:var(--panel);border:1px solid var(--border);padding:16px 8px;text-align:center;cursor:pointer;transition:all .25s;}
+.mood-btn:hover{border-color:var(--gold-dim);transform:translateY(-2px);}
+.mood-btn.selected{border-color:var(--gold);background:var(--gold-faint);}
+.mood-emoji{font-size:26px;margin-bottom:6px;}
+.mood-label{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--text-dim);text-transform:uppercase;}
+
+.mantra-rotator{background:var(--panel);border:1px solid var(--gold-dim);padding:36px;text-align:center;position:relative;overflow:hidden;margin-bottom:20px;}
+.mantra-rotator::before,.mantra-rotator::after{content:'⛩';position:absolute;font-size:56px;opacity:.03;top:50%;transform:translateY(-50%);}
+.mantra-rotator::before{left:10px;}.mantra-rotator::after{right:10px;}
+.mantra-current{font-size:clamp(15px,2.5vw,20px);font-style:italic;color:var(--white);line-height:1.8;min-height:60px;transition:opacity .4s;}
+.mantra-nav-btn{background:none;border:1px solid var(--border);color:var(--text-dim);cursor:pointer;padding:6px 14px;font-size:14px;transition:all .2s;margin-top:14px;}
+.mantra-nav-btn:hover{border-color:var(--gold-dim);color:var(--gold);}
+
+.journal-sanc{background:var(--panel);border:1px solid var(--border);padding:22px;}
+.journal-sanc textarea{background:var(--panel2);border:1px solid var(--border);padding:12px;color:var(--white);font-family:'Cormorant Garamond',serif;font-size:16px;outline:none;width:100%;resize:vertical;min-height:100px;transition:border-color .2s;line-height:1.7;}
+.journal-sanc textarea:focus{border-color:var(--gold-dim);}
+.sanc-timer{background:var(--panel);border:1px solid var(--border);padding:28px;text-align:center;}
+.timer-display{font-family:'Cinzel',serif;font-size:clamp(40px,7vw,72px);color:var(--gold);letter-spacing:6px;text-shadow:0 0 30px rgba(201,168,76,.2);margin-bottom:16px;}
+.timer-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+
+@media(max-width:760px){
+  .cal-grid{gap:1px;}
+  .cal-day{min-height:60px;padding:5px;}
+  .gallery-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));}
+  .level-strip{flex-wrap:wrap;}
+  .level-item{min-width:80px;}
+}
 .tf-block{background:var(--panel);border:1px solid var(--border);padding:28px;margin-bottom:16px;}
 .tf-title{font-family:'Cinzel',serif;font-size:16px;color:var(--gold);margin-bottom:16px;letter-spacing:1px;}
 .tf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
@@ -407,6 +556,11 @@ tr:hover td{background:rgba(201,168,76,.015);}
     <button class="nav-link active" onclick="gotoPage('home')">🏠 Accueil</button>
     <button class="nav-link" onclick="gotoPage('plan')">📜 Plan</button>
     <button class="nav-link" onclick="gotoPage('journal')">📋 Journal</button>
+    <button class="nav-link" onclick="gotoPage('calendrier')">📅 Calendrier</button>
+    <button class="nav-link" onclick="gotoPage('gallery')">📸 Gallery</button>
+    <button class="nav-link" onclick="gotoPage('goals')">🎯 Objectifs</button>
+    <button class="nav-link" onclick="gotoPage('pretrade')">⚡ Pré-Trade</button>
+    <button class="nav-link" onclick="gotoPage('sanctuaire')">🧘 Sanctuaire</button>
     <button class="nav-link" onclick="gotoPage('review')">🪞 Review</button>
     <button class="nav-link" onclick="gotoPage('outils')">🧮 Outils</button>
   </div>
@@ -934,6 +1088,277 @@ tr:hover td{background:rgba(201,168,76,.015);}
 </div>
 
 <!-- ============================================================
+     PAGE : CALENDRIER
+     ============================================================ -->
+<div class="page" id="page-calendrier">
+<div class="wrap">
+  <div class="sec-hdr"><span class="sec-num">—</span><h2 class="sec-title">📅 Vue Calendrier</h2><div class="sec-line"></div></div>
+  <div class="cal-nav">
+    <button class="cal-arrow" onclick="calPrev()">←</button>
+    <div class="cal-month-title" id="calTitle">—</div>
+    <button class="cal-arrow" onclick="calNext()">→</button>
+  </div>
+  <div style="background:var(--panel);border:1px solid var(--border);overflow:hidden;">
+    <div class="cal-grid" id="calDows"></div>
+    <div class="cal-grid" id="calDays"></div>
+  </div>
+  <div class="cal-legend">
+    <div class="cal-leg-item"><div class="cal-leg-dot" style="background:var(--green)"></div>Trade gagnant</div>
+    <div class="cal-leg-item"><div class="cal-leg-dot" style="background:var(--red)"></div>Trade perdant</div>
+    <div class="cal-leg-item"><div class="cal-leg-dot" style="background:var(--text-dim)"></div>Breakeven</div>
+  </div>
+  <div style="margin-top:24px;background:var(--panel);border:1px solid var(--border);padding:22px;" id="calDaySummary" style="display:none">
+    <div class="ctitle" style="margin-bottom:14px" id="calDaySummaryTitle">Sélectionne un jour</div>
+    <div id="calDaySummaryContent" style="color:var(--text-dim);font-style:italic">Clique sur un jour pour voir les trades.</div>
+  </div>
+</div>
+<footer class="site-footer"><div class="ft-torii">⛩️</div><div class="ft-title">THE TRADER'S TEMPLE · V2</div></footer>
+</div>
+
+<!-- ============================================================
+     PAGE : GALLERY
+     ============================================================ -->
+<div class="page" id="page-gallery">
+<div class="wrap">
+  <div class="sec-hdr"><span class="sec-num">—</span><h2 class="sec-title">📸 Gallery</h2><div class="sec-line"></div></div>
+  <p style="color:var(--text-dim);font-style:italic;margin-bottom:24px;font-size:15px">Tous tes screenshots classés par trade. Filtre par actif, setup ou résultat.</p>
+  <div class="gallery-filters" id="galleryFilters">
+    <button class="gf-btn active" data-filter="all" onclick="filterGallery('all',this)">Tous</button>
+    <button class="gf-btn" data-filter="BTC/USD" onclick="filterGallery('BTC/USD',this)">BTC/USD</button>
+    <button class="gf-btn" data-filter="XAU/USD" onclick="filterGallery('XAU/USD',this)">XAU/USD</button>
+    <button class="gf-btn" data-filter="win" onclick="filterGallery('win',this)">✅ Wins</button>
+    <button class="gf-btn" data-filter="loss" onclick="filterGallery('loss',this)">❌ Losses</button>
+    <button class="gf-btn" data-filter="A++" onclick="filterGallery('A++',this)">A++</button>
+    <button class="gf-btn" data-filter="A+" onclick="filterGallery('A+',this)">A+</button>
+    <button class="gf-btn" data-filter="has_screen" onclick="filterGallery('has_screen',this)">📷 Avec screen</button>
+  </div>
+  <div class="gallery-grid" id="galleryGrid"></div>
+</div>
+<footer class="site-footer"><div class="ft-torii">⛩️</div><div class="ft-title">THE TRADER'S TEMPLE · V2</div></footer>
+</div>
+
+<!-- lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightboxImg" src="" alt="">
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
+<!-- ============================================================
+     PAGE : OBJECTIFS & GOALS
+     ============================================================ -->
+<div class="page" id="page-goals">
+<div class="wrap">
+  <div class="sec-hdr"><span class="sec-num">—</span><h2 class="sec-title">🎯 Objectifs & Goals</h2><div class="sec-line"></div></div>
+  <p style="color:var(--text-dim);font-style:italic;margin-bottom:32px;font-size:15px">Fixe tes targets, suis ta progression. La discipline se mesure.</p>
+
+  <div class="g2" style="margin-bottom:24px">
+    <div class="goal-card">
+      <div class="goal-title">Winrate Cible</div>
+      <div class="goal-desc">Pourcentage de trades gagnants visé</div>
+      <div class="goal-input-row">
+        <span class="mono" style="font-size:11px;color:var(--text-dim)">Objectif :</span>
+        <input type="number" class="finput" id="goalWR" style="width:80px" value="60" min="1" max="100" oninput="saveGoals();renderGoals()">
+        <span class="mono" style="font-size:11px;color:var(--text-dim)">%</span>
+      </div>
+      <div class="goal-current" id="goalWRCurrent" style="color:var(--gold)">—</div>
+      <div class="goal-target" id="goalWRTarget">Objectif : 60%</div>
+      <div class="goal-bar-wrap" style="margin-top:12px"><div class="goal-bar" id="goalWRBar" style="background:var(--gold)"></div></div>
+      <div class="goal-pct" id="goalWRPct">—</div>
+    </div>
+    <div class="goal-card">
+      <div class="goal-title">R Mensuel Visé</div>
+      <div class="goal-desc">Gain en R à atteindre ce mois</div>
+      <div class="goal-input-row">
+        <span class="mono" style="font-size:11px;color:var(--text-dim)">Objectif :</span>
+        <input type="number" class="finput" id="goalR" style="width:80px" value="10" min="1" oninput="saveGoals();renderGoals()">
+        <span class="mono" style="font-size:11px;color:var(--text-dim)">R</span>
+      </div>
+      <div class="goal-current" id="goalRCurrent" style="color:var(--gold)">—</div>
+      <div class="goal-target" id="goalRTarget">Objectif : 10R</div>
+      <div class="goal-bar-wrap" style="margin-top:12px"><div class="goal-bar" id="goalRBar" style="background:var(--gold)"></div></div>
+      <div class="goal-pct" id="goalRPct">—</div>
+    </div>
+    <div class="goal-card">
+      <div class="goal-title">Capital Objectif (€)</div>
+      <div class="goal-desc">Capital cible à atteindre</div>
+      <div class="goal-input-row">
+        <span class="mono" style="font-size:11px;color:var(--text-dim)">Objectif :</span>
+        <input type="number" class="finput" id="goalCapital" style="width:100px" value="6000" step="100" oninput="saveGoals();renderGoals()">
+        <span class="mono" style="font-size:11px;color:var(--text-dim)">€</span>
+      </div>
+      <div class="goal-current" id="goalCapCurrent" style="color:var(--gold)">—</div>
+      <div class="goal-target" id="goalCapTarget">Objectif : 6000€</div>
+      <div class="goal-bar-wrap" style="margin-top:12px"><div class="goal-bar" id="goalCapBar" style="background:var(--gold)"></div></div>
+      <div class="goal-pct" id="goalCapPct">—</div>
+    </div>
+    <div class="goal-card">
+      <div class="goal-title">Respect du Plan</div>
+      <div class="goal-desc">% de trades respectant ton plan</div>
+      <div class="goal-input-row">
+        <span class="mono" style="font-size:11px;color:var(--text-dim)">Objectif :</span>
+        <input type="number" class="finput" id="goalPlan" style="width:80px" value="90" min="1" max="100" oninput="saveGoals();renderGoals()">
+        <span class="mono" style="font-size:11px;color:var(--text-dim)">%</span>
+      </div>
+      <div class="goal-current" id="goalPlanCurrent" style="color:var(--gold)">—</div>
+      <div class="goal-target" id="goalPlanTarget">Objectif : 90%</div>
+      <div class="goal-bar-wrap" style="margin-top:12px"><div class="goal-bar" id="goalPlanBar" style="background:var(--gold)"></div></div>
+      <div class="goal-pct" id="goalPlanPct">—</div>
+    </div>
+  </div>
+
+  <!-- LEVEL SYSTEM -->
+  <div class="sec-hdr" style="margin-bottom:18px"><span class="sec-num">—</span><h3 class="sec-title" style="font-size:18px">Niveau du Trader</h3><div class="sec-line"></div></div>
+  <div class="level-strip" id="levelStrip">
+    <div class="level-item" data-level="0"><div class="level-emoji">🌱</div><div class="level-name">Initié</div><div class="level-req">0–20 trades</div></div>
+    <div class="level-item" data-level="1"><div class="level-emoji">🗡️</div><div class="level-name">Apprenti</div><div class="level-req">21–50 trades</div></div>
+    <div class="level-item" data-level="2"><div class="level-emoji">⚔️</div><div class="level-name">Guerrier</div><div class="level-req">51–100 trades</div></div>
+    <div class="level-item" data-level="3"><div class="level-emoji">🏹</div><div class="level-name">Chasseur</div><div class="level-req">101–200 trades</div></div>
+    <div class="level-item" data-level="4"><div class="level-emoji">🔱</div><div class="level-name">Maître</div><div class="level-req">201–500 trades</div></div>
+    <div class="level-item" data-level="5"><div class="level-emoji">🏯</div><div class="level-name">Sensei</div><div class="level-req">500+ trades</div></div>
+  </div>
+  <div style="text-align:center;margin-top:16px;font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim)" id="levelDesc">—</div>
+</div>
+<footer class="site-footer"><div class="ft-torii">⛩️</div><div class="ft-title">THE TRADER'S TEMPLE · V2</div></footer>
+</div>
+
+<!-- ============================================================
+     PAGE : PRÉ-TRADE
+     ============================================================ -->
+<div class="page" id="page-pretrade">
+<div class="wrap">
+  <div class="sec-hdr"><span class="sec-num">—</span><h2 class="sec-title">⚡ Mode Pré-Trade</h2><div class="sec-line"></div></div>
+  <div class="pretrade-wrap">
+    <div class="pretrade-header">
+      <div class="pretrade-score" id="pretradeScore" style="color:var(--text-dim)">0/10</div>
+      <div class="pretrade-score-lbl">CHECKLIST SCORE</div>
+    </div>
+
+    <div class="checklist-section">
+      <div class="cl-section-title">🕐 Contexte & Session</div>
+      <div class="cl-item" onclick="toggleCL(this)" data-key="session"><div class="cl-box">✓</div><div class="cl-text">Je suis dans une session autorisée (09h-12h ou 14h-18h)</div><span class="cl-badge" style="border-color:var(--red);color:var(--red)">BLOQUANT</span></div>
+      <div class="cl-item" onclick="toggleCL(this)" data-key="calm"><div class="cl-box">✓</div><div class="cl-text">Je suis calme, reposé et concentré</div><span class="cl-badge" style="border-color:var(--red);color:var(--red)">BLOQUANT</span></div>
+      <div class="cl-item" onclick="toggleCL(this)" data-key="norevenge"><div class="cl-box">✓</div><div class="cl-text">Je ne trade pas pour me "refaire" après un SL</div><span class="cl-badge" style="border-color:var(--red);color:var(--red)">BLOQUANT</span></div>
+      <div class="cl-item" onclick="toggleCL(this)" data-key="limit"><div class="cl-box">✓</div><div class="cl-text">Je n'ai pas déjà pris 2 SL aujourd'hui</div><span class="cl-badge" style="border-color:var(--red);color:var(--red)">BLOQUANT</span></div>
+    </div>
+
+    <div class="checklist-section">
+      <div class="cl-section-title">📊 Analyse & Structure</div>
+      <div class="cl-item" onclick="toggleCL(this)" data-key="bias"><div class="cl-box">✓</div><div class="cl-text">J'ai un biais H4 clair (bullish ou bearish)</div></div>
+      <div class="cl-item" onclick="toggleCL(this)" data-key="zone"><div class="cl-box">✓</div><div class="cl-text">J'ai identifié une zone H4 ou M15 (OB ou IMB)</div></div>
+      <div class="cl-item" onclick="toggleCL(this)" data-key="sweep"><div class="cl-box">✓</div><div class="cl-text">Il y a eu un sweep de liquidité</div></div>
+      <div class="cl-item" onclick="toggleCL(this)" data-key="bos"><div class="cl-box">✓</div><div class="cl-text">Il y a eu un Market Shift / BOS confirmé</div></div>
+    </div>
+
+    <div class="checklist-section">
+      <div class="cl-section-title">🎯 Exécution</div>
+      <div class="cl-item" onclick="toggleCL(this)" data-key="confirm"><div class="cl-box">✓</div><div class="cl-text">J'ai une confirmation M1 (clôture ou engulfing)</div></div>
+      <div class="cl-item" onclick="toggleCL(this)" data-key="sl"><div class="cl-box">✓</div><div class="cl-text">Mon SL est placé logiquement (sous/sur la structure)</div></div>
+    </div>
+
+    <div class="pretrade-verdict pending" id="pretradeVerdict">
+      <div class="verdict-icon" id="verdictIcon">⏳</div>
+      <div class="verdict-title" id="verdictTitle">EN ATTENTE</div>
+      <div class="verdict-sub" id="verdictSub">Complète la checklist pour obtenir ton verdict.</div>
+    </div>
+    <div class="pretrade-reset" style="text-align:center;margin-top:14px">
+      <button class="btn" onclick="resetPretrade()">🔄 Réinitialiser</button>
+    </div>
+  </div>
+</div>
+<footer class="site-footer"><div class="ft-torii">⛩️</div><div class="ft-title">THE TRADER'S TEMPLE · V2</div></footer>
+</div>
+
+<!-- ============================================================
+     PAGE : SANCTUAIRE
+     ============================================================ -->
+<div class="page sanctuaire-page" id="page-sanctuaire">
+<div class="wrap-sm">
+
+  <div class="sanc-hero reveal">
+    <div class="sanc-torii">🧘</div>
+    <h2 class="sanc-title">Le Sanctuaire</h2>
+    <p class="sanc-sub">Respire. Pose les armes. Le marché sera encore là demain.</p>
+  </div>
+
+  <!-- MOOD -->
+  <div style="margin-bottom:36px" class="reveal">
+    <div class="ctitle" style="margin-bottom:16px;text-align:center">Comment tu te sens ?</div>
+    <div class="mood-grid">
+      <div class="mood-btn" onclick="selectMood(this,'frustrated')"><div class="mood-emoji">😤</div><div class="mood-label">Frustré</div></div>
+      <div class="mood-btn" onclick="selectMood(this,'angry')"><div class="mood-emoji">😡</div><div class="mood-label">En colère</div></div>
+      <div class="mood-btn" onclick="selectMood(this,'sad')"><div class="mood-emoji">😔</div><div class="mood-label">Découragé</div></div>
+      <div class="mood-btn" onclick="selectMood(this,'anxious')"><div class="mood-emoji">😰</div><div class="mood-label">Anxieux</div></div>
+      <div class="mood-btn" onclick="selectMood(this,'tired')"><div class="mood-emoji">😴</div><div class="mood-label">Fatigué</div></div>
+      <div class="mood-btn" onclick="selectMood(this,'calm')"><div class="mood-emoji">😌</div><div class="mood-label">Calme</div></div>
+    </div>
+    <div id="moodMessage" style="display:none;margin-top:16px;padding:18px 22px;border:1px solid var(--gold-dim);background:var(--gold-faint);font-size:15px;font-style:italic;color:var(--white);line-height:1.8;text-align:center"></div>
+  </div>
+
+  <!-- BREATHING -->
+  <div style="margin-bottom:36px;text-align:center" class="reveal">
+    <div class="ctitle" style="margin-bottom:20px;text-align:center">Respiration 4-7-4</div>
+    <div class="breath-ring" id="breathRing" onclick="startBreath()">
+      <div>
+        <div class="breath-label" id="breathLabel">TAP POUR<br>COMMENCER</div>
+        <div class="breath-count" id="breathCount"></div>
+      </div>
+    </div>
+    <div class="breath-instruction" id="breathInstruction">Clique sur l'anneau pour commencer</div>
+    <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-top:8px">Cycles complétés : <span id="breathCycles" style="color:var(--gold)">0</span></div>
+  </div>
+
+  <!-- MANTRA ROTATOR -->
+  <div style="margin-bottom:36px" class="reveal">
+    <div class="ctitle" style="margin-bottom:16px;text-align:center">Mantras du Temple</div>
+    <div class="mantra-rotator">
+      <div class="mantra-current" id="mantraCurrent"></div>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:14px">
+        <button class="mantra-nav-btn" onclick="prevMantra()">←</button>
+        <button class="mantra-nav-btn" onclick="nextMantra()">→</button>
+        <button class="mantra-nav-btn" onclick="shuffleMantra()">🔀</button>
+      </div>
+      <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);margin-top:12px" id="mantraCounter"></div>
+    </div>
+  </div>
+
+  <!-- TIMER MÉDITATION -->
+  <div style="margin-bottom:36px" class="reveal">
+    <div class="ctitle" style="margin-bottom:16px;text-align:center">Timer Déconnexion</div>
+    <div class="sanc-timer">
+      <div class="timer-display" id="timerDisplay">05:00</div>
+      <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-bottom:18px">Déconnecte-toi du marché le temps du timer.</div>
+      <div class="timer-btns">
+        <button class="btn" onclick="setTimer(3)">3 min</button>
+        <button class="btn" onclick="setTimer(5)">5 min</button>
+        <button class="btn" onclick="setTimer(10)">10 min</button>
+        <button class="btn" onclick="setTimer(15)">15 min</button>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:14px">
+        <button class="btn green" onclick="startTimer()" id="timerStartBtn">▶ Démarrer</button>
+        <button class="btn red" onclick="resetTimer()">■ Stop</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JOURNAL ÉMOTIONNEL -->
+  <div class="reveal">
+    <div class="ctitle" style="margin-bottom:16px;text-align:center">Journal Émotionnel</div>
+    <div class="journal-sanc">
+      <div style="font-size:13px;color:var(--text-dim);margin-bottom:12px;font-style:italic">Écris ce que tu ressens. Ici, personne ne te juge.</div>
+      <textarea id="sancJournal" placeholder="Qu'est-ce qui s'est passé ? Qu'est-ce que tu ressens ? Qu'est-ce que tu aurais pu faire différemment ?..."></textarea>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+        <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim)" id="sancSaveStatus">Sauvegarde auto</div>
+        <button class="btn" onclick="clearSancJournal()">Effacer</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+<footer class="site-footer"><div class="ft-torii">⛩️</div><div class="ft-title">THE TRADER'S TEMPLE · V2</div></footer>
+</div>
+
+<!-- ============================================================
      MODAL DÉTAIL TRADE
      ============================================================ -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
@@ -976,19 +1401,6 @@ document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
 // ============================================================
 // NAVIGATION
 // ============================================================
-function gotoPage(name){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
-  document.getElementById('page-'+name).classList.add('active');
-  const btn=document.querySelector(`.nav-link[onclick="gotoPage('${name}')"]`);
-  if(btn)btn.classList.add('active');
-  window.scrollTo({top:0,behavior:'instant'});
-  document.getElementById('navLinks').classList.remove('open');
-  if(name==='outils'){calcPosition();loadFearGreed();}
-  if(name==='journal'){renderAll();}
-  if(name==='review'){renderReviewYearTabs();renderReviewYearPanel(activeReviewYear);}
-  if(name==='home'){renderHomeKPIs();}
-}
 function toggleBurger(){document.getElementById('navLinks').classList.toggle('open');}
 
 // ============================================================
@@ -1520,6 +1932,453 @@ function saveQCard(year,qid){
   saveReview();renderReviewYearPanel(year);
   const btn=document.getElementById(`qsave_${year}_${qid}`);
   if(btn){btn.textContent='✅ Sauvegardé !';btn.classList.add('saved');setTimeout(()=>{btn.textContent='💾 Sauvegarder';btn.classList.remove('saved');},2000);}
+}
+
+// ============================================================
+// NAVIGATION — updated to handle new pages
+// ============================================================
+function gotoPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  const btn=document.querySelector(`.nav-link[onclick="gotoPage('${name}')"]`);
+  if(btn)btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
+  document.getElementById('navLinks').classList.remove('open');
+  if(name==='outils'){calcPosition();loadFearGreed();}
+  if(name==='journal'){renderAll();}
+  if(name==='review'){renderReviewYearTabs();renderReviewYearPanel(activeReviewYear);}
+  if(name==='home'){renderHomeKPIs();loadFearGreed();}
+  if(name==='calendrier'){renderCalendar();}
+  if(name==='gallery'){renderGallery();}
+  if(name==='goals'){renderGoals();}
+  if(name==='sanctuaire'){renderMantras();}
+}
+
+// ============================================================
+// CALENDRIER
+// ============================================================
+let calDate = new Date();
+function calPrev(){calDate.setMonth(calDate.getMonth()-1);renderCalendar();}
+function calNext(){calDate.setMonth(calDate.getMonth()+1);renderCalendar();}
+
+function renderCalendar(){
+  const y=calDate.getFullYear(),m=calDate.getMonth();
+  const MONTHS=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  const DOWS=['LUN','MAR','MER','JEU','VEN','SAM','DIM'];
+  const titleEl=document.getElementById('calTitle');
+  if(titleEl)titleEl.textContent=`${MONTHS[m]} ${y}`;
+
+  // DOW headers
+  const dowsEl=document.getElementById('calDows');
+  if(dowsEl)dowsEl.innerHTML=DOWS.map(d=>`<div class="cal-dow">${d}</div>`).join('');
+
+  // Build days
+  const firstDay=new Date(y,m,1);
+  const lastDay=new Date(y,m+1,0);
+  const startDow=(firstDay.getDay()+6)%7; // 0=Mon
+  const today=new Date();
+
+  // Group trades by date
+  const tradesByDate={};
+  trades.forEach(t=>{if(!tradesByDate[t.date])tradesByDate[t.date]=[];tradesByDate[t.date].push(t);});
+
+  let days=[];
+  // prev month padding
+  for(let i=0;i<startDow;i++){
+    const d=new Date(y,m,1-startDow+i);
+    days.push({date:d,cur:false});
+  }
+  // current month
+  for(let i=1;i<=lastDay.getDate();i++) days.push({date:new Date(y,m,i),cur:true});
+  // next month padding
+  while(days.length%7!==0) days.push({date:new Date(y,m+1,days.length-lastDay.getDate()-startDow+1),cur:false});
+
+  const daysEl=document.getElementById('calDays');
+  if(!daysEl)return;
+  daysEl.innerHTML=days.map(({date,cur})=>{
+    const key=`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
+    const dayTrades=tradesByDate[key]||[];
+    const isToday=date.toDateString()===today.toDateString();
+    const totalPnl=dayTrades.reduce((s,t)=>s+t.gain,0);
+    const hasTrades=dayTrades.length>0;
+    const dots=dayTrades.slice(0,3).map(t=>{
+      const cls=t.result==='SL'?'loss':t.result==='BE'?'be':'win';
+      return`<span class="cal-trade-dot ${cls}" onclick="event.stopPropagation();openModal(${t.id})">${t.asset} ${t.setup}</span>`;
+    }).join('');
+    const more=dayTrades.length>3?`<span style="font-family:'Space Mono',monospace;font-size:7px;color:var(--text-dim)">+${dayTrades.length-3} autres</span>`:'';
+    const pnlHtml=hasTrades?`<div class="cal-day-pnl" style="color:${totalPnl>=0?'var(--green)':'var(--red)'}">${totalPnl>=0?'+':''}${totalPnl.toFixed(1)}R</div>`:'';
+    return`<div class="cal-day${!cur?' other-month':''}${isToday?' today':''}${hasTrades?' has-trades':''}" onclick="calDayClick('${key}')">
+      <div class="cal-day-num">${date.getDate()}</div>
+      ${dots}${more}${pnlHtml}
+    </div>`;
+  }).join('');
+}
+
+function calDayClick(dateKey){
+  const dayTrades=trades.filter(t=>t.date===dateKey);
+  const summaryEl=document.getElementById('calDaySummary');
+  const titleEl=document.getElementById('calDaySummaryTitle');
+  const contentEl=document.getElementById('calDaySummaryContent');
+  if(!summaryEl||!titleEl||!contentEl)return;
+  summaryEl.style.display='block';
+  titleEl.textContent=`Trades du ${dateKey}`;
+  if(!dayTrades.length){contentEl.innerHTML='<span style="color:var(--text-dim);font-style:italic">Aucun trade ce jour.</span>';return;}
+  const totalPnl=dayTrades.reduce((s,t)=>s+t.gain,0);
+  contentEl.innerHTML=`<div style="margin-bottom:12px;font-family:'Space Mono',monospace;font-size:10px;color:${totalPnl>=0?'var(--green)':'var(--red)'}">P&L du jour : ${totalPnl>=0?'+':''}${totalPnl.toFixed(1)}R</div>`+
+  dayTrades.map(t=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border:1px solid var(--border);margin-bottom:6px;background:var(--panel2)">
+    <div style="display:flex;gap:12px;align-items:center">
+      <span style="font-family:'Space Mono',monospace;font-size:9px;color:var(--gold)">${t.asset}</span>
+      <span style="font-family:'Space Mono',monospace;font-size:9px;padding:2px 6px;border:1px solid var(--gold-dim);color:var(--gold)">${t.setup}</span>
+      <span style="font-family:'Space Mono',monospace;font-size:9px;color:${t.dir==='LONG'?'var(--green)':'var(--red)'}">${t.dir}</span>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <span style="font-family:'Space Mono',monospace;font-size:10px;color:${t.result==='SL'?'var(--red)':t.result==='BE'?'var(--text-dim)':'var(--green)'}">${t.result}</span>
+      <span style="font-family:'Space Mono',monospace;font-size:10px;color:${t.gain>=0?'var(--green)':'var(--red)'}">${t.gain>=0?'+':''}${t.gain}R</span>
+      <button class="view-btn" onclick="openModal(${t.id})">DÉTAIL</button>
+    </div>
+  </div>`).join('');
+}
+
+// ============================================================
+// GALLERY
+// ============================================================
+let galleryFilter='all';
+function filterGallery(f,btn){
+  galleryFilter=f;
+  document.querySelectorAll('.gf-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGallery();
+}
+
+function renderGallery(){
+  const el=document.getElementById('galleryGrid');
+  if(!el)return;
+  let filtered=trades.filter(t=>t.screens&&(t.screens.htf||t.screens.mtf||t.screens.ltf)||true);
+  if(galleryFilter==='BTC/USD')filtered=trades.filter(t=>t.asset==='BTC/USD');
+  else if(galleryFilter==='XAU/USD')filtered=trades.filter(t=>t.asset==='XAU/USD');
+  else if(galleryFilter==='win')filtered=trades.filter(t=>!['SL','BE'].includes(t.result));
+  else if(galleryFilter==='loss')filtered=trades.filter(t=>t.result==='SL');
+  else if(galleryFilter==='A++')filtered=trades.filter(t=>t.setup==='A++');
+  else if(galleryFilter==='A+')filtered=trades.filter(t=>t.setup==='A+');
+  else if(galleryFilter==='has_screen')filtered=trades.filter(t=>t.screens&&(t.screens.htf||t.screens.mtf||t.screens.ltf));
+  else filtered=[...trades];
+
+  if(!filtered.length){el.innerHTML=`<div class="gallery-empty" style="grid-column:1/-1"><div class="empty-icon">📸</div>Aucun trade trouvé pour ce filtre.</div>`;return;}
+
+  const rc=r=>r==='SL'?'var(--red)':r==='BE'?'var(--text-dim)':'var(--green)';
+  el.innerHTML=[...filtered].reverse().map(t=>{
+    const mainScreen=t.screens?.htf||t.screens?.mtf||t.screens?.ltf||null;
+    const imgHtml=mainScreen?`<img class="gallery-img" src="${mainScreen}" alt="${t.asset}" onclick="openLightbox('${mainScreen}','${t.asset} · ${t.date} · ${t.setup}')">`:`<div class="gallery-img-empty">📷</div>`;
+    const tfs=['htf','mtf','ltf'].map(tf=>`<span class="gallery-tf-chip${t.screens?.[tf]?' has-img':''}" onclick="${t.screens?.[tf]?`openLightbox('${t.screens[tf]}','${tf.toUpperCase()} — ${t.asset} · ${t.date}')`:''}">${tf.toUpperCase()}</span>`).join('');
+    return`<div class="gallery-card">
+      ${imgHtml}
+      <div class="gallery-info">
+        <div class="gallery-info-top">
+          <span class="gallery-asset">${t.asset}</span>
+          <span class="gallery-result" style="color:${rc(t.result)}">${t.result} ${t.gain>=0?'+':''}${t.gain}R</span>
+        </div>
+        <div style="display:flex;justify-content:space-between">
+          <span class="gallery-date">${t.date} · ${t.session}</span>
+          <span style="font-family:'Space Mono',monospace;font-size:8px;padding:1px 6px;border:1px solid var(--gold-dim);color:var(--gold)">${t.setup}</span>
+        </div>
+        <div class="gallery-tf">${tfs}</div>
+        ${t.comments?.lessons?`<div style="font-size:12px;font-style:italic;color:var(--text-dim);margin-top:7px;border-top:1px solid var(--border);padding-top:6px">"${t.comments.lessons.substring(0,80)}${t.comments.lessons.length>80?'...':''}"</div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openLightbox(src,caption){
+  const lb=document.getElementById('lightbox');
+  const img=document.getElementById('lightboxImg');
+  const cap=document.getElementById('lightboxCaption');
+  if(!lb||!img)return;
+  img.src=src;
+  if(cap)cap.textContent=caption||'';
+  lb.classList.add('open');
+}
+function closeLightbox(){document.getElementById('lightbox')?.classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
+
+// ============================================================
+// GOALS
+// ============================================================
+let goalsData=JSON.parse(localStorage.getItem('ttt_goals_v1')||'{"wr":60,"r":10,"capital":6000,"plan":90}');
+function saveGoals(){
+  goalsData.wr=parseFloat(document.getElementById('goalWR')?.value)||60;
+  goalsData.r=parseFloat(document.getElementById('goalR')?.value)||10;
+  goalsData.capital=parseFloat(document.getElementById('goalCapital')?.value)||6000;
+  goalsData.plan=parseFloat(document.getElementById('goalPlan')?.value)||90;
+  localStorage.setItem('ttt_goals_v1',JSON.stringify(goalsData));
+}
+function renderGoals(){
+  if(!document.getElementById('goalWR'))return;
+  document.getElementById('goalWR').value=goalsData.wr;
+  document.getElementById('goalR').value=goalsData.r;
+  document.getElementById('goalCapital').value=goalsData.capital;
+  document.getElementById('goalPlan').value=goalsData.plan;
+
+  // Current month trades
+  const now=new Date();
+  const monthKey=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
+  const monthTrades=trades.filter(t=>t.date.startsWith(monthKey));
+
+  // WR
+  if(trades.length){
+    const wr=Math.round(trades.filter(t=>!['SL','BE'].includes(t.result)).length/trades.length*100);
+    const pct=Math.min(100,Math.round(wr/goalsData.wr*100));
+    const color=pct>=100?'var(--green)':pct>=60?'var(--gold)':'var(--red)';
+    document.getElementById('goalWRCurrent').textContent=wr+'%';
+    document.getElementById('goalWRCurrent').style.color=color;
+    document.getElementById('goalWRTarget').textContent=`Objectif : ${goalsData.wr}%`;
+    document.getElementById('goalWRBar').style.width=pct+'%';
+    document.getElementById('goalWRBar').style.background=color;
+    document.getElementById('goalWRPct').textContent=pct+'% de l\'objectif atteint';
+  }
+
+  // R mensuel
+  const monthR=monthTrades.reduce((s,t)=>s+t.gain,0);
+  const rPct=goalsData.r>0?Math.min(100,Math.round(Math.max(0,monthR)/goalsData.r*100)):0;
+  const rColor=rPct>=100?'var(--green)':rPct>=60?'var(--gold)':'var(--red)';
+  document.getElementById('goalRCurrent').textContent=(monthR>=0?'+':'')+monthR.toFixed(1)+'R ce mois';
+  document.getElementById('goalRCurrent').style.color=rColor;
+  document.getElementById('goalRTarget').textContent=`Objectif : ${goalsData.r}R`;
+  document.getElementById('goalRBar').style.width=rPct+'%';
+  document.getElementById('goalRBar').style.background=rColor;
+  document.getElementById('goalRPct').textContent=rPct+'% de l\'objectif atteint';
+
+  // Capital
+  const lastCap=trades.filter(t=>t.capital>0).slice(-1)[0]?.capital||5000;
+  const capPct=Math.min(100,Math.round(Math.max(0,(lastCap-5000))/(goalsData.capital-5000)*100));
+  const capColor=capPct>=100?'var(--green)':capPct>=60?'var(--gold)':'var(--red)';
+  document.getElementById('goalCapCurrent').textContent=lastCap.toFixed(0)+'€';
+  document.getElementById('goalCapCurrent').style.color=capColor;
+  document.getElementById('goalCapTarget').textContent=`Objectif : ${goalsData.capital}€`;
+  document.getElementById('goalCapBar').style.width=capPct+'%';
+  document.getElementById('goalCapBar').style.background=capColor;
+  document.getElementById('goalCapPct').textContent=capPct+'% de l\'objectif atteint';
+
+  // Plan respect
+  const planPct2=trades.length?Math.round(trades.filter(t=>t.plan==='OUI').length/trades.length*100):0;
+  const planGoalPct=Math.min(100,Math.round(planPct2/goalsData.plan*100));
+  const planColor=planGoalPct>=100?'var(--green)':planGoalPct>=60?'var(--gold)':'var(--red)';
+  document.getElementById('goalPlanCurrent').textContent=planPct2+'%';
+  document.getElementById('goalPlanCurrent').style.color=planColor;
+  document.getElementById('goalPlanTarget').textContent=`Objectif : ${goalsData.plan}%`;
+  document.getElementById('goalPlanBar').style.width=planGoalPct+'%';
+  document.getElementById('goalPlanBar').style.background=planColor;
+  document.getElementById('goalPlanPct').textContent=planGoalPct+'% de l\'objectif atteint';
+
+  // Level
+  const n=trades.length;
+  const levels=[{max:20,lv:0},{max:50,lv:1},{max:100,lv:2},{max:200,lv:3},{max:500,lv:4},{max:Infinity,lv:5}];
+  const lvl=levels.find(l=>n<=l.max);
+  document.querySelectorAll('.level-item').forEach(el=>el.classList.remove('active'));
+  document.querySelector(`[data-level="${lvl.lv}"]`)?.classList.add('active');
+  const descs=['Commence ton voyage. Pose les bases.','Tu apprends les mécanismes. Continue.','Tu bâtis ta consistance. Bel effort.','Tu maîtrises ta méthode. Solidifie.','Excellence en cours. Le temple te reconnaît.','Le marché n\'a plus de secrets pour toi. 🏯'];
+  const descEl=document.getElementById('levelDesc');
+  if(descEl)descEl.textContent=`${n} trades · ${descs[lvl.lv]}`;
+}
+
+// ============================================================
+// PRÉ-TRADE CHECKLIST
+// ============================================================
+const BLOCKERS=['session','calm','norevenge','limit'];
+function toggleCL(el){
+  el.classList.toggle('checked');
+  updateVerdict();
+}
+function updateVerdict(){
+  const items=document.querySelectorAll('.cl-item');
+  const total=items.length;
+  const checked=document.querySelectorAll('.cl-item.checked').length;
+  const scoreEl=document.getElementById('pretradeScore');
+  if(scoreEl)scoreEl.textContent=`${checked}/${total}`;
+  const pct=Math.round(checked/total*100);
+  if(scoreEl)scoreEl.style.color=pct===100?'var(--green)':pct>=70?'var(--gold)':'var(--red)';
+
+  const blockersFail=BLOCKERS.some(k=>{
+    const el=document.querySelector(`[data-key="${k}"]`);
+    return el&&!el.classList.contains('checked');
+  });
+
+  const v=document.getElementById('pretradeVerdict');
+  const vi=document.getElementById('verdictIcon');
+  const vt=document.getElementById('verdictTitle');
+  const vs=document.getElementById('verdictSub');
+  if(!v)return;
+
+  if(blockersFail){
+    v.className='pretrade-verdict nogo';vi.textContent='🚫';vt.textContent='NO GO';vs.textContent='Une condition bloquante n\'est pas remplie. Ne prends pas ce trade.';
+  } else if(checked===total){
+    v.className='pretrade-verdict go';vi.textContent='✅';vt.textContent='FEU VERT';vs.textContent='Toutes les conditions sont remplies. Tu peux entrer en position.';
+  } else if(checked>=7){
+    v.className='pretrade-verdict go';vi.textContent='⚠️';vt.textContent='AVEC PRUDENCE';vs.textContent=`${total-checked} point(s) manquant(s). Trade possible mais reste vigilant.`;
+  } else {
+    v.className='pretrade-verdict pending';vi.textContent='⏳';vt.textContent='EN ATTENTE';vs.textContent='Continue de remplir la checklist.';
+  }
+}
+function resetPretrade(){
+  document.querySelectorAll('.cl-item').forEach(el=>el.classList.remove('checked','blocked'));
+  const v=document.getElementById('pretradeVerdict');
+  if(v){v.className='pretrade-verdict pending';}
+  document.getElementById('verdictIcon').textContent='⏳';
+  document.getElementById('verdictTitle').textContent='EN ATTENTE';
+  document.getElementById('verdictSub').textContent='Complète la checklist pour obtenir ton verdict.';
+  document.getElementById('pretradeScore').textContent='0/10';
+  document.getElementById('pretradeScore').style.color='var(--text-dim)';
+}
+
+// ============================================================
+// SANCTUAIRE
+// ============================================================
+
+// Mood messages
+const moodMessages={
+  frustrated:'Respire. Un SL n\'est pas un échec, c\'est le coût de faire du business. Les meilleurs traders du monde en prennent tous les jours. Ce qui compte c\'est comment tu réagis maintenant.',
+  angry:'La colère est l\'ennemie du capital. Le marché ne t\'en veut pas — il ne sait même pas que tu existes. Pose le clavier, respire, reviens quand tu es calme.',
+  sad:'Le découragement est normal. Même les traders professionnels ont des séries de SL. Ce n\'est pas ta valeur en tant que personne. C\'est juste du bruit statistique. Tu vas t\'en sortir.',
+  anxious:'L\'anxiété vient de l\'incertitude. Et l\'incertitude est partout en trading. Ce que tu contrôles : ton entrée, ton SL, ta taille de position. Le reste appartient au marché.',
+  tired:'Trader fatigué = trader qui perd. Le cerveau fatigué prend de mauvaises décisions. Le marché sera là demain. Repose-toi vraiment.',
+  calm:'Tu es dans le bon état pour trader. Garde cet équilibre, ne force rien. Si le setup n\'est pas là, pas de trade. La patience est une position.'
+};
+function selectMood(el,mood){
+  document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  const msgEl=document.getElementById('moodMessage');
+  if(msgEl){msgEl.style.display='block';msgEl.textContent=moodMessages[mood]||'';}
+}
+
+// Mantras
+const MANTRAS=[
+  '« Je ne cherche pas à avoir raison. Je laisse le marché me donner raison. »',
+  '« Un SL respecté est une victoire sur soi-même. »',
+  '« La patience est ma position la plus rentable. »',
+  '« Je ne trade pas le passé. Je trade ce qui est devant moi. »',
+  '« Le plan existe pour les moments où je ne pense pas clairement. »',
+  '« La discipline d\'aujourd\'hui est le profit de demain. »',
+  '« Un trade que je ne prends pas ne peut pas me faire perdre. »',
+  '« Le marché n\'est pas mon ennemi. Mon ego l\'est. »',
+  '« Je maîtrise ce que je peux maîtriser. Le reste n\'est pas mon problème. »',
+  '« Chaque SL m\'enseigne quelque chose. Chaque TP me prouve quelque chose. »',
+  '« Le meilleur trade est parfois l\'absence de trade. »',
+  '« Je traduit pour construire, pas pour prouver. »',
+  '« Que tu gères 100€ ou 100 000€, la discipline reste identique. »',
+  '« Le temple récompense les patients. »',
+  '« Je ne suis pas mon dernier trade. Je suis la somme de mes décisions. »',
+];
+let mantraIdx=0;
+function renderMantras(){
+  const el=document.getElementById('mantraCurrent');
+  const cnt=document.getElementById('mantraCounter');
+  if(el)el.textContent=MANTRAS[mantraIdx];
+  if(cnt)cnt.textContent=`${mantraIdx+1} / ${MANTRAS.length}`;
+}
+function nextMantra(){mantraIdx=(mantraIdx+1)%MANTRAS.length;fadeMantra();}
+function prevMantra(){mantraIdx=(mantraIdx-1+MANTRAS.length)%MANTRAS.length;fadeMantra();}
+function shuffleMantra(){mantraIdx=Math.floor(Math.random()*MANTRAS.length);fadeMantra();}
+function fadeMantra(){
+  const el=document.getElementById('mantraCurrent');
+  if(!el)return;
+  el.style.opacity='0';
+  setTimeout(()=>{renderMantras();el.style.opacity='1';},300);
+}
+
+// Breathing 4-7-4
+let breathPhase='idle',breathTimer=null,breathTick=0,breathCycleCount=0;
+function startBreath(){
+  if(breathPhase!=='idle')return;
+  runBreathPhase('inhale',4);
+}
+function runBreathPhase(phase,duration){
+  breathPhase=phase;
+  const ring=document.getElementById('breathRing');
+  const lbl=document.getElementById('breathLabel');
+  const cnt=document.getElementById('breathCount');
+  const inst=document.getElementById('breathInstruction');
+  const labels={inhale:'INSPIRE',hold:'RETIENS',exhale:'EXPIRE'};
+  const instrs={inhale:'Inspire profondément par le nez...',hold:'Retiens ton souffle...',exhale:'Expire lentement par la bouche...'};
+  if(ring){ring.className='breath-ring '+phase;}
+  if(lbl)lbl.textContent=labels[phase]||'';
+  if(inst)inst.textContent=instrs[phase]||'';
+  breathTick=duration;
+  if(cnt)cnt.textContent=breathTick;
+  clearInterval(breathTimer);
+  breathTimer=setInterval(()=>{
+    breathTick--;
+    if(cnt)cnt.textContent=Math.max(0,breathTick);
+    if(breathTick<=0){
+      clearInterval(breathTimer);
+      if(phase==='inhale')runBreathPhase('hold',7);
+      else if(phase==='hold')runBreathPhase('exhale',4);
+      else{
+        breathCycleCount++;
+        const cc=document.getElementById('breathCycles');
+        if(cc)cc.textContent=breathCycleCount;
+        breathPhase='idle';
+        if(ring)ring.className='breath-ring';
+        if(lbl)lbl.textContent='CYCLE COMPLET';
+        if(cnt)cnt.textContent='';
+        if(inst)inst.textContent='Clique pour un autre cycle';
+        setTimeout(()=>{if(lbl)lbl.textContent='TAP POUR\nCOMMENCER';},2000);
+      }
+    }
+  },1000);
+}
+
+// Timer
+let timerSeconds=300,timerInterval=null,timerRunning=false;
+function setTimer(min){
+  resetTimer();
+  timerSeconds=min*60;
+  updateTimerDisplay();
+}
+function updateTimerDisplay(){
+  const m=Math.floor(timerSeconds/60),s=timerSeconds%60;
+  const el=document.getElementById('timerDisplay');
+  if(el)el.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+function startTimer(){
+  if(timerRunning)return;
+  timerRunning=true;
+  const btn=document.getElementById('timerStartBtn');
+  if(btn)btn.textContent='⏸ En cours...';
+  timerInterval=setInterval(()=>{
+    timerSeconds--;
+    updateTimerDisplay();
+    if(timerSeconds<=0){
+      clearInterval(timerInterval);timerRunning=false;
+      const el=document.getElementById('timerDisplay');
+      if(el){el.textContent='00:00';el.style.color='var(--green)';}
+      const btn2=document.getElementById('timerStartBtn');
+      if(btn2)btn2.textContent='▶ Démarrer';
+    }
+  },1000);
+}
+function resetTimer(){
+  clearInterval(timerInterval);timerRunning=false;timerSeconds=300;
+  updateTimerDisplay();
+  const el=document.getElementById('timerDisplay');
+  if(el)el.style.color='var(--gold)';
+  const btn=document.getElementById('timerStartBtn');
+  if(btn)btn.textContent='▶ Démarrer';
+}
+
+// Journal émotionnel auto-save
+const sancJournalEl=document.getElementById('sancJournal');
+if(sancJournalEl){
+  sancJournalEl.value=localStorage.getItem('ttt_sanc_journal')||'';
+  sancJournalEl.addEventListener('input',()=>{
+    localStorage.setItem('ttt_sanc_journal',sancJournalEl.value);
+    const st=document.getElementById('sancSaveStatus');
+    if(st){st.textContent='✅ Sauvegardé';setTimeout(()=>st.textContent='Sauvegarde auto',1500);}
+  });
+}
+function clearSancJournal(){
+  if(!confirm('Effacer le journal ?'))return;
+  if(sancJournalEl)sancJournalEl.value='';
+  localStorage.removeItem('ttt_sanc_journal');
 }
 
 // ============================================================
