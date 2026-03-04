@@ -1357,45 +1357,71 @@ function syncRiskBtns() {
   });
 }
 function calcPosition() {
-  const capital = parseFloat(document.getElementById('calcCapital').value) || 0;
-  const riskPct = parseFloat(document.getElementById('calcRisk').value) || 1;
-  const sl = parseFloat(document.getElementById('calcSL').value) || 20;
-  const asset = document.getElementById('calcAsset').value;
-  const riskEur = capital * riskPct / 100;
+  const capital  = parseFloat(document.getElementById('calcCapital').value) || 0;
+  const riskPct  = parseFloat(document.getElementById('calcRisk').value)    || 1;
+  const slPips   = parseFloat(document.getElementById('calcSL').value)      || 20;
+  const asset    = document.getElementById('calcAsset').value;
 
-  let lotSize, pipValue, lotLabel;
+  const riskEur  = capital * riskPct / 100;
+
+  // ---- Lot size ----
+  // XAU/USD : contract size = 100 oz, pip = $0.01
+  //   pip value per lot = 100 × 0.01 = $1  → ≈ €1 (simplified, no fx conversion)
+  //   lots = riskEur / (slPips × pipValuePerLot)
+  // BTC/USD : contract size = 1 BTC, pip = $1
+  //   pip value per lot = 1 × 1 = $1
+  let lotSize, pipValPerLot, lotLabel;
   if (asset === 'GOLD') {
-    // Gold: 1 lot = 100 oz, pip = $0.01, pip value per lot = $1
-    // pipValue per lot in USD ≈ 1$ → convert to EUR (approx 0.92)
-    const pipValPerLot = 1;
-    lotSize = riskEur / (sl * pipValPerLot);
-    pipValue = (lotSize * pipValPerLot).toFixed(2);
-    lotLabel = lotSize.toFixed(2) + ' lot';
+    pipValPerLot = 100 * 0.01; // = 1 € per pip per lot
+    lotSize      = riskEur / (slPips * pipValPerLot);
+    lotLabel     = lotSize.toFixed(2) + ' lot';
   } else {
-    // BTC: 1 lot = 1 BTC, pip = $1
-    const pipValPerLot = 1;
-    lotSize = riskEur / (sl * pipValPerLot);
-    pipValue = (lotSize * pipValPerLot).toFixed(2);
-    lotLabel = lotSize.toFixed(4) + ' BTC';
+    pipValPerLot = 1 * 1;      // = 1 € per pip per lot
+    lotSize      = riskEur / (slPips * pipValPerLot);
+    lotLabel     = lotSize.toFixed(4) + ' BTC';
   }
+  const pipValue = (lotSize * pipValPerLot).toFixed(2);
 
   document.getElementById('rEuros').textContent = riskEur.toFixed(2) + ' €';
-  document.getElementById('rLot').textContent = lotLabel;
-  document.getElementById('rPip').textContent = pipValue + ' € / pip';
+  document.getElementById('rLot').textContent   = lotLabel;
+  document.getElementById('rPip').textContent   = pipValue + ' € / pip';
 
-  const zone = capital >= 4800 ? {l:'VERTE 🟩',c:'var(--green)'} :
-               capital >= 4700 ? {l:'ORANGE 🟧',c:'var(--orange)'} :
-               capital >= 4600 ? {l:'ROUGE 🟥',c:'var(--red)'} :
-                                 {l:'NOIRE ⬛',c:'#aaa'};
-  document.getElementById('rZone').innerHTML = `<span style="font-family:'Space Mono',monospace;font-size:11px;color:${zone.c}">${zone.l}</span>`;
+  // ---- Zone drawdown — couleur selon le risque utilisé ----
+  let zoneLabel, zoneColor;
+  if (riskPct <= 0.25)      { zoneLabel = 'NOIRE ⬛';  zoneColor = '#aaaaaa'; }
+  else if (riskPct <= 0.5)  { zoneLabel = 'ROUGE 🟥';  zoneColor = 'var(--red)'; }
+  else if (riskPct <= 0.75) { zoneLabel = 'ORANGE 🟧'; zoneColor = 'var(--orange)'; }
+  else                       { zoneLabel = 'VERTE 🟩';  zoneColor = 'var(--green)'; }
+  document.getElementById('rZone').innerHTML =
+    `<span style="font-family:'Space Mono',monospace;font-size:11px;color:${zoneColor}">${zoneLabel}</span>`;
 
-  // TP targets
-  const targets = [{r:1,label:'TP1'},{r:3,label:'TP2'},{r:6,label:'TP3+'}];
+  // ---- Objectifs R/R cumulatifs ----
+  // Le lot est divisé en 3 parts égales (1/3 chacune)
+  // TP1 atteint  → gain = (lotSize/3) × 1R  en €
+  // TP2 atteint  → gain cumulé = TP1 + (lotSize/3) × 3R
+  // TP3 atteint  → gain cumulé = TP1 + TP2 + (lotSize/3) × 6R
+  const partEur = riskEur / 3; // chaque TP représente 1/3 du risque
+  const tp1gain = partEur * 1;
+  const tp2gain = partEur * 3;
+  const tp3gain = partEur * 6;
+  const cum1    = tp1gain;
+  const cum2    = tp1gain + tp2gain;
+  const cum3    = tp1gain + tp2gain + tp3gain;
+
+  const targets = [
+    { label:'TP1', r:'1R',   gain: tp1gain, cumul: cum1,  note:'si TP1 seul touché' },
+    { label:'TP2', r:'3R',   gain: tp2gain, cumul: cum2,  note:'TP1 + TP2' },
+    { label:'TP3', r:'6R+',  gain: tp3gain, cumul: cum3,  note:'TP1 + TP2 + TP3' },
+  ];
+
   document.getElementById('rTargets').innerHTML = targets.map(t => `
     <div style="text-align:center;padding:14px 8px;border:1px solid var(--border);background:var(--panel2)">
-      <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--gold-dim);letter-spacing:2px;margin-bottom:6px">${t.label}</div>
-      <div style="font-family:'Cinzel',serif;font-size:18px;color:var(--green)">+${(riskEur*t.r).toFixed(2)}€</div>
-      <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-top:3px">${t.r}R</div>
+      <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--gold-dim);letter-spacing:2px;margin-bottom:4px">${t.label} · ${t.r}</div>
+      <div style="font-family:'Cinzel',serif;font-size:16px;color:var(--green)">+${t.gain.toFixed(2)}€</div>
+      <div style="width:100%;height:1px;background:var(--border);margin:6px 0"></div>
+      <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--gold-dim);margin-bottom:3px">CUMULÉ</div>
+      <div style="font-family:'Cinzel',serif;font-size:20px;color:var(--gold)">+${t.cumul.toFixed(2)}€</div>
+      <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);margin-top:4px">${t.note}</div>
     </div>`).join('');
 }
 calcPosition();
