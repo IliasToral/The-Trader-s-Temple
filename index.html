@@ -278,6 +278,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .gallery-slot-hover{position:absolute;inset:0;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;font-size:18px;}
 .gallery-slot:hover .gallery-slot-hover{opacity:1;}
 .gallery-info{padding:10px 12px;}
+.gallery-info:hover{background:rgba(201,168,76,.03);}
+.gallery-info:hover .gallery-asset{color:var(--gold-light);}
 .gallery-info-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
 .gallery-asset{font-family:'Space Mono',monospace;font-size:9px;color:var(--gold);}
 .gallery-result{font-family:'Space Mono',monospace;font-size:9px;}
@@ -2693,7 +2695,7 @@ function renderGallery(){
 
     return`<div class="gallery-card">
       <div class="gallery-strip">${slots}</div>
-      <div class="gallery-info">
+      <div class="gallery-info" onclick="openModal(${t.id})" style="cursor:pointer" title="Ouvrir le détail du trade">
         <div class="gallery-info-top">
           <span class="gallery-asset">${t.asset}</span>
           <span class="gallery-result" style="color:${rc(t.result)}">${t.result} ${t.gain>=0?'+':''}${t.gain}R</span>
@@ -2706,6 +2708,7 @@ function renderGallery(){
           </div>
         </div>
         ${t.comments?.lessons?`<div style="font-size:12px;font-style:italic;color:var(--text-dim);margin-top:7px;border-top:1px solid var(--border);padding-top:6px">"${t.comments.lessons.substring(0,80)}${t.comments.lessons.length>80?'...':''}"</div>`:''}
+        <div style="margin-top:8px;border-top:1px solid var(--border);padding-top:7px;font-family:'Space Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--gold-dim);text-align:center">OUVRIR LE DÉTAIL →</div>
       </div>
     </div>`;
   }).join('');
