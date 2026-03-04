@@ -905,9 +905,9 @@ tr:hover td{background:rgba(201,168,76,.015);}
         <div class="fg"><label class="flbl">Direction</label>
           <select class="fsel" id="fDir"><option>LONG</option><option>SHORT</option></select></div>
         <div class="fg"><label class="flbl">TP atteint</label>
-          <select class="fsel" id="fResult"><option>TP1</option><option>TP2</option><option>TP3</option><option>SL</option><option>BE</option></select></div>
+          <select class="fsel" id="fResult" onchange="syncResultGain()"><option>TP1</option><option>TP2</option><option>TP3</option><option>SL</option><option>BE</option></select></div>
         <div class="fg"><label class="flbl">Risque (R)</label><input type="number" class="finput" id="fRisk" value="1" step="0.25"></div>
-        <div class="fg"><label class="flbl">Gain/Perte (R)</label><input type="number" class="finput" id="fGain" placeholder="ex: 3" step="0.1"></div>
+        <div class="fg"><label class="flbl">Gain/Perte (R)</label><input type="number" class="finput" id="fGain" placeholder="ex: 3" step="0.1" oninput="syncGainResult()"></div>
         <div class="fg"><label class="flbl">RR Visé</label><input type="number" class="finput" id="fRR" placeholder="ex: 6" step="0.5"></div>
         <div class="fg"><label class="flbl">Capital après (€)</label><input type="number" class="finput" id="fCapital" placeholder="ex: 5047" step="0.01"></div>
       </div>
@@ -1975,6 +1975,42 @@ function saveQCard(year,qid){
   saveReview();renderReviewYearPanel(year);
   const btn=document.getElementById(`qsave_${year}_${qid}`);
   if(btn){btn.textContent='✅ Sauvegardé !';btn.classList.add('saved');setTimeout(()=>{btn.textContent='💾 Sauvegarder';btn.classList.remove('saved');},2000);}
+}
+
+// Sync Result ↔ Gain cohérence
+function syncResultGain(){
+  const result=document.getElementById('fResult').value;
+  const gainEl=document.getElementById('fGain');
+  const gain=parseFloat(gainEl.value);
+  if(result==='SL'){
+    // Si SL → force valeur négative
+    if(gainEl.value===''||gain>0) gainEl.value=-1;
+    gainEl.style.borderColor='var(--red)';
+  } else if(result==='BE'){
+    gainEl.value=0;
+    gainEl.style.borderColor='var(--text-dim)';
+  } else {
+    // TP1/2/3 → force valeur positive
+    if(gain<=0) gainEl.value='';
+    gainEl.style.borderColor='var(--green)';
+  }
+}
+function syncGainResult(){
+  const gainEl=document.getElementById('fGain');
+  const resultEl=document.getElementById('fResult');
+  const gain=parseFloat(gainEl.value);
+  if(isNaN(gain))return;
+  if(gain<0){
+    resultEl.value='SL';
+    gainEl.style.borderColor='var(--red)';
+  } else if(gain===0){
+    resultEl.value='BE';
+    gainEl.style.borderColor='var(--text-dim)';
+  } else {
+    // Si positif et result est SL, corrige
+    if(resultEl.value==='SL'||resultEl.value==='BE') resultEl.value='TP1';
+    gainEl.style.borderColor='var(--green)';
+  }
 }
 
 // ============================================================
