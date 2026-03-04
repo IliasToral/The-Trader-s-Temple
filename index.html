@@ -140,6 +140,21 @@ nav a:hover,nav a.active{color:var(--gold);border-bottom-color:var(--gold);}
 .banned{padding:18px;border:1px solid rgba(192,57,43,.3);background:rgba(139,26,26,.09);text-align:center;font-size:13px;color:var(--text);}
 .banned::before{content:'❌';display:block;font-size:20px;margin-bottom:8px;}
 
+/* ---- TOOLS EXTRA ---- */
+.risk-btn{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;padding:6px 12px;border:1px solid var(--border);color:var(--text-dim);background:transparent;cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.risk-btn:hover{border-color:var(--gold-dim);color:var(--gold);}
+.risk-btn.active{border-color:var(--gold);color:var(--gold);background:var(--gold-faint);}
+.sess-card{background:var(--panel);border:1px solid var(--border);padding:24px;position:relative;transition:border-color .3s;}
+.sess-card.open{border-color:var(--green);background:rgba(39,174,96,.05);}
+.sess-card.allowed{border-color:var(--gold-dim);}
+.sess-card.closed{opacity:.6;}
+.sess-card-name{font-family:'Cinzel',serif;font-size:16px;letter-spacing:2px;margin-bottom:4px;}
+.sess-card-hours{font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim);margin-bottom:12px;}
+.sess-status-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px;}
+.sess-status-dot.open{background:var(--green);box-shadow:0 0 8px var(--green);}
+.sess-status-dot.closed{background:var(--text-dim);}
+.sess-allowed-badge{display:inline-block;font-family:'Space Mono',monospace;font-size:8px;padding:2px 8px;border:1px solid var(--gold-dim);color:var(--gold-dim);letter-spacing:2px;margin-top:8px;}
+
 /* ---- REVIEW ---- */
 .review-year-tabs{display:flex;gap:0;margin-bottom:32px;border-bottom:1px solid var(--border);}
 .ry-btn{font-family:'Cinzel',serif;font-size:14px;letter-spacing:3px;padding:12px 28px;border:none;background:transparent;color:var(--text-dim);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .25s;}
@@ -319,6 +334,10 @@ footer{border-top:1px solid var(--border);padding:44px 20px;text-align:center;}
   <a href="#stats-section">📊 Stats & Journal</a>
   <a href="#review-section">🪞 Review</a>
   <a href="#charts-section">📉 Charts Live</a>
+  <a href="#tools-section">🧮 Outils</a>
+  <a href="#session-section">⏰ Sessions</a>
+  <a href="#sentiment-section">🌡️ Sentiment</a>
+  <a href="#news-section">📰 News</a>
 </nav>
 
 <!-- S1 HORAIRES -->
@@ -735,11 +754,190 @@ footer{border-top:1px solid var(--border);padding:44px 20px;text-align:center;}
 
 </div></div>
 
+<!-- ============ TOOLS : CALCULATEUR ============ -->
+<div class="gold-divider"></div>
+<div id="tools-section" style="background:var(--deep)"><div class="wrap">
+  <div class="sec-hdr reveal">
+    <span class="sec-num">10</span>
+    <h2 class="sec-title">🧮 Calculateur de Position</h2>
+    <div class="sec-line"></div>
+  </div>
+  <p style="color:var(--text-dim);font-style:italic;margin-bottom:36px;font-size:16px" class="reveal">Entre ton capital et ton risque — obtiens la taille de lot exacte pour BTC et GOLD.</p>
+
+  <div class="g2 reveal">
+    <!-- INPUTS -->
+    <div style="background:var(--panel);border:1px solid var(--border);padding:32px;">
+      <div class="ctitle" style="margin-bottom:24px">Paramètres</div>
+      <div style="display:flex;flex-direction:column;gap:18px;">
+        <div class="fg">
+          <label class="flbl">Capital actuel (€)</label>
+          <input type="number" class="finput" id="calcCapital" value="5000" step="10" oninput="calcPosition()">
+        </div>
+        <div class="fg">
+          <label class="flbl">Risque (%)</label>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px" id="riskBtns">
+            <button onclick="setRisk(0.25)" class="risk-btn" data-r="0.25">0.25%</button>
+            <button onclick="setRisk(0.5)"  class="risk-btn" data-r="0.5">0.5%</button>
+            <button onclick="setRisk(0.75)" class="risk-btn" data-r="0.75">0.75%</button>
+            <button onclick="setRisk(1)"    class="risk-btn active" data-r="1">1%</button>
+          </div>
+          <input type="number" class="finput" id="calcRisk" value="1" step="0.25" min="0.1" max="5" oninput="syncRiskBtns();calcPosition()" style="margin-top:10px">
+        </div>
+        <div class="fg">
+          <label class="flbl">Stop Loss (pips / points)</label>
+          <input type="number" class="finput" id="calcSL" value="20" step="1" oninput="calcPosition()">
+        </div>
+        <div class="fg">
+          <label class="flbl">Actif</label>
+          <select class="fsel" id="calcAsset" onchange="calcPosition()">
+            <option value="GOLD">XAU/USD — Gold (pip = 0.01$)</option>
+            <option value="BTC">BTC/USD — Bitcoin (pip = 1$)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div style="background:var(--panel);border:1px solid var(--gold-dim);padding:32px;flex:1;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:16px;right:16px;font-size:32px;opacity:.06">⚖️</div>
+        <div class="ctitle" style="margin-bottom:24px">Résultat</div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)">
+            <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:2px;">RISQUE €</span>
+            <span style="font-family:'Cinzel',serif;font-size:22px;color:var(--red)" id="rEuros">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)">
+            <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:2px;">TAILLE DE LOT</span>
+            <span style="font-family:'Cinzel',serif;font-size:28px;color:var(--gold)" id="rLot">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)">
+            <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:2px;">VALEUR DU PIP</span>
+            <span style="font-family:'Space Mono',monospace;font-size:14px;color:var(--white)" id="rPip">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0">
+            <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:2px;">ZONE DRAWDOWN</span>
+            <span id="rZone">—</span>
+          </div>
+        </div>
+      </div>
+      <!-- TP targets -->
+      <div style="background:var(--panel);border:1px solid var(--border);padding:24px;">
+        <div class="ctitle" style="margin-bottom:14px;font-size:11px">Objectifs R/R</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;" id="rTargets"></div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<!-- ============ SESSION CLOCK ============ -->
+<div class="gold-divider"></div>
+<div id="session-section" style="background:var(--black)"><div class="wrap">
+  <div class="sec-hdr reveal">
+    <span class="sec-num">11</span>
+    <h2 class="sec-title">⏰ Session Clock</h2>
+    <div class="sec-line"></div>
+  </div>
+  <p style="color:var(--text-dim);font-style:italic;margin-bottom:36px;font-size:16px" class="reveal">Heure de Paris en temps réel — statut de chaque session de trading.</p>
+
+  <div style="background:var(--panel);border:1px solid var(--border);padding:32px;margin-bottom:24px;text-align:center;" class="reveal">
+    <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:4px;color:var(--text-dim);margin-bottom:8px">HEURE PARIS</div>
+    <div style="font-family:'Cinzel',serif;font-size:clamp(36px,6vw,64px);color:var(--gold);letter-spacing:4px;text-shadow:0 0 30px rgba(201,168,76,.3)" id="clockTime">--:--:--</div>
+    <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim);margin-top:8px" id="clockDate">---</div>
+    <div style="margin-top:20px;font-family:'Cinzel',serif;font-size:16px;letter-spacing:3px;" id="clockStatus">—</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;" class="reveal" id="sessionCards"></div>
+
+  <div style="background:var(--panel);border:1px solid var(--border);padding:20px 24px;margin-top:16px;display:flex;align-items:center;gap:16px;" class="reveal" id="nextSessionBox">
+    <span style="font-size:24px">⏳</span>
+    <div>
+      <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--gold-dim);margin-bottom:4px">PROCHAINE SESSION AUTORISÉE</div>
+      <div style="font-family:'Cinzel',serif;font-size:18px;color:var(--white)" id="nextSessionLabel">—</div>
+      <div style="font-family:'Space Mono',monospace;font-size:13px;color:var(--gold)" id="nextSessionCountdown">—</div>
+    </div>
+  </div>
+</div></div>
+
+<!-- ============ FEAR & GREED ============ -->
+<div class="gold-divider"></div>
+<div id="sentiment-section" style="background:var(--deep)"><div class="wrap">
+  <div class="sec-hdr reveal">
+    <span class="sec-num">12</span>
+    <h2 class="sec-title">🌡️ Sentiment du Marché</h2>
+    <div class="sec-line"></div>
+  </div>
+  <p style="color:var(--text-dim);font-style:italic;margin-bottom:36px;font-size:16px" class="reveal">Fear & Greed Index — filtre psychologique avant chaque trade BTC.</p>
+
+  <div class="g2 reveal">
+    <div style="background:var(--panel);border:1px solid var(--border);padding:40px;text-align:center;position:relative;overflow:hidden;">
+      <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:4px;color:var(--text-dim);margin-bottom:24px">INDEX EN DIRECT</div>
+      <div style="position:relative;width:200px;height:200px;margin:0 auto 24px;">
+        <canvas id="fgGauge" width="200" height="200"></canvas>
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-top:20px">
+          <div style="font-family:'Cinzel',serif;font-size:52px;font-weight:900;line-height:1" id="fgValue">—</div>
+          <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;margin-top:6px" id="fgLabel">LOADING</div>
+        </div>
+      </div>
+      <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim)" id="fgDate">—</div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div style="background:var(--panel);border:1px solid var(--border);padding:24px;">
+        <div class="ctitle" style="margin-bottom:16px;font-size:11px">Lecture du Signal</div>
+        <div id="fgSignal" style="font-size:16px;line-height:1.8;color:var(--text)">Chargement...</div>
+      </div>
+      <div style="background:var(--panel);border:1px solid var(--border);padding:24px;">
+        <div class="ctitle" style="margin-bottom:14px;font-size:11px">Échelle de référence</div>
+        <div style="display:flex;flex-direction:column;gap:8px;font-family:'Space Mono',monospace;font-size:10px;">
+          <div style="display:flex;justify-content:space-between"><span style="color:#c0392b">0–24</span><span style="color:var(--text-dim)">Peur Extrême — Possible opportunité long</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:#e67e22">25–44</span><span style="color:var(--text-dim)">Peur — Marché hésitant</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:#f1c40f">45–55</span><span style="color:var(--text-dim)">Neutre — Pas de biais clair</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:#27ae60">56–74</span><span style="color:var(--text-dim)">Avidité — Momentum haussier</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:#c9a84c">75–100</span><span style="color:var(--text-dim)">Avidité Extrême — Prudence shorts</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<!-- ============ NEWS & CALENDRIER ============ -->
+<div class="gold-divider"></div>
+<div id="news-section" style="background:var(--black)"><div class="wrap">
+  <div class="sec-hdr reveal">
+    <span class="sec-num">13</span>
+    <h2 class="sec-title">📰 News & Calendrier Macro</h2>
+    <div class="sec-line"></div>
+  </div>
+  <p style="color:var(--text-dim);font-style:italic;margin-bottom:36px;font-size:16px" class="reveal">Événements économiques à venir — savoir quand NE PAS trader.</p>
+
+  <div style="background:var(--panel);border:1px solid var(--border);overflow:hidden;" class="reveal">
+    <div style="padding:16px 20px;border-bottom:1px solid var(--border);background:rgba(201,168,76,.03);display:flex;align-items:center;justify-content:space-between;">
+      <div style="font-family:'Cinzel',serif;font-size:14px;color:var(--gold);letter-spacing:2px;">Calendrier Économique</div>
+      <span style="font-family:'Space Mono',monospace;font-size:9px;padding:3px 8px;border:1px solid var(--green);color:var(--green);background:var(--green-bg);">● LIVE</span>
+    </div>
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
+      {
+        "colorTheme": "dark",
+        "isTransparent": true,
+        "width": "100%",
+        "height": "550",
+        "locale": "fr",
+        "importanceFilter": "0,1",
+        "countryFilter": "us,eu,gb,jp,cn"
+      }
+      </script>
+    </div>
+  </div>
+</div></div>
+
 <!-- ============ REVIEW & ANALYSE ============ -->
 <div class="gold-divider"></div>
 <div id="review-section" style="background:var(--deep)"><div class="wrap">
   <div class="sec-hdr reveal">
-    <span class="sec-num">10</span>
+    <span class="sec-num">14</span>
     <h2 class="sec-title">🪞 Review & Analyse</h2>
     <div class="sec-line"></div>
   </div>
@@ -1146,6 +1344,211 @@ function closeModalDirect(){document.getElementById('modalOverlay').classList.re
 document.getElementById('fDate').value = new Date().toISOString().split('T')[0];
 renderAll();
 
+// ============ CALCULATEUR DE POSITION ============
+function setRisk(v) {
+  document.getElementById('calcRisk').value = v;
+  syncRiskBtns();
+  calcPosition();
+}
+function syncRiskBtns() {
+  const v = parseFloat(document.getElementById('calcRisk').value);
+  document.querySelectorAll('.risk-btn').forEach(b => {
+    b.classList.toggle('active', parseFloat(b.dataset.r) === v);
+  });
+}
+function calcPosition() {
+  const capital = parseFloat(document.getElementById('calcCapital').value) || 0;
+  const riskPct = parseFloat(document.getElementById('calcRisk').value) || 1;
+  const sl = parseFloat(document.getElementById('calcSL').value) || 20;
+  const asset = document.getElementById('calcAsset').value;
+  const riskEur = capital * riskPct / 100;
+
+  let lotSize, pipValue, lotLabel;
+  if (asset === 'GOLD') {
+    // Gold: 1 lot = 100 oz, pip = $0.01, pip value per lot = $1
+    // pipValue per lot in USD ≈ 1$ → convert to EUR (approx 0.92)
+    const pipValPerLot = 1;
+    lotSize = riskEur / (sl * pipValPerLot);
+    pipValue = (lotSize * pipValPerLot).toFixed(2);
+    lotLabel = lotSize.toFixed(2) + ' lot';
+  } else {
+    // BTC: 1 lot = 1 BTC, pip = $1
+    const pipValPerLot = 1;
+    lotSize = riskEur / (sl * pipValPerLot);
+    pipValue = (lotSize * pipValPerLot).toFixed(2);
+    lotLabel = lotSize.toFixed(4) + ' BTC';
+  }
+
+  document.getElementById('rEuros').textContent = riskEur.toFixed(2) + ' €';
+  document.getElementById('rLot').textContent = lotLabel;
+  document.getElementById('rPip').textContent = pipValue + ' € / pip';
+
+  const zone = capital >= 4800 ? {l:'VERTE 🟩',c:'var(--green)'} :
+               capital >= 4700 ? {l:'ORANGE 🟧',c:'var(--orange)'} :
+               capital >= 4600 ? {l:'ROUGE 🟥',c:'var(--red)'} :
+                                 {l:'NOIRE ⬛',c:'#aaa'};
+  document.getElementById('rZone').innerHTML = `<span style="font-family:'Space Mono',monospace;font-size:11px;color:${zone.c}">${zone.l}</span>`;
+
+  // TP targets
+  const targets = [{r:1,label:'TP1'},{r:3,label:'TP2'},{r:6,label:'TP3+'}];
+  document.getElementById('rTargets').innerHTML = targets.map(t => `
+    <div style="text-align:center;padding:14px 8px;border:1px solid var(--border);background:var(--panel2)">
+      <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--gold-dim);letter-spacing:2px;margin-bottom:6px">${t.label}</div>
+      <div style="font-family:'Cinzel',serif;font-size:18px;color:var(--green)">+${(riskEur*t.r).toFixed(2)}€</div>
+      <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-top:3px">${t.r}R</div>
+    </div>`).join('');
+}
+calcPosition();
+
+// ============ SESSION CLOCK ============
+const SESSIONS = [
+  { id:'asian',   name:'Asian.KZ',  start:2,  end:9,   allowed:false, emoji:'🌏' },
+  { id:'ldn',     name:'LDN.KZ',    start:9,  end:12,  allowed:true,  emoji:'🇬🇧' },
+  { id:'nyam',    name:'NY.AM',     start:14, end:18,  allowed:true,  emoji:'🗽' },
+  { id:'nypm',    name:'NY.PM',     start:18, end:22,  allowed:false, emoji:'🌆' },
+];
+
+function updateClock() {
+  const now = new Date();
+  const paris = new Date(now.toLocaleString('en-US', {timeZone:'Europe/Paris'}));
+  const h = paris.getHours(), m = paris.getMinutes(), s = paris.getSeconds();
+  const pad = n => String(n).padStart(2,'0');
+  document.getElementById('clockTime').textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
+  const days = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+  const months = ['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
+  document.getElementById('clockDate').textContent = `${days[paris.getDay()]} ${paris.getDate()} ${months[paris.getMonth()]} ${paris.getFullYear()}`;
+
+  const totalMin = h * 60 + m;
+  let inAllowed = false;
+  let statusHtml = '';
+
+  // Render session cards
+  const cardsHtml = SESSIONS.map(sess => {
+    const startMin = sess.start * 60, endMin = sess.end * 60;
+    const isOpen = totalMin >= startMin && totalMin < endMin;
+    if (isOpen && sess.allowed) inAllowed = true;
+    const cls = isOpen ? (sess.allowed ? 'open' : 'sess-card') : 'closed';
+    const dotCls = isOpen ? 'open' : 'closed';
+    const timeLeft = isOpen ? endMin - totalMin : 0;
+    return `<div class="sess-card ${cls}">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div class="sess-card-name" style="color:${isOpen?'var(--white)':'var(--text-dim)'}">${sess.emoji} ${sess.name}</div>
+          <div class="sess-card-hours">${pad(sess.start)}h00 → ${pad(sess.end)}h00</div>
+        </div>
+        <span class="sess-status-dot ${dotCls}"></span>
+      </div>
+      ${isOpen ? `<div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim)">Ferme dans <span style="color:var(--gold)">${Math.floor(timeLeft/60)}h${pad(timeLeft%60)}m</span></div>` : ''}
+      ${sess.allowed ? `<div class="sess-allowed-badge">✅ SESSION AUTORISÉE</div>` : `<div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);margin-top:8px;letter-spacing:1px">hors plan</div>`}
+    </div>`;
+  }).join('');
+  document.getElementById('sessionCards').innerHTML = cardsHtml;
+
+  // Global status
+  if (inAllowed) {
+    document.getElementById('clockStatus').innerHTML = `<span style="color:var(--green)">● SESSION ACTIVE — Tu peux trader</span>`;
+  } else {
+    document.getElementById('clockStatus').innerHTML = `<span style="color:var(--red)">● HORS SESSION — Pas de trade</span>`;
+  }
+
+  // Next allowed session
+  const allowed = SESSIONS.filter(s => s.allowed);
+  let next = null, minWait = Infinity;
+  allowed.forEach(sess => {
+    let waitMin = sess.start * 60 - totalMin;
+    if (waitMin <= 0) waitMin += 24 * 60;
+    if (waitMin < minWait) { minWait = waitMin; next = sess; }
+  });
+  if (inAllowed) {
+    document.getElementById('nextSessionLabel').textContent = 'Tu es actuellement dans une session autorisée';
+    document.getElementById('nextSessionCountdown').textContent = '';
+  } else if (next) {
+    const wh = Math.floor(minWait/60), wm = minWait%60;
+    document.getElementById('nextSessionLabel').textContent = `${next.emoji} ${next.name} — ${pad(next.start)}h00`;
+    document.getElementById('nextSessionCountdown').textContent = `Dans ${wh}h ${pad(wm)}min`;
+  }
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+// ============ FEAR & GREED ============
+async function loadFearGreed() {
+  try {
+    const res = await fetch('https://api.alternative.me/fng/?limit=1');
+    const data = await res.json();
+    const val = parseInt(data.data[0].value);
+    const classification = data.data[0].value_classification;
+    const ts = new Date(data.data[0].timestamp * 1000);
+    const months = ['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
+    document.getElementById('fgDate').textContent = `Mis à jour le ${ts.getDate()} ${months[ts.getMonth()]} ${ts.getFullYear()}`;
+
+    const color = val <= 24 ? '#c0392b' : val <= 44 ? '#e67e22' : val <= 55 ? '#f1c40f' : val <= 74 ? '#27ae60' : '#c9a84c';
+    document.getElementById('fgValue').textContent = val;
+    document.getElementById('fgValue').style.color = color;
+    document.getElementById('fgLabel').textContent = classification.toUpperCase();
+    document.getElementById('fgLabel').style.color = color;
+
+    // Signal
+    let signal = '';
+    if (val <= 24) signal = `⚠️ <strong style="color:#c0392b">Peur Extrême (${val})</strong><br>Le marché est en panique. Historiquement une zone d'accumulation. Sois vigilant pour les longs BTC si la structure le permet.`;
+    else if (val <= 44) signal = `😟 <strong style="color:#e67e22">Peur (${val})</strong><br>Sentiment négatif dominant. Les vendeurs contrôlent. Favorise les setups short ou attends une confirmation de retournement.`;
+    else if (val <= 55) signal = `😐 <strong style="color:#f1c40f">Neutre (${val})</strong><br>Marché indécis. Pas de biais dominant. Reste sur tes niveaux et évite les trades de conviction.`;
+    else if (val <= 74) signal = `😊 <strong style="color:#27ae60">Avidité (${val})</strong><br>Momentum haussier. Les acheteurs sont actifs. Favorise les setups long dans tes zones HTF.`;
+    else signal = `🔥 <strong style="color:#c9a84c">Avidité Extrême (${val})</strong><br>Euphorie du marché. Risque de retournement élevé. Sois prudent sur les longs — surveille les shorts.`;
+    document.getElementById('fgSignal').innerHTML = signal;
+
+    // Gauge
+    drawGauge(val, color);
+  } catch(e) {
+    document.getElementById('fgValue').textContent = '?';
+    document.getElementById('fgLabel').textContent = 'API indisponible';
+    document.getElementById('fgSignal').textContent = 'Impossible de charger le Fear & Greed Index. Réessaie plus tard.';
+    drawGauge(50, '#7a6230');
+  }
+}
+
+function drawGauge(val, color) {
+  const canvas = document.getElementById('fgGauge');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const cx = 100, cy = 120, r = 80;
+  ctx.clearRect(0, 0, 200, 200);
+
+  // Background arc
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, Math.PI, 2 * Math.PI);
+  ctx.strokeStyle = '#1e1e1e';
+  ctx.lineWidth = 14;
+  ctx.stroke();
+
+  // Value arc
+  const startAngle = Math.PI;
+  const endAngle = Math.PI + (val / 100) * Math.PI;
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, startAngle, endAngle);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 14;
+  ctx.lineCap = 'round';
+  ctx.stroke();
+
+  // Needle
+  const angle = Math.PI + (val / 100) * Math.PI;
+  const nx = cx + (r - 20) * Math.cos(angle);
+  const ny = cy + (r - 20) * Math.sin(angle);
+  ctx.beginPath();
+  ctx.moveTo(cx, cy);
+  ctx.lineTo(nx, ny);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 3;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(cx, cy, 6, 0, 2 * Math.PI);
+  ctx.fillStyle = color;
+  ctx.fill();
+}
+
+loadFearGreed();
+
 // ============ REVIEW ============
 const REVIEW_YEARS = [2024, 2025, 2026];
 const QUARTERS = [
@@ -1333,6 +1736,340 @@ function saveQCard(year, qid) {
 // Init review
 renderReviewYearTabs();
 renderReviewYearPanel(activeReviewYear);
+</script>
+
+<!-- ============ AI COACH WIDGET ============ -->
+<style>
+/* FLOATING BUTTON */
+.ai-fab{position:fixed;bottom:28px;right:28px;z-index:5000;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#c9a84c,#7a6230);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 24px rgba(201,168,76,.35),0 0 0 0 rgba(201,168,76,.4);animation:fabPulse 3s ease-in-out infinite;transition:transform .2s;}
+.ai-fab:hover{transform:scale(1.08);}
+@keyframes fabPulse{0%,100%{box-shadow:0 4px 24px rgba(201,168,76,.35),0 0 0 0 rgba(201,168,76,.3);}50%{box-shadow:0 4px 32px rgba(201,168,76,.5),0 0 0 10px rgba(201,168,76,.0);}}
+.ai-fab-badge{position:absolute;top:-3px;right:-3px;width:18px;height:18px;background:var(--green);border-radius:50%;border:2px solid var(--black);animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.4;}}
+
+/* CHAT PANEL */
+.ai-panel{position:fixed;bottom:100px;right:28px;z-index:4999;width:420px;max-width:calc(100vw - 40px);background:var(--panel);border:1px solid var(--gold-dim);display:flex;flex-direction:column;box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 0 1px rgba(201,168,76,.1);transform:translateY(20px) scale(.97);opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.34,1.56,.64,1);max-height:70vh;}
+.ai-panel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:all;}
+
+/* PANEL HEADER */
+.ai-header{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(201,168,76,.02));flex-shrink:0;}
+.ai-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#c9a84c,#7a6230);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.ai-header-info{flex:1;}
+.ai-name{font-family:'Cinzel',serif;font-size:13px;color:var(--gold);letter-spacing:1px;}
+.ai-status{font-family:'Space Mono',monospace;font-size:8px;color:var(--green);letter-spacing:2px;margin-top:2px;}
+.ai-close{background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:16px;padding:4px;transition:color .2s;}
+.ai-close:hover{color:var(--red);}
+
+/* QUICK ACTIONS */
+.ai-quick{display:flex;gap:6px;padding:10px 14px;border-bottom:1px solid var(--border);flex-wrap:wrap;flex-shrink:0;background:rgba(0,0,0,.2);}
+.ai-quick-btn{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:1px;padding:5px 9px;border:1px solid var(--border);color:var(--text-dim);background:transparent;cursor:pointer;text-transform:uppercase;transition:all .2s;white-space:nowrap;}
+.ai-quick-btn:hover{border-color:var(--gold-dim);color:var(--gold);}
+
+/* API KEY INPUT */
+.ai-apikey-bar{display:flex;gap:8px;padding:10px 14px;border-bottom:1px solid var(--border);flex-shrink:0;background:rgba(201,168,76,.02);}
+.ai-apikey-input{flex:1;background:var(--panel2);border:1px solid var(--border);padding:7px 10px;color:var(--text-dim);font-family:'Space Mono',monospace;font-size:9px;outline:none;transition:border-color .2s;}
+.ai-apikey-input:focus{border-color:var(--gold-dim);color:var(--white);}
+.ai-apikey-btn{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:1px;padding:7px 12px;border:1px solid var(--gold-dim);color:var(--gold-dim);background:transparent;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.ai-apikey-btn:hover{border-color:var(--gold);color:var(--gold);}
+.ai-apikey-btn.set{border-color:var(--green);color:var(--green);}
+
+/* MESSAGES */
+.ai-messages{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;min-height:200px;}
+.ai-messages::-webkit-scrollbar{width:3px;}
+.ai-messages::-webkit-scrollbar-thumb{background:var(--gold-dim);}
+.ai-msg{max-width:88%;display:flex;flex-direction:column;gap:4px;}
+.ai-msg.user{align-self:flex-end;align-items:flex-end;}
+.ai-msg.assistant{align-self:flex-start;align-items:flex-start;}
+.ai-bubble{padding:10px 14px;font-size:14px;line-height:1.6;font-family:'Cormorant Garamond',serif;}
+.ai-msg.user .ai-bubble{background:rgba(201,168,76,.1);border:1px solid var(--gold-dim);color:var(--white);border-radius:12px 12px 2px 12px;}
+.ai-msg.assistant .ai-bubble{background:var(--panel2);border:1px solid var(--border);color:var(--text);border-radius:2px 12px 12px 12px;}
+.ai-msg-time{font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);padding:0 4px;}
+.ai-typing{display:flex;gap:4px;padding:14px;}
+.ai-dot{width:6px;height:6px;border-radius:50%;background:var(--gold-dim);animation:typingDot 1.2s ease-in-out infinite;}
+.ai-dot:nth-child(2){animation-delay:.2s;}
+.ai-dot:nth-child(3){animation-delay:.4s;}
+@keyframes typingDot{0%,60%,100%{transform:translateY(0);opacity:.4;}30%{transform:translateY(-6px);opacity:1;}}
+
+/* INPUT */
+.ai-input-wrap{display:flex;gap:0;border-top:1px solid var(--border);flex-shrink:0;}
+.ai-input{flex:1;background:transparent;border:none;padding:14px 16px;color:var(--white);font-family:'Cormorant Garamond',serif;font-size:15px;outline:none;resize:none;max-height:100px;}
+.ai-input::placeholder{color:var(--text-dim);}
+.ai-send{background:none;border:none;border-left:1px solid var(--border);padding:14px 18px;color:var(--gold-dim);cursor:pointer;font-size:18px;transition:all .2s;flex-shrink:0;}
+.ai-send:hover{color:var(--gold);background:rgba(201,168,76,.05);}
+.ai-send:disabled{opacity:.3;cursor:not-allowed;}
+</style>
+
+<!-- FAB BUTTON -->
+<button class="ai-fab" id="aiFab" onclick="toggleAI()" title="Coach IA — The Trader's Temple">
+  ⛩️
+  <span class="ai-fab-badge"></span>
+</button>
+
+<!-- CHAT PANEL -->
+<div class="ai-panel" id="aiPanel">
+  <div class="ai-header">
+    <div class="ai-avatar">🏯</div>
+    <div class="ai-header-info">
+      <div class="ai-name">Sensei — Coach IA</div>
+      <div class="ai-status">● EN LIGNE · THE TRADER'S TEMPLE</div>
+    </div>
+    <button class="ai-close" onclick="toggleAI()">✕</button>
+  </div>
+
+  <!-- API KEY -->
+  <div class="ai-apikey-bar" id="apiKeyBar">
+    <input class="ai-apikey-input" type="password" id="apiKeyInput" placeholder="Colle ta clé API Anthropic ici (sk-ant-...)">
+    <button class="ai-apikey-btn" id="apiKeyBtn" onclick="setApiKey()">Valider</button>
+  </div>
+
+  <!-- QUICK ACTIONS -->
+  <div class="ai-quick">
+    <button class="ai-quick-btn" onclick="quickAction('errors')">🔍 Analyse mes erreurs</button>
+    <button class="ai-quick-btn" onclick="quickAction('psycho')">🧠 Coach psycho</button>
+    <button class="ai-quick-btn" onclick="quickAction('setup')">✅ Valide mon setup</button>
+    <button class="ai-quick-btn" onclick="quickAction('bilan')">📊 Bilan stats</button>
+  </div>
+
+  <!-- MESSAGES -->
+  <div class="ai-messages" id="aiMessages">
+    <div class="ai-msg assistant">
+      <div class="ai-bubble">
+        Salut ! Je suis ton coach IA personnel, entraîné sur <strong style="color:var(--gold)">ton plan de trading</strong> exactement. 🏯<br><br>
+        Je peux analyser tes erreurs, te coacher psychologiquement, valider tes setups ou faire un bilan de tes stats.<br><br>
+        <span style="color:var(--gold-dim);font-size:13px">👆 Entre ta clé API Anthropic pour commencer, ou utilise les boutons rapides ci-dessus.</span>
+      </div>
+      <div class="ai-msg-time">Sensei · maintenant</div>
+    </div>
+  </div>
+
+  <!-- INPUT -->
+  <div class="ai-input-wrap">
+    <textarea class="ai-input" id="aiInput" placeholder="Pose ta question au Sensei..." rows="1"
+      onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage();}"
+      oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,100)+'px'"></textarea>
+    <button class="ai-send" id="aiSendBtn" onclick="sendMessage()">➤</button>
+  </div>
+</div>
+
+<script>
+// ============ AI COACH ============
+let aiOpen = false;
+let apiKey = localStorage.getItem('ttt_apikey') || '';
+let aiHistory = [];
+let aiTyping = false;
+
+// Init API key display
+if(apiKey) {
+  document.getElementById('apiKeyInput').value = '••••••••••••••••';
+  document.getElementById('apiKeyBtn').textContent = '✅ Clé active';
+  document.getElementById('apiKeyBtn').classList.add('set');
+}
+
+function toggleAI() {
+  aiOpen = !aiOpen;
+  document.getElementById('aiPanel').classList.toggle('open', aiOpen);
+  if(aiOpen) setTimeout(()=>document.getElementById('aiInput').focus(), 300);
+}
+
+function setApiKey() {
+  const val = document.getElementById('apiKeyInput').value.trim();
+  if(!val || val.startsWith('•')) return;
+  apiKey = val;
+  localStorage.setItem('ttt_apikey', apiKey);
+  document.getElementById('apiKeyInput').value = '••••••••••••••••';
+  document.getElementById('apiKeyBtn').textContent = '✅ Clé active';
+  document.getElementById('apiKeyBtn').classList.add('set');
+  addAIMessage('assistant', '✅ Clé API activée ! Je suis prêt à t\'accompagner. Tu peux me poser n\'importe quelle question sur ton trading, ou utiliser les boutons rapides.');
+}
+
+// Build context from trades data
+function buildContext() {
+  const t = typeof trades !== 'undefined' ? trades : [];
+  if(!t.length) return 'Aucun trade enregistré pour le moment.';
+
+  const wins = t.filter(x=>!['SL','BE'].includes(x.result));
+  const losses = t.filter(x=>x.result==='SL');
+  const wr = Math.round(wins.length/t.length*100);
+  const totalR = t.reduce((s,x)=>s+x.gain,0);
+  const planOk = t.filter(x=>x.plan==='OUI').length;
+
+  // Error frequency
+  const errCnt = {};
+  t.forEach(x=>(x.errors||[]).forEach(e=>{errCnt[e]=(errCnt[e]||0)+1;}));
+  const topErrors = Object.entries(errCnt).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([e,n])=>`${e}(×${n})`).join(', ');
+
+  // Recent 5 trades
+  const recent = t.slice(-5).map(x=>`${x.date} ${x.asset} ${x.setup} ${x.result} ${x.gain>=0?'+':''}${x.gain}R plan:${x.plan} erreurs:[${(x.errors||[]).join(',')}]`).join('\n');
+
+  // Last capital
+  const lastCap = t.filter(x=>x.capital>0).slice(-1)[0]?.capital;
+  const zone = lastCap ? (lastCap>=4800?'VERTE':lastCap>=4700?'ORANGE':lastCap>=4600?'ROUGE':'NOIRE') : 'inconnue';
+
+  return `DONNÉES JOURNAL TRADING (${t.length} trades enregistrés):
+- Winrate global: ${wr}%
+- Total P&L: ${totalR>=0?'+':''}${totalR.toFixed(1)}R
+- Trades avec plan respecté: ${planOk}/${t.length} (${Math.round(planOk/t.length*100)}%)
+- Zone drawdown actuelle: ${zone}${lastCap?` (capital: ${lastCap.toFixed(0)}€)`:''}
+- Erreurs les plus fréquentes: ${topErrors||'aucune'}
+- 5 derniers trades:
+${recent}`;
+}
+
+const SYSTEM_PROMPT = `Tu es le "Sensei" — coach trading personnel intégré dans "The Trader's Temple". Tu es bienveillant, encourageant, mais direct et honnête quand c'est nécessaire. Tu encourages et conseilles, tu ne juges pas.
+
+TON RÔLE :
+1. Analyser les erreurs du journal et donner des conseils concrets pour s'améliorer
+2. Coacher psychologiquement (revenge trade, overtrade, FOMO, etc.)
+3. Valider si un setup décrit est conforme au plan
+4. Faire des bilans hebdo/mensuel des statistiques
+
+LE PLAN DE TRADING EXACT (tu le connais par cœur) :
+- Actifs: BTCUSD / XAUUSD
+- Sessions: 09h-12h et 14h-18h UNIQUEMENT
+- Structure MTF Swing: H4 (biais) → M15 (zone/OB) → M1/M5 (entrée)
+- Structure MTF Scalp: M15 (biais) → M15 (zone) → M1 (entrée)
+- Zones autorisées: H4 OB, H4 IMB, M15 OB, M15 IMB UNIQUEMENT
+- Setups validés: A- / A / A+ / A++
+- Setup A+: Sweep liquidité → BOS → Clôture dans le sens → Entrée
+- Setup A++: Sweep → BOS → OB créé → (IMB bonus) → Retest OB → Clôture → Entrée sans hésitation
+- Confirmations M1 obligatoires: BOS M1 + clôture, OU Engulfing M1 clair, OU OB M1 + rejet propre
+- INTERDITS: Pin bar seule, entrée au feeling
+- Risque: 1R par plan, 3 TP (0.33R chacun), BE auto après TP1
+- Max 2 plans/jour, max 6/semaine
+- Stop journée: 2 TP ou 2 SL
+- TP1: 1R (sécurité/BE), TP2: 3R, TP3: 6R+ (laisser courir)
+- Retake: max 2 par zone, SL par mèche uniquement + structure intacte + nouvelle confirmation
+- Scalp: bonus uniquement si trade principal BE/gagnant + structure M15 intacte, max 2/zone
+- Règles psycho non-négociables: pas de revenge trade, pas d'overtrade, pas de trade hors plan
+- Checklist avant trade: dans ma zone? sweep+MS? clôture confirmée? dans mes horaires? émotionnellement stable?
+
+ZONES DE DRAWDOWN (compte 5000€):
+- Zone Verte (5000→4800€): risque 1R, max 4 SL consécutifs
+- Zone Orange (4800→4700€): risque 0.75R, max 3 SL consécutifs, pas de scalp
+- Zone Rouge (4700→4600€): risque 0.5R, 1 trade/jour, swing uniquement
+- Zone Noire (4600→4500€): risque 0.25R, 2 jours OFF, revue complète, A++ uniquement
+
+STYLE DE RÉPONSE:
+- Bienveillant mais direct
+- Utilise des emojis avec modération (🏯 ⚡ ✅ ❌)
+- Cite les règles exactes du plan quand pertinent
+- Toujours terminer par une action concrète ou un encouragement
+- Réponds en français
+- Sois concis mais précis (max 250 mots sauf bilan complet demandé)`;
+
+function buildMessages(userMsg) {
+  const context = buildContext();
+  const messages = [
+    { role: 'user', content: `Contexte actuel de mon journal:\n${context}\n\n---\n\n${userMsg}` },
+    ...aiHistory.slice(1).map(m => ({ role: m.role, content: m.content })),
+    { role: 'user', content: userMsg }
+  ];
+  // Clean: only keep last 10 exchanges to avoid token explosion
+  const clean = aiHistory.map(m=>({role:m.role,content:m.content}));
+  clean.push({role:'user',content:userMsg});
+  if(clean.length > 20) clean.splice(0, clean.length - 20);
+  return clean;
+}
+
+function quickAction(type) {
+  const prompts = {
+    errors: `Analyse mes erreurs de trading les plus fréquentes dans mon journal et dis-moi concrètement comment les corriger. Sois direct et bienveillant.`,
+    psycho: `Fais un bilan de mon état psychologique en trading. Est-ce que je fais du revenge trade, de l'overtrade ? Comment puis-je m'améliorer mentalement ?`,
+    setup: `Je veux valider un setup avant d'entrer. Pose-moi les questions nécessaires pour confirmer que mon setup A+ ou A++ est conforme à mon plan de trading.`,
+    bilan: `Fais-moi un bilan complet de mes statistiques : winrate, P&L, erreurs fréquentes, zone drawdown, et dis-moi ce que je dois améliorer en priorité.`
+  };
+  document.getElementById('aiInput').value = prompts[type];
+  document.getElementById('aiInput').style.height = 'auto';
+  document.getElementById('aiInput').style.height = Math.min(document.getElementById('aiInput').scrollHeight, 100) + 'px';
+  document.getElementById('aiInput').focus();
+}
+
+function addAIMessage(role, content) {
+  const msgs = document.getElementById('aiMessages');
+  const now = new Date().toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'});
+  const div = document.createElement('div');
+  div.className = `ai-msg ${role}`;
+  div.innerHTML = `
+    <div class="ai-bubble">${content.replace(/\*\*(.*?)\*\*/g,'<strong style="color:var(--gold)">$1</strong>').replace(/\n/g,'<br>')}</div>
+    <div class="ai-msg-time">${role==='user'?'Toi':'Sensei'} · ${now}</div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  aiHistory.push({role, content});
+}
+
+function showTyping() {
+  const msgs = document.getElementById('aiMessages');
+  const div = document.createElement('div');
+  div.className = 'ai-msg assistant';
+  div.id = 'aiTypingIndicator';
+  div.innerHTML = `<div class="ai-bubble ai-typing"><div class="ai-dot"></div><div class="ai-dot"></div><div class="ai-dot"></div></div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function hideTyping() {
+  const el = document.getElementById('aiTypingIndicator');
+  if(el) el.remove();
+}
+
+async function sendMessage() {
+  if(aiTyping) return;
+  const input = document.getElementById('aiInput');
+  const msg = input.value.trim();
+  if(!msg) return;
+
+  if(!apiKey) {
+    addAIMessage('assistant', '⚠️ Entre d\'abord ta clé API Anthropic dans le champ en haut pour activer le coach IA. Tu peux la créer sur **console.anthropic.com** — c\'est gratuit !');
+    return;
+  }
+
+  input.value = '';
+  input.style.height = 'auto';
+  document.getElementById('aiSendBtn').disabled = true;
+  aiTyping = true;
+
+  addAIMessage('user', msg);
+  showTyping();
+
+  try {
+    const messages = buildMessages(msg);
+    // First message: inject context
+    if(messages.length === 1) {
+      const context = buildContext();
+      messages[0].content = `[CONTEXTE JOURNAL]\n${context}\n\n[QUESTION]\n${msg}`;
+    }
+
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: SYSTEM_PROMPT,
+        messages: messages
+      })
+    });
+
+    hideTyping();
+
+    if(!response.ok) {
+      const err = await response.json().catch(()=>({}));
+      if(response.status === 401) addAIMessage('assistant', '❌ Clé API invalide. Vérifie ta clé sur **console.anthropic.com** et entre-la à nouveau.');
+      else addAIMessage('assistant', `❌ Erreur API (${response.status}). Réessaie dans quelques secondes.`);
+    } else {
+      const data = await response.json();
+      const reply = data.content?.find(c=>c.type==='text')?.text || 'Désolé, je n\'ai pas pu générer une réponse.';
+      addAIMessage('assistant', reply);
+    }
+  } catch(e) {
+    hideTyping();
+    addAIMessage('assistant', '⚠️ Erreur de connexion. Vérifie ta connexion internet et réessaie.');
+  }
+
+  aiTyping = false;
+  document.getElementById('aiSendBtn').disabled = false;
+  document.getElementById('aiInput').focus();
+}
 </script>
 </body>
 </html>
