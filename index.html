@@ -318,6 +318,7 @@ footer{border-top:1px solid var(--border);padding:44px 20px;text-align:center;}
   <a href="#psycho">Psycho</a>
   <a href="#stats-section">📊 Stats & Journal</a>
   <a href="#review-section">🪞 Review</a>
+  <a href="#charts-section">📉 Charts Live</a>
 </nav>
 
 <!-- S1 HORAIRES -->
@@ -636,11 +637,125 @@ footer{border-top:1px solid var(--border);padding:44px 20px;text-align:center;}
   </div>
 </div></div>
 
+<!-- ============ CHARTS LIVE ============ -->
+<div class="gold-divider"></div>
+<div id="charts-section" style="background:var(--black)"><div class="wrap">
+  <div class="sec-hdr reveal">
+    <span class="sec-num">09</span>
+    <h2 class="sec-title">📉 Charts Live</h2>
+    <div class="sec-line"></div>
+  </div>
+  <p style="color:var(--text-dim);font-style:italic;margin-bottom:36px;font-size:16px" class="reveal">Cours en temps réel — XAU/USD · OANDA &nbsp;|&nbsp; BTC/USD · CAPITAL.COM</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;" class="reveal">
+
+    <!-- GOLD -->
+    <div style="background:var(--panel);border:1px solid var(--border);position:relative;overflow:hidden;">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border);background:rgba(201,168,76,.04);">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span style="font-size:22px;">🥇</span>
+          <div>
+            <div style="font-family:'Cinzel',serif;font-size:15px;color:var(--gold);letter-spacing:2px;">XAU / USD</div>
+            <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text-dim);">OANDA</div>
+          </div>
+        </div>
+        <span style="font-family:'Space Mono',monospace;font-size:9px;padding:3px 8px;border:1px solid var(--green);color:var(--green);background:var(--green-bg);">● LIVE</span>
+      </div>
+      <div style="height:420px;">
+        <div class="tradingview-widget-container" style="height:100%;width:100%;">
+          <div class="tradingview-widget-container__widget" style="height:100%;width:100%;"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+          {
+            "autosize": true,
+            "symbol": "OANDA:XAUUSD",
+            "interval": "15",
+            "timezone": "Europe/Paris",
+            "theme": "dark",
+            "style": "1",
+            "locale": "fr",
+            "backgroundColor": "#111111",
+            "gridColor": "rgba(201,168,76,0.04)",
+            "hide_top_toolbar": false,
+            "hide_legend": false,
+            "save_image": false,
+            "calendar": false,
+            "hide_volume": false,
+            "support_host": "https://www.tradingview.com"
+          }
+          </script>
+        </div>
+      </div>
+    </div>
+
+    <!-- BTC -->
+    <div style="background:var(--panel);border:1px solid var(--border);position:relative;overflow:hidden;">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border);background:rgba(201,168,76,.04);">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span style="font-size:22px;">₿</span>
+          <div>
+            <div style="font-family:'Cinzel',serif;font-size:15px;color:var(--gold);letter-spacing:2px;">BTC / USD</div>
+            <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text-dim);">CAPITAL.COM</div>
+          </div>
+        </div>
+        <span style="font-family:'Space Mono',monospace;font-size:9px;padding:3px 8px;border:1px solid var(--green);color:var(--green);background:var(--green-bg);">● LIVE</span>
+      </div>
+      <div style="height:420px;">
+        <div class="tradingview-widget-container" style="height:100%;width:100%;">
+          <div class="tradingview-widget-container__widget" style="height:100%;width:100%;"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+          {
+            "autosize": true,
+            "symbol": "CAPITALCOM:BITCOIN",
+            "interval": "15",
+            "timezone": "Europe/Paris",
+            "theme": "dark",
+            "style": "1",
+            "locale": "fr",
+            "backgroundColor": "#111111",
+            "gridColor": "rgba(201,168,76,0.04)",
+            "hide_top_toolbar": false,
+            "hide_legend": false,
+            "save_image": false,
+            "calendar": false,
+            "hide_volume": false,
+            "support_host": "https://www.tradingview.com"
+          }
+          </script>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- mini ticker strip -->
+  <div style="margin-top:20px;background:var(--panel);border:1px solid var(--border);" class="reveal">
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+      {
+        "symbols": [
+          { "proName": "OANDA:XAUUSD", "title": "Gold" },
+          { "proName": "CAPITALCOM:BITCOIN", "title": "Bitcoin" },
+          { "proName": "FX:EURUSD", "title": "EUR/USD" },
+          { "proName": "TVC:DXY", "title": "DXY" },
+          { "proName": "CAPITALCOM:US500", "title": "S&P 500" }
+        ],
+        "isTransparent": true,
+        "showSymbolLogo": true,
+        "colorTheme": "dark",
+        "locale": "fr"
+      }
+      </script>
+    </div>
+  </div>
+
+</div></div>
+
 <!-- ============ REVIEW & ANALYSE ============ -->
 <div class="gold-divider"></div>
 <div id="review-section" style="background:var(--deep)"><div class="wrap">
   <div class="sec-hdr reveal">
-    <span class="sec-num">09</span>
+    <span class="sec-num">10</span>
     <h2 class="sec-title">🪞 Review & Analyse</h2>
     <div class="sec-line"></div>
   </div>
