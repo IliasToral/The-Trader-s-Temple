@@ -140,7 +140,45 @@ nav a:hover,nav a.active{color:var(--gold);border-bottom-color:var(--gold);}
 .banned{padding:18px;border:1px solid rgba(192,57,43,.3);background:rgba(139,26,26,.09);text-align:center;font-size:13px;color:var(--text);}
 .banned::before{content:'❌';display:block;font-size:20px;margin-bottom:8px;}
 
-/* ---- REVEAL ---- */
+/* ---- REVIEW ---- */
+.review-year-tabs{display:flex;gap:0;margin-bottom:32px;border-bottom:1px solid var(--border);}
+.ry-btn{font-family:'Cinzel',serif;font-size:14px;letter-spacing:3px;padding:12px 28px;border:none;background:transparent;color:var(--text-dim);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .25s;}
+.ry-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+.ry-btn:hover{color:var(--white);}
+.quarter-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-bottom:32px;}
+.quarter-card{background:var(--panel);border:1px solid var(--border);position:relative;overflow:hidden;transition:border-color .3s;}
+.quarter-card:hover{border-color:var(--gold-dim);}
+.quarter-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);}
+.q-header{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid var(--border);background:rgba(201,168,76,.03);}
+.q-title{font-family:'Cinzel',serif;font-size:18px;color:var(--gold);letter-spacing:3px;}
+.q-months{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:2px;}
+.q-body{padding:20px 24px;}
+.q-stats{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:16px;}
+.q-stat{padding:8px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.q-stat:nth-child(odd){padding-right:14px;border-right:1px solid var(--border);}
+.q-stat:nth-child(even){padding-left:14px;}
+.q-stat-lbl{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--text-dim);text-transform:uppercase;}
+.q-stat-val{font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:var(--white);}
+.q-stat-val.green{color:var(--green);}
+.q-stat-val.red{color:var(--red);}
+.q-stat-val.gold{color:var(--gold);}
+.q-months-breakdown{border-top:1px solid var(--border);padding-top:14px;margin-top:4px;}
+.q-month-row{display:flex;align-items:center;gap:10px;padding:5px 0;}
+.q-month-lbl{font-family:'Space Mono',monospace;font-size:10px;color:var(--gold-dim);width:34px;flex-shrink:0;}
+.q-month-input{background:transparent;border:none;border-bottom:1px solid var(--border2);color:var(--text);font-family:'Space Mono',monospace;font-size:11px;padding:3px 6px;width:100%;outline:none;transition:border-color .2s;}
+.q-month-input:focus{border-bottom-color:var(--gold-dim);color:var(--white);}
+.q-month-input::placeholder{color:var(--text-dim);font-size:10px;}
+.q-save-btn{margin-top:16px;width:100%;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:3px;padding:9px;border:1px solid var(--gold-dim);color:var(--gold-dim);background:transparent;cursor:pointer;text-transform:uppercase;transition:all .22s;}
+.q-save-btn:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-faint);}
+.q-save-btn.saved{border-color:var(--green);color:var(--green);}
+.q-wr-bar{height:3px;background:var(--border);margin-top:10px;margin-bottom:14px;}
+.q-wr-fill{height:100%;transition:width .6s ease;}
+.review-global{background:var(--panel);border:1px solid var(--border);padding:32px;margin-top:8px;}
+.rg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:14px;}
+.rg-kpi{text-align:center;padding:16px;border:1px solid var(--border);}
+.rg-val{font-family:'Cinzel',serif;font-size:22px;color:var(--gold);margin-bottom:4px;}
+.rg-lbl{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;}
+
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s,transform .65s;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 
@@ -279,6 +317,7 @@ footer{border-top:1px solid var(--border);padding:44px 20px;text-align:center;}
   <a href="#objectifs">TP</a>
   <a href="#psycho">Psycho</a>
   <a href="#stats-section">📊 Stats & Journal</a>
+  <a href="#review-section">🪞 Review</a>
 </nav>
 
 <!-- S1 HORAIRES -->
@@ -595,6 +634,24 @@ footer{border-top:1px solid var(--border);padding:44px 20px;text-align:center;}
       </div>
     </div>
   </div>
+</div></div>
+
+<!-- ============ REVIEW & ANALYSE ============ -->
+<div class="gold-divider"></div>
+<div id="review-section" style="background:var(--deep)"><div class="wrap">
+  <div class="sec-hdr reveal">
+    <span class="sec-num">09</span>
+    <h2 class="sec-title">🪞 Review & Analyse</h2>
+    <div class="sec-line"></div>
+  </div>
+  <p style="color:var(--text-dim);font-style:italic;margin-bottom:36px;font-size:16px" class="reveal">Analyse trimestrielle de ta performance. Chaque quarter, chaque leçon compte.</p>
+
+  <!-- YEAR TABS -->
+  <div class="review-year-tabs reveal" id="reviewYearTabs"></div>
+
+  <!-- YEAR PANELS -->
+  <div id="reviewYearPanels"></div>
+
 </div></div>
 
 <!-- FOOTER -->
@@ -989,6 +1046,194 @@ function closeModalDirect(){document.getElementById('modalOverlay').classList.re
 // ---- INIT ----
 document.getElementById('fDate').value = new Date().toISOString().split('T')[0];
 renderAll();
+
+// ============ REVIEW ============
+const REVIEW_YEARS = [2024, 2025, 2026];
+const QUARTERS = [
+  { id:'Q1', label:'Q1', months:['JAN','FEB','MAR'] },
+  { id:'Q2', label:'Q2', months:['APR','MAY','JUN'] },
+  { id:'Q3', label:'Q3', months:['JUL','AUG','SEP'] },
+  { id:'Q4', label:'Q4', months:['OCT','NOV','DEC'] },
+];
+let reviewData = JSON.parse(localStorage.getItem('ttt_review_v1') || '{}');
+let activeReviewYear = 2025;
+
+function saveReview() { localStorage.setItem('ttt_review_v1', JSON.stringify(reviewData)); }
+
+function getReviewKey(year, qid) { return `${year}_${qid}`; }
+
+function getQData(year, qid) {
+  const key = getReviewKey(year, qid);
+  if (!reviewData[key]) reviewData[key] = { wins:'', losses:'', be:'', total:'', winrate:'', netpl:'', months:{} };
+  return reviewData[key];
+}
+
+function calcWinrate(year, qid) {
+  const d = getQData(year, qid);
+  const w = parseInt(d.wins)||0, l = parseInt(d.losses)||0, b = parseInt(d.be)||0;
+  const total = w+l+b;
+  if(!total) return 0;
+  return Math.round(w/total*100);
+}
+
+function renderReviewYearTabs() {
+  const tabs = document.getElementById('reviewYearTabs');
+  tabs.innerHTML = REVIEW_YEARS.map(y =>
+    `<button class="ry-btn${y===activeReviewYear?' active':''}" onclick="switchReviewYear(${y})">${y}</button>`
+  ).join('');
+}
+
+function switchReviewYear(year) {
+  activeReviewYear = year;
+  renderReviewYearTabs();
+  renderReviewYearPanel(year);
+}
+
+function renderReviewYearPanel(year) {
+  const panels = document.getElementById('reviewYearPanels');
+
+  // Global year KPIs
+  let totalW=0,totalL=0,totalBE=0,totalTrades=0,totalNetPL=0;
+  QUARTERS.forEach(q => {
+    const d = getQData(year, q.id);
+    totalW += parseInt(d.wins)||0;
+    totalL += parseInt(d.losses)||0;
+    totalBE += parseInt(d.be)||0;
+    totalTrades += parseInt(d.total)||0;
+    const np = parseFloat(d.netpl)||0;
+    totalNetPL += np;
+  });
+  const globalWR = totalW+totalL+totalBE > 0 ? Math.round(totalW/(totalW+totalL+totalBE)*100) : 0;
+
+  panels.innerHTML = `
+    <div class="review-global reveal" style="margin-bottom:28px">
+      <div class="ctitle" style="margin-bottom:18px">📊 Bilan Annuel ${year}</div>
+      <div class="rg-grid">
+        <div class="rg-kpi"><div class="rg-val" style="color:var(--green)">${totalW}</div><div class="rg-lbl">Wins</div></div>
+        <div class="rg-kpi"><div class="rg-val" style="color:var(--red)">${totalL}</div><div class="rg-lbl">Losses</div></div>
+        <div class="rg-kpi"><div class="rg-val" style="color:var(--text-dim)">${totalBE}</div><div class="rg-lbl">Breakeven</div></div>
+        <div class="rg-kpi"><div class="rg-val">${totalW+totalL+totalBE}</div><div class="rg-lbl">Total Trades</div></div>
+        <div class="rg-kpi"><div class="rg-val" style="color:${globalWR>=50?'var(--green)':'var(--red)'}">${globalWR}%</div><div class="rg-lbl">Win Rate</div></div>
+        <div class="rg-kpi"><div class="rg-val" style="color:${totalNetPL>=0?'var(--green)':'var(--red)'}">${totalNetPL>=0?'+':''}${totalNetPL.toFixed(1)}R</div><div class="rg-lbl">Net P/L</div></div>
+      </div>
+    </div>
+    <div class="quarter-grid">
+      ${QUARTERS.map(q => renderQuarterCard(year, q)).join('')}
+    </div>
+  `;
+}
+
+function renderQuarterCard(year, q) {
+  const d = getQData(year, q.id);
+  const wr = calcWinrate(year, q.id);
+  const wrColor = wr>=50 ? 'var(--green)' : wr>0 ? 'var(--orange)' : 'var(--text-dim)';
+  const netPL = parseFloat(d.netpl)||0;
+  const monthLabels = { JAN:'JAN',FEB:'FEB',MAR:'MAR',APR:'APR',MAY:'MAY',JUN:'JUN',JUL:'JUL',AUG:'AUG',SEP:'SEP',OCT:'OCT',NOV:'NOV',DEC:'DEC' };
+
+  return `
+  <div class="quarter-card">
+    <div class="q-header">
+      <div class="q-title">${q.label}</div>
+      <div class="q-months">${q.months.join(' · ')}</div>
+    </div>
+    <div class="q-body">
+      <div class="q-stats">
+        <div class="q-stat">
+          <span class="q-stat-lbl">Wins</span>
+          <input class="q-stat-val green" style="background:transparent;border:none;border-bottom:1px solid var(--border2);width:60px;text-align:right;font-family:'Space Mono',monospace;font-size:13px;color:var(--green);outline:none;" 
+            type="number" min="0" placeholder="0" value="${d.wins}"
+            oninput="updateQField('${year}','${q.id}','wins',this.value)">
+        </div>
+        <div class="q-stat">
+          <span class="q-stat-lbl">Losses</span>
+          <input class="q-stat-val red" style="background:transparent;border:none;border-bottom:1px solid var(--border2);width:60px;text-align:right;font-family:'Space Mono',monospace;font-size:13px;color:var(--red);outline:none;"
+            type="number" min="0" placeholder="0" value="${d.losses}"
+            oninput="updateQField('${year}','${q.id}','losses',this.value)">
+        </div>
+        <div class="q-stat">
+          <span class="q-stat-lbl">Breakeven</span>
+          <input style="background:transparent;border:none;border-bottom:1px solid var(--border2);width:60px;text-align:right;font-family:'Space Mono',monospace;font-size:13px;color:var(--text-dim);outline:none;"
+            type="number" min="0" placeholder="0" value="${d.be}"
+            oninput="updateQField('${year}','${q.id}','be',this.value)">
+        </div>
+        <div class="q-stat">
+          <span class="q-stat-lbl">Total</span>
+          <input style="background:transparent;border:none;border-bottom:1px solid var(--border2);width:60px;text-align:right;font-family:'Space Mono',monospace;font-size:13px;color:var(--white);outline:none;"
+            type="number" min="0" placeholder="0" value="${d.total}"
+            oninput="updateQField('${year}','${q.id}','total',this.value)">
+        </div>
+        <div class="q-stat" style="grid-column:span 2;border-right:none;padding-right:0">
+          <span class="q-stat-lbl">Win Rate</span>
+          <span class="q-stat-val" style="color:${wrColor}">${wr}%</span>
+        </div>
+        <div class="q-stat" style="grid-column:span 2;border-right:none;padding-right:0;border-bottom:none">
+          <span class="q-stat-lbl">Net P/L</span>
+          <div style="display:flex;align-items:center;gap:6px">
+            <input style="background:transparent;border:none;border-bottom:1px solid var(--border2);width:80px;text-align:right;font-family:'Space Mono',monospace;font-size:13px;color:${netPL>=0?'var(--green)':'var(--red)'};outline:none;"
+              type="number" step="0.1" placeholder="+0R" value="${d.netpl}"
+              oninput="updateQField('${year}','${q.id}','netpl',this.value)">
+            <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim)">R</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-wr-bar">
+        <div class="q-wr-fill" style="width:${wr}%;background:${wrColor}"></div>
+      </div>
+
+      <div class="q-months-breakdown">
+        ${q.months.map(m => `
+          <div class="q-month-row">
+            <span class="q-month-lbl">${m}</span>
+            <input class="q-month-input" type="text" placeholder="Notes du mois..." 
+              value="${(d.months&&d.months[m])||''}"
+              oninput="updateQMonth('${year}','${q.id}','${m}',this.value)">
+          </div>
+        `).join('')}
+      </div>
+
+      <button class="q-save-btn" id="qsave_${year}_${q.id}" onclick="saveQCard('${year}','${q.id}')">💾 Sauvegarder</button>
+    </div>
+  </div>`;
+}
+
+function updateQField(year, qid, field, val) {
+  const d = getQData(year, qid);
+  d[field] = val;
+  // live update winrate display
+  const card = document.getElementById(`qsave_${year}_${qid}`)?.closest('.quarter-card');
+  if(card) {
+    const wr = calcWinrate(year, qid);
+    const wrColor = wr>=50?'var(--green)':wr>0?'var(--orange)':'var(--text-dim)';
+    const wrEl = card.querySelector('.q-wr-fill');
+    const wrLbl = card.querySelector('.q-stat-val[style*="color"]');
+    if(wrEl) { wrEl.style.width=wr+'%'; wrEl.style.background=wrColor; }
+    // update netpl color
+    if(field==='netpl') {
+      const np = parseFloat(val)||0;
+      const npInput = card.querySelectorAll('input[type="number"]')[5];
+      if(npInput) npInput.style.color = np>=0?'var(--green)':'var(--red)';
+    }
+  }
+}
+
+function updateQMonth(year, qid, month, val) {
+  const d = getQData(year, qid);
+  if(!d.months) d.months={};
+  d.months[month] = val;
+}
+
+function saveQCard(year, qid) {
+  saveReview();
+  // refresh global bilan
+  renderReviewYearPanel(year);
+  const btn = document.getElementById(`qsave_${year}_${qid}`);
+  if(btn) { btn.textContent='✅ Sauvegardé !'; btn.classList.add('saved'); setTimeout(()=>{ btn.textContent='💾 Sauvegarder'; btn.classList.remove('saved'); },2000); }
+}
+
+// Init review
+renderReviewYearTabs();
+renderReviewYearPanel(activeReviewYear);
 </script>
 </body>
 </html>
