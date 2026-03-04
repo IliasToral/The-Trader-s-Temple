@@ -196,9 +196,18 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .rule-label{font-family:'Cinzel',serif;font-size:13px;color:var(--white);letter-spacing:1px;flex:1;}
 .rule-val{font-family:'Space Mono',monospace;font-size:11px;color:var(--gold);}
 
-/* ============================================================
-   PAGE CALENDRIER
-   ============================================================ */
+/* ---- EXPORT / IMPORT ---- */
+.data-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 16px;background:var(--panel);border:1px solid var(--border);margin-bottom:20px;}
+.data-bar-label{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;margin-right:4px;}
+.data-btn{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;padding:6px 14px;border:1px solid;cursor:pointer;background:transparent;text-transform:uppercase;transition:all .2s;white-space:nowrap;}
+.data-btn.export{border-color:var(--gold-dim);color:var(--gold);}
+.data-btn.export:hover{background:var(--gold-faint);border-color:var(--gold);}
+.data-btn.import{border-color:var(--border2);color:var(--text-dim);}
+.data-btn.import:hover{border-color:var(--green-border);color:var(--green);}
+.data-btn.danger{border-color:var(--red-border);color:var(--red);}
+.data-btn.danger:hover{background:var(--red-bg);}
+.data-info{font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);margin-left:auto;}
+#importFileInput{display:none;}
 .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
 .cal-month-title{font-family:'Cinzel',serif;font-size:22px;color:var(--gold);letter-spacing:3px;}
 .cal-arrow{background:none;border:1px solid var(--border);color:var(--text-dim);cursor:pointer;padding:7px 14px;font-size:16px;transition:all .2s;}
@@ -861,6 +870,16 @@ tr:hover td{background:rgba(201,168,76,.015);}
 <div class="wrap">
   <div class="sec-hdr"><span class="sec-num">—</span><h2 class="sec-title">📋 Journal & Stats</h2><div class="sec-line"></div></div>
 
+  <!-- DATA SAFETY BAR -->
+  <div class="data-bar">
+    <span class="data-bar-label">💾 Données :</span>
+    <button class="data-btn export" onclick="exportAll()">⬇ Exporter tout (JSON)</button>
+    <button class="data-btn import" onclick="document.getElementById('importFileInput').click()">⬆ Importer backup</button>
+    <input type="file" id="importFileInput" accept=".json" onchange="importAll(this)">
+    <button class="data-btn danger" onclick="dangerReset()">🗑 Reset</button>
+    <span class="data-info" id="dataInfo">—</span>
+  </div>
+
   <div class="tabs">
     <button class="tab-btn active" onclick="switchJTab('journal')">📋 Journal</button>
     <button class="tab-btn" onclick="switchJTab('mensuel')">📅 Mensuel</button>
@@ -1479,9 +1498,8 @@ function addTrade(){
   ['fGain','fRR','fCapital','fDate'].forEach(id=>document.getElementById(id).value='');
   document.querySelector('input[name="fPlan"][value="OUI"]').checked=true;
   document.getElementById('fDate').value=new Date().toISOString().split('T')[0];
-  renderAll();renderHomeKPIs();
-}
-function deleteTrade(id){if(!confirm('Supprimer ?'))return;trades=trades.filter(t=>t.id!==id);save();renderAll();renderHomeKPIs();}
+  renderAll();renderHomeKPIs();updateDataInfo();
+function deleteTrade(id){if(!confirm('Supprimer ?'))return;trades=trades.filter(t=>t.id!==id);save();renderAll();renderHomeKPIs();updateDataInfo();}
 
 // ============================================================
 // JOURNAL — KPIs
@@ -1959,6 +1977,87 @@ function saveQCard(year,qid){
 }
 
 // ============================================================
+// EXPORT / IMPORT / RESET
+// ============================================================
+function updateDataInfo(){
+  const el=document.getElementById('dataInfo');
+  if(!el)return;
+  const n=trades.length;
+  const last=trades.length?trades[trades.length-1].date:'—';
+  const kb=Math.round(JSON.stringify(trades).length/1024*10)/10;
+  el.textContent=`${n} trades · dernier : ${last} · ${kb} KB`;
+}
+
+function exportAll(){
+  const payload={
+    version:'ttt_v2',
+    exported:new Date().toISOString(),
+    trades,
+    review:reviewData,
+    goals:goalsData,
+    sancJournal:localStorage.getItem('ttt_sanc_journal')||''
+  };
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  const date=new Date().toISOString().split('T')[0];
+  a.href=url;a.download=`traders-temple-backup-${date}.json`;
+  document.body.appendChild(a);a.click();
+  document.body.removeChild(a);URL.revokeObjectURL(url);
+  showToast('✅ Backup exporté ! Garde ce fichier précieusement.');
+}
+
+function importAll(input){
+  if(!input.files[0])return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const data=JSON.parse(e.target.result);
+      if(!data.version||!data.trades)throw new Error('Format invalide');
+      if(!confirm(`Importer ${data.trades.length} trades depuis ${data.exported?.split('T')[0]||'?'} ?\n\nCela remplacera toutes tes données actuelles.`))return;
+      trades=data.trades||[];
+      reviewData=data.review||{};
+      goalsData=data.goals||{wr:60,r:10,capital:6000,plan:90};
+      localStorage.setItem('ttt_trades_v3',JSON.stringify(trades));
+      localStorage.setItem('ttt_review_v1',JSON.stringify(reviewData));
+      localStorage.setItem('ttt_goals_v1',JSON.stringify(goalsData));
+      if(data.sancJournal)localStorage.setItem('ttt_sanc_journal',data.sancJournal);
+      renderAll();renderHomeKPIs();updateDataInfo();
+      showToast(`✅ ${trades.length} trades importés avec succès !`);
+    }catch(err){
+      showToast('❌ Fichier invalide. Vérifie que c\'est bien un backup du Temple.');
+    }
+  };
+  reader.readAsText(input.files[0]);
+  input.value='';
+}
+
+function dangerReset(){
+  if(!confirm('⚠️ SUPPRIMER TOUTES LES DONNÉES ?\n\nCette action est irréversible.\nFais un export avant si tu veux garder tes trades.'))return;
+  if(!confirm('Dernière confirmation — vraiment tout supprimer ?'))return;
+  trades=[];reviewData={};
+  localStorage.removeItem('ttt_trades_v3');
+  localStorage.removeItem('ttt_review_v1');
+  renderAll();renderHomeKPIs();updateDataInfo();
+  showToast('🗑 Toutes les données supprimées.');
+}
+
+// Toast notification
+function showToast(msg){
+  let toast=document.getElementById('tttToast');
+  if(!toast){
+    toast=document.createElement('div');
+    toast.id='tttToast';
+    toast.style.cssText='position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--panel);border:1px solid var(--gold-dim);color:var(--white);font-family:"Space Mono",monospace;font-size:11px;letter-spacing:1px;padding:12px 22px;z-index:9999;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;';
+    document.body.appendChild(toast);
+  }
+  toast.textContent=msg;
+  toast.style.opacity='1';toast.style.transform='translateX(-50%) translateY(0)';
+  clearTimeout(toast._t);
+  toast._t=setTimeout(()=>{toast.style.opacity='0';toast.style.transform='translateX(-50%) translateY(10px)';},3500);
+}
+
+// ============================================================
 // THEME TOGGLE
 // ============================================================
 (function(){
@@ -2426,6 +2525,7 @@ function clearSancJournal(){
 document.getElementById('fDate').value=new Date().toISOString().split('T')[0];
 renderAll();
 renderHomeKPIs();
+updateDataInfo();
 </script>
 </body>
 </html>
