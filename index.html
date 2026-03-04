@@ -20,12 +20,6 @@ body{background:var(--black);color:var(--text);font-family:'Cormorant Garamond',
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.5;}
 ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--black);}::-webkit-scrollbar-thumb{background:var(--gold-dim);}
 
-/* Hide TradingView branding button */
-#tradingview-chat-button,
-.tv-chat-widget,
-[class*="chat-widget"],
-iframe[id*="chat"] { display:none !important; }
-
 /* ---- HERO ---- */
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;padding:60px 20px;text-align:center;overflow:hidden;}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 55% 45% at 50% 50%,rgba(201,168,76,.055) 0%,transparent 70%),radial-gradient(ellipse 80% 55% at 50% 100%,rgba(139,26,26,.07) 0%,transparent 60%);}
@@ -339,7 +333,6 @@ footer{border-top:1px solid var(--border);padding:44px 20px;text-align:center;}
   <a href="#psycho">Psycho</a>
   <a href="#stats-section">📊 Stats & Journal</a>
   <a href="#review-section">🪞 Review</a>
-  <a href="#charts-section">📉 Charts Live</a>
   <a href="#tools-section">🧮 Outils</a>
   <a href="#session-section">⏰ Sessions</a>
   <a href="#sentiment-section">🌡️ Sentiment</a>
@@ -660,104 +653,6 @@ footer{border-top:1px solid var(--border);padding:44px 20px;text-align:center;}
       </div>
     </div>
   </div>
-</div></div>
-
-<!-- ============ CHARTS LIVE ============ -->
-<div class="gold-divider"></div>
-<div id="charts-section" style="background:var(--black)"><div class="wrap">
-  <div class="sec-hdr reveal">
-    <span class="sec-num">09</span>
-    <h2 class="sec-title">📉 Charts Live</h2>
-    <div class="sec-line"></div>
-  </div>
-  <p style="color:var(--text-dim);font-style:italic;margin-bottom:36px;font-size:16px" class="reveal">Cours en temps réel — XAU/USD · OANDA &nbsp;|&nbsp; BTC/USD · CAPITAL.COM</p>
-
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;" class="reveal">
-
-    <!-- GOLD -->
-    <div style="background:var(--panel);border:1px solid var(--border);position:relative;overflow:hidden;">
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border);background:rgba(201,168,76,.04);">
-        <div style="display:flex;align-items:center;gap:12px;">
-          <span style="font-size:22px;">🥇</span>
-          <div>
-            <div style="font-family:'Cinzel',serif;font-size:15px;color:var(--gold);letter-spacing:2px;">XAU / USD</div>
-            <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text-dim);">OANDA</div>
-          </div>
-        </div>
-        <span style="font-family:'Space Mono',monospace;font-size:9px;padding:3px 8px;border:1px solid var(--green);color:var(--green);background:var(--green-bg);">● LIVE</span>
-      </div>
-      <div style="height:420px;">
-        <div class="tradingview-widget-container" style="height:100%;width:100%;">
-          <div class="tradingview-widget-container__widget" style="height:100%;width:100%;"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-          {
-            "autosize": true,
-            "symbol": "OANDA:XAUUSD",
-            "interval": "15",
-            "timezone": "Europe/Paris",
-            "theme": "dark",
-            "style": "1",
-            "locale": "fr",
-            "backgroundColor": "#111111",
-            "gridColor": "rgba(201,168,76,0.04)",
-            "hide_top_toolbar": false,
-            "hide_legend": false,
-            "hide_side_toolbar": false,
-            "allow_symbol_change": true,
-            "save_image": false,
-            "calendar": false,
-            "hide_volume": false,
-            "support_host": "https://www.tradingview.com"
-          }
-          </script>
-        </div>
-      </div>
-    </div>
-
-    <!-- BTC -->
-    <div style="background:var(--panel);border:1px solid var(--border);position:relative;overflow:hidden;">
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border);background:rgba(201,168,76,.04);">
-        <div style="display:flex;align-items:center;gap:12px;">
-          <span style="font-size:22px;">₿</span>
-          <div>
-            <div style="font-family:'Cinzel',serif;font-size:15px;color:var(--gold);letter-spacing:2px;">BTC / USD</div>
-            <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text-dim);">CAPITAL.COM</div>
-          </div>
-        </div>
-        <span style="font-family:'Space Mono',monospace;font-size:9px;padding:3px 8px;border:1px solid var(--green);color:var(--green);background:var(--green-bg);">● LIVE</span>
-      </div>
-      <div style="height:420px;">
-        <div class="tradingview-widget-container" style="height:100%;width:100%;">
-          <div class="tradingview-widget-container__widget" style="height:100%;width:100%;"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-          {
-            "autosize": true,
-            "symbol": "CAPITALCOM:BITCOIN",
-            "interval": "15",
-            "timezone": "Europe/Paris",
-            "theme": "dark",
-            "style": "1",
-            "locale": "fr",
-            "backgroundColor": "#111111",
-            "gridColor": "rgba(201,168,76,0.04)",
-            "hide_top_toolbar": false,
-            "hide_legend": false,
-            "hide_side_toolbar": false,
-            "allow_symbol_change": true,
-            "save_image": false,
-            "calendar": false,
-            "hide_volume": false,
-            "support_host": "https://www.tradingview.com"
-          }
-          </script>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- mini ticker strip supprimé -->
-
 </div></div>
 
 <!-- ============ TOOLS : CALCULATEUR ============ -->
