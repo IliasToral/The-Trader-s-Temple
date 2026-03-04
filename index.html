@@ -1499,6 +1499,7 @@ function addTrade(){
   document.querySelector('input[name="fPlan"][value="OUI"]').checked=true;
   document.getElementById('fDate').value=new Date().toISOString().split('T')[0];
   renderAll();renderHomeKPIs();updateDataInfo();
+}
 function deleteTrade(id){if(!confirm('Supprimer ?'))return;trades=trades.filter(t=>t.id!==id);save();renderAll();renderHomeKPIs();updateDataInfo();}
 
 // ============================================================
