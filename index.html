@@ -326,8 +326,65 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .cal-leg-dot{width:8px;height:8px;border-radius:50%;}
 
 /* ============================================================
-   RECHERCHE DE TRADES
+   SPLASH SCREEN
    ============================================================ */
+#splash{position:fixed;inset:0;background:var(--black);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s ease, visibility .6s ease;}
+#splash.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+.splash-torii{font-size:80px;animation:splashTorii 1.2s ease-out both;filter:drop-shadow(0 0 40px rgba(201,168,76,.5));}
+@keyframes splashTorii{0%{opacity:0;transform:scale(.5) translateY(30px);}60%{transform:scale(1.08) translateY(-4px);}100%{opacity:1;transform:scale(1) translateY(0);}}
+.splash-title{font-family:'Cinzel',serif;font-size:clamp(22px,5vw,44px);font-weight:900;color:var(--gold);letter-spacing:6px;margin:20px 0 6px;animation:fadeUp .8s .5s both;}
+.splash-sub{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:5px;color:var(--gold-dim);text-transform:uppercase;animation:fadeUp .8s .7s both;}
+.splash-bar{width:200px;height:1px;background:var(--border);margin:36px auto 0;overflow:hidden;animation:fadeUp .8s .9s both;}
+.splash-bar-fill{height:100%;width:0;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:splashLoad 1.6s 1s ease-out forwards;}
+@keyframes splashLoad{0%{width:0;}100%{width:100%;}}
+.splash-quote{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--text-dim);margin-top:20px;animation:fadeUp .8s 1.1s both;max-width:340px;text-align:center;line-height:1.8;}
+
+/* ============================================================
+   NOTES RAPIDES — BLOC-NOTES ANCRÉ
+   ============================================================ */
+#quickNoteBtn{position:fixed;bottom:24px;right:24px;width:48px;height:48px;background:var(--panel);border:1px solid var(--gold-dim);color:var(--gold);font-size:20px;cursor:pointer;z-index:800;display:flex;align-items:center;justify-content:center;transition:all .25s;box-shadow:0 4px 20px rgba(0,0,0,.4);}
+#quickNoteBtn:hover{background:var(--gold-faint);box-shadow:0 4px 28px rgba(201,168,76,.2);}
+#quickNotePanel{position:fixed;bottom:84px;right:24px;width:320px;background:var(--panel);border:1px solid var(--gold-dim);z-index:800;display:none;flex-direction:column;box-shadow:0 8px 40px rgba(0,0,0,.5);animation:noteSlideUp .2s ease-out;}
+#quickNotePanel.open{display:flex;}
+@keyframes noteSlideUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.qn-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border);background:var(--panel2);}
+.qn-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:var(--gold);}
+.qn-close{background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:16px;line-height:1;}
+.qn-tabs{display:flex;border-bottom:1px solid var(--border);}
+.qn-tab{flex:1;font-family:'Space Mono',monospace;font-size:7px;letter-spacing:1px;padding:6px;background:none;border:none;border-bottom:2px solid transparent;color:var(--text-dim);cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.qn-tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.qn-body{padding:10px;}
+.qn-textarea{width:100%;background:var(--panel2);border:1px solid var(--border);color:var(--white);font-family:'Cormorant Garamond',serif;font-size:15px;padding:10px;outline:none;resize:none;height:160px;line-height:1.7;transition:border-color .2s;}
+.qn-textarea:focus{border-color:var(--gold-dim);}
+.qn-textarea::placeholder{color:var(--text-dim);font-style:italic;}
+.qn-footer{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;border-top:1px solid var(--border);}
+.qn-save-status{font-family:'Space Mono',monospace;font-size:7px;color:var(--text-dim);}
+.qn-clear{font-family:'Space Mono',monospace;font-size:7px;padding:3px 8px;border:1px solid var(--border);background:none;color:var(--text-dim);cursor:pointer;transition:all .2s;}
+.qn-clear:hover{border-color:var(--red-border);color:var(--red);}
+
+/* ============================================================
+   CALENDRIER — VUE SEMAINE
+   ============================================================ */
+.cal-view-toggle{display:flex;gap:0;border:1px solid var(--border);overflow:hidden;width:fit-content;margin-bottom:20px;}
+.cal-view-btn{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;padding:7px 16px;background:transparent;border:none;border-right:1px solid var(--border);color:var(--text-dim);cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.cal-view-btn:last-child{border-right:none;}
+.cal-view-btn.active{background:var(--gold-faint);color:var(--gold);}
+.week-grid{background:var(--border);border:1px solid var(--border);}
+.week-row{display:grid;grid-template-columns:80px repeat(7,1fr);gap:1px;}
+.week-header-cell{background:var(--panel2);padding:8px 10px;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--text-dim);text-align:center;}
+.week-header-cell.today-col{color:var(--gold);}
+.week-time-label{background:var(--panel);padding:8px;font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);text-align:right;display:flex;align-items:center;justify-content:flex-end;}
+.week-day-cell{background:var(--panel);min-height:52px;padding:6px;position:relative;transition:background .2s;cursor:pointer;}
+.week-day-cell:hover{background:var(--panel2);}
+.week-day-cell.today-col{outline:1px solid var(--gold-dim);outline-offset:-1px;}
+.week-trade-chip{font-family:'Space Mono',monospace;font-size:7px;padding:2px 6px;margin-bottom:3px;cursor:pointer;transition:opacity .2s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.week-trade-chip:hover{opacity:.8;}
+.week-trade-chip.win{background:rgba(46,204,113,.15);border:1px solid rgba(46,204,113,.3);color:#2ecc71;}
+.week-trade-chip.loss{background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.3);color:#e74c3c;}
+.week-trade-chip.be{background:rgba(200,200,200,.08);border:1px solid rgba(200,200,200,.15);color:var(--text-dim);}
+.week-day-pnl{position:absolute;bottom:3px;right:4px;font-family:'Space Mono',monospace;font-size:7px;}
+.week-summary-row{display:grid;grid-template-columns:80px repeat(7,1fr);gap:1px;margin-top:1px;}
+.week-summary-cell{background:var(--panel2);padding:6px 8px;font-family:'Space Mono',monospace;font-size:8px;text-align:center;}
 .search-bar{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;}
 .search-input{flex:1;min-width:200px;background:var(--panel2);border:1px solid var(--border);color:var(--white);font-family:'Space Mono',monospace;font-size:11px;padding:10px 14px;outline:none;transition:border-color .2s;}
 .search-input:focus{border-color:var(--gold-dim);}
@@ -721,6 +778,36 @@ tr:hover td{background:rgba(201,168,76,.015);}
 </style>
 </head>
 <body>
+
+<!-- SPLASH SCREEN -->
+<div id="splash">
+  <div class="splash-torii">⛩️</div>
+  <div class="splash-title">THE TRADER'S TEMPLE</div>
+  <div class="splash-sub">Discipline · Patience · Habitude</div>
+  <div class="splash-bar"><div class="splash-bar-fill"></div></div>
+  <div class="splash-quote" id="splashQuote"></div>
+</div>
+
+<!-- NOTES RAPIDES -->
+<button id="quickNoteBtn" onclick="toggleQuickNote()" title="Notes rapides">📝</button>
+<div id="quickNotePanel">
+  <div class="qn-header">
+    <span class="qn-title">📝 NOTES RAPIDES</span>
+    <button class="qn-close" onclick="toggleQuickNote()">✕</button>
+  </div>
+  <div class="qn-tabs">
+    <button class="qn-tab active" onclick="switchQNTab('general',this)">Général</button>
+    <button class="qn-tab" onclick="switchQNTab('setups',this)">Setups</button>
+    <button class="qn-tab" onclick="switchQNTab('idees',this)">Idées</button>
+  </div>
+  <div class="qn-body">
+    <textarea class="qn-textarea" id="qnText" placeholder="Écris ici... sauvegarde auto."></textarea>
+  </div>
+  <div class="qn-footer">
+    <span class="qn-save-status" id="qnStatus">Sauvegarde auto</span>
+    <button class="qn-clear" onclick="clearQN()">Effacer</button>
+  </div>
+</div>
 
 <!-- ============================================================
      TOP NAV
@@ -1349,21 +1436,40 @@ tr:hover td{background:rgba(201,168,76,.015);}
 <div class="page" id="page-calendrier">
 <div class="wrap">
   <div class="sec-hdr"><span class="sec-num">—</span><h2 class="sec-title">📅 Vue Calendrier</h2><div class="sec-line"></div></div>
-  <div class="cal-nav">
-    <button class="cal-arrow" onclick="calPrev()">←</button>
-    <div class="cal-month-title" id="calTitle">—</div>
-    <button class="cal-arrow" onclick="calNext()">→</button>
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:0">
+    <div class="cal-view-toggle">
+      <button class="cal-view-btn active" id="calViewMois" onclick="setCalView('mois',this)">📅 Mois</button>
+      <button class="cal-view-btn" id="calViewSemaine" onclick="setCalView('semaine',this)">🗓️ Semaine</button>
+    </div>
+    <div class="cal-nav" style="margin-bottom:0">
+      <button class="cal-arrow" onclick="calPrev()">←</button>
+      <div class="cal-month-title" id="calTitle">—</div>
+      <button class="cal-arrow" onclick="calNext()">→</button>
+    </div>
   </div>
-  <div style="background:var(--panel);border:1px solid var(--border);overflow:hidden;">
-    <div class="cal-grid" id="calDows"></div>
-    <div class="cal-grid" id="calDays"></div>
+  <div style="height:16px"></div>
+  <!-- MONTH VIEW -->
+  <div id="calMonthView">
+    <div style="background:var(--panel);border:1px solid var(--border);overflow:hidden;">
+      <div class="cal-grid" id="calDows"></div>
+      <div class="cal-grid" id="calDays"></div>
+    </div>
+    <div class="cal-legend">
+      <div class="cal-leg-item"><div class="cal-leg-dot" style="background:var(--green)"></div>Trade gagnant</div>
+      <div class="cal-leg-item"><div class="cal-leg-dot" style="background:var(--red)"></div>Trade perdant</div>
+      <div class="cal-leg-item"><div class="cal-leg-dot" style="background:var(--text-dim)"></div>Breakeven</div>
+    </div>
   </div>
-  <div class="cal-legend">
-    <div class="cal-leg-item"><div class="cal-leg-dot" style="background:var(--green)"></div>Trade gagnant</div>
-    <div class="cal-leg-item"><div class="cal-leg-dot" style="background:var(--red)"></div>Trade perdant</div>
-    <div class="cal-leg-item"><div class="cal-leg-dot" style="background:var(--text-dim)"></div>Breakeven</div>
+  <!-- WEEK VIEW -->
+  <div id="calWeekView" style="display:none">
+    <div id="weekGrid"></div>
+    <div class="cal-legend" style="margin-top:12px">
+      <div class="cal-leg-item"><div class="cal-leg-dot" style="background:var(--green)"></div>Win</div>
+      <div class="cal-leg-item"><div class="cal-leg-dot" style="background:var(--red)"></div>SL</div>
+      <div class="cal-leg-item"><div class="cal-leg-dot" style="background:var(--text-dim)"></div>BE</div>
+    </div>
   </div>
-  <div style="margin-top:24px;background:var(--panel);border:1px solid var(--border);padding:22px;" id="calDaySummary" style="display:none">
+  <div style="margin-top:24px;background:var(--panel);border:1px solid var(--border);padding:22px;" id="calDaySummary">
     <div class="ctitle" style="margin-bottom:14px" id="calDaySummaryTitle">Sélectionne un jour</div>
     <div id="calDaySummaryContent" style="color:var(--text-dim);font-style:italic">Clique sur un jour pour voir les trades.</div>
   </div>
@@ -3780,6 +3886,208 @@ function updateVolume(v){
     if(g&&g.gain)g.gain.value=soundVolume;
   });
 }
+
+// ============================================================
+// SPLASH SCREEN
+// ============================================================
+(function(){
+  const QUOTES=[
+    '« La discipline crée la liberté. »',
+    '« Un SL respecté est une victoire sur soi-même. »',
+    '« La patience est ma position la plus rentable. »',
+    '« Le plan existe pour les moments où je ne pense pas clairement. »',
+    '« Le marché récompense la patience. »',
+    '« Chaque jour sans trade est un jour sans perte inutile. »',
+  ];
+  const q=document.getElementById('splashQuote');
+  if(q)q.textContent=QUOTES[Math.floor(Math.random()*QUOTES.length)];
+
+  const splash=document.getElementById('splash');
+  if(!splash)return;
+  // Hide after 2.8s
+  setTimeout(()=>{
+    splash.classList.add('hidden');
+    setTimeout(()=>{splash.style.display='none';},650);
+  },2800);
+})();
+
+// ============================================================
+// NOTES RAPIDES
+// ============================================================
+let qnCurrentTab='general';
+const QN_KEYS={general:'ttt_qn_general',setups:'ttt_qn_setups',idees:'ttt_qn_idees'};
+
+function toggleQuickNote(){
+  const panel=document.getElementById('quickNotePanel');
+  if(!panel)return;
+  panel.classList.toggle('open');
+  if(panel.classList.contains('open'))loadQN();
+}
+
+function switchQNTab(tab,btn){
+  saveQNCurrentText();
+  qnCurrentTab=tab;
+  document.querySelectorAll('.qn-tab').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  loadQN();
+}
+
+function loadQN(){
+  const ta=document.getElementById('qnText');
+  if(!ta)return;
+  ta.value=localStorage.getItem(QN_KEYS[qnCurrentTab])||'';
+  ta.placeholder={general:'Notes générales, observations du marché...',setups:'Setups en attente, analyses HTF...',idees:'Idées, règles à tester, améliorations...'}[qnCurrentTab]||'';
+}
+
+function saveQNCurrentText(){
+  const ta=document.getElementById('qnText');
+  if(!ta)return;
+  localStorage.setItem(QN_KEYS[qnCurrentTab],ta.value);
+}
+
+function clearQN(){
+  if(!confirm('Effacer cette note ?'))return;
+  localStorage.removeItem(QN_KEYS[qnCurrentTab]);
+  const ta=document.getElementById('qnText');
+  if(ta)ta.value='';
+}
+
+// Auto-save on input
+document.getElementById('qnText')?.addEventListener('input',function(){
+  localStorage.setItem(QN_KEYS[qnCurrentTab],this.value);
+  const st=document.getElementById('qnStatus');
+  if(st){st.textContent='✅ Sauvegardé';setTimeout(()=>st.textContent='Sauvegarde auto',1500);}
+});
+
+// Close on outside click
+document.addEventListener('click',e=>{
+  const panel=document.getElementById('quickNotePanel');
+  const btn=document.getElementById('quickNoteBtn');
+  if(panel?.classList.contains('open')&&!panel.contains(e.target)&&e.target!==btn&&!btn?.contains(e.target)){
+    saveQNCurrentText();
+    panel.classList.remove('open');
+  }
+});
+
+// ============================================================
+// CALENDRIER — VUE SEMAINE
+// ============================================================
+let calView='mois'; // 'mois' | 'semaine'
+let calWeekStart=new Date(); // Monday of current week
+
+function setCalView(view,btn){
+  calView=view;
+  document.querySelectorAll('.cal-view-btn').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  document.getElementById('calMonthView').style.display=view==='mois'?'block':'none';
+  document.getElementById('calWeekView').style.display=view==='semaine'?'block':'none';
+  if(view==='semaine'){
+    // Set week start to this Monday if first time
+    const today=new Date();
+    const dow=(today.getDay()+6)%7;
+    calWeekStart=new Date(today);calWeekStart.setDate(today.getDate()-dow);calWeekStart.setHours(0,0,0,0);
+    renderCalendar();
+  } else {
+    renderCalendar();
+  }
+}
+
+function calPrev(){
+  if(calView==='mois'){calDate.setMonth(calDate.getMonth()-1);}
+  else{calWeekStart.setDate(calWeekStart.getDate()-7);}
+  renderCalendar();
+}
+function calNext(){
+  if(calView==='mois'){calDate.setMonth(calDate.getMonth()+1);}
+  else{calWeekStart.setDate(calWeekStart.getDate()+7);}
+  renderCalendar();
+}
+
+function renderWeekView(){
+  const MONTHS=['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
+  const DAYS=['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+  const SESSIONS=['Asian.KZ','LDN.KZ','NY.AM','NY.PM'];
+  const today=new Date();today.setHours(0,0,0,0);
+
+  // Build 7 days from calWeekStart
+  const weekDays=Array.from({length:7},(_,i)=>{
+    const d=new Date(calWeekStart);d.setDate(calWeekStart.getDate()+i);return d;
+  });
+
+  const titleEl=document.getElementById('calTitle');
+  if(titleEl)titleEl.textContent=`${String(weekDays[0].getDate()).padStart(2,'0')} ${MONTHS[weekDays[0].getMonth()]} — ${String(weekDays[6].getDate()).padStart(2,'0')} ${MONTHS[weekDays[6].getMonth()]} ${weekDays[6].getFullYear()}`;
+
+  // Group trades by date
+  const tbd={};
+  trades.forEach(t=>{if(!tbd[t.date])tbd[t.date]=[];tbd[t.date].push(t);});
+
+  const fmtDate=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+
+  const el=document.getElementById('weekGrid');
+  if(!el)return;
+
+  // Header
+  const isToday=d=>d.toDateString()===today.toDateString();
+  let html=`<div class="week-grid">`;
+  // Header row
+  html+=`<div class="week-row">`;
+  html+=`<div class="week-header-cell" style="background:var(--panel)">Session</div>`;
+  weekDays.forEach((d,i)=>{
+    const tot=tbd[fmtDate(d)]?.reduce((s,t)=>s+t.gain,0)||0;
+    const hasTrd=(tbd[fmtDate(d)]||[]).length>0;
+    html+=`<div class="week-header-cell${isToday(d)?' today-col':''}">
+      <div style="font-size:9px;letter-spacing:1px">${DAYS[i]}</div>
+      <div style="font-family:'Cinzel',serif;font-size:16px;margin:2px 0">${d.getDate()}</div>
+      ${hasTrd?`<div style="font-family:'Space Mono',monospace;font-size:7px;color:${tot>=0?'var(--green)':'var(--red)'}">${tot>=0?'+':''}${tot.toFixed(1)}R</div>`:''}
+    </div>`;
+  });
+  html+=`</div>`;
+
+  // Session rows
+  SESSIONS.forEach(sess=>{
+    html+=`<div class="week-row">`;
+    html+=`<div class="week-time-label" style="font-size:7px;padding:6px 8px;line-height:1.4;text-align:right">${sess}</div>`;
+    weekDays.forEach(d=>{
+      const key=fmtDate(d);
+      const dayTrades=(tbd[key]||[]).filter(t=>t.session===sess);
+      html+=`<div class="week-day-cell${isToday(d)?' today-col':''}" onclick="calDayClick('${key}')">`;
+      dayTrades.forEach(t=>{
+        const cls=t.result==='SL'?'loss':t.result==='BE'?'be':'win';
+        html+=`<div class="week-trade-chip ${cls}" onclick="event.stopPropagation();openModal(${t.id})">${t.setup} ${t.gain>=0?'+':''}${t.gain}R</div>`;
+      });
+      html+=`</div>`;
+    });
+    html+=`</div>`;
+  });
+
+  // Summary row
+  html+=`<div class="week-summary-row">`;
+  html+=`<div class="week-summary-cell" style="color:var(--text-dim)">Total</div>`;
+  weekDays.forEach(d=>{
+    const key=fmtDate(d);
+    const dayTrades=tbd[key]||[];
+    const pnl=dayTrades.reduce((s,t)=>s+t.gain,0);
+    const wins=dayTrades.filter(t=>!['SL','BE'].includes(t.result)).length;
+    html+=`<div class="week-summary-cell">`;
+    if(dayTrades.length){
+      html+=`<div style="color:${pnl>=0?'var(--green)':'var(--red)'};font-size:9px">${pnl>=0?'+':''}${pnl.toFixed(1)}R</div>`;
+      html+=`<div style="color:var(--text-dim);font-size:7px">${wins}/${dayTrades.length} W</div>`;
+    } else {
+      html+=`<span style="color:var(--border2)">—</span>`;
+    }
+    html+=`</div>`;
+  });
+  html+=`</div>`;
+  html+=`</div>`;
+  el.innerHTML=html;
+}
+
+// Patch renderCalendar to handle both views
+const _origRenderCalendar=renderCalendar;
+renderCalendar=function(){
+  if(calView==='semaine'){renderWeekView();return;}
+  _origRenderCalendar();
+};
 
 // ============================================================
 // INIT
