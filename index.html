@@ -326,13 +326,22 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .cal-leg-dot{width:8px;height:8px;border-radius:50%;}
 
 /* ============================================================
-   AMBIANCE YOUTUBE
+   AMBIANCE YOUTUBE — AUDIO PLAYER
    ============================================================ */
-.yt-pill{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;padding:7px 14px;border:1px solid var(--border);color:var(--text-dim);background:transparent;cursor:pointer;transition:all .22s;text-transform:uppercase;}
-.yt-pill:hover{border-color:var(--gold-dim);color:var(--gold);}
-.yt-pill.active{border-color:var(--gold);color:var(--gold);background:var(--gold-faint);}
-.yt-ctrl-btn{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:1px;padding:5px 12px;border:1px solid var(--border);color:var(--text-dim);background:none;cursor:pointer;transition:all .2s;}
-.yt-ctrl-btn:hover{border-color:var(--gold-dim);color:var(--gold);}
+.yt-track{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--panel);border:1px solid var(--border);cursor:pointer;transition:all .22s;user-select:none;}
+.yt-track:hover{border-color:var(--gold-dim);background:var(--panel2);}
+.yt-track.playing{border-color:var(--gold);background:rgba(212,168,67,.06);}
+.yt-track-icon{font-size:22px;flex-shrink:0;width:28px;text-align:center;}
+.yt-track-info{flex:1;min-width:0;}
+.yt-track-name{font-family:'Cinzel',serif;font-size:12px;color:var(--white);letter-spacing:1px;margin-bottom:7px;}
+.yt-track.playing .yt-track-name{color:var(--gold-light);}
+.yt-track-bar{height:3px;background:var(--border2);border-radius:2px;overflow:hidden;}
+.yt-track-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--gold-dim),var(--gold));border-radius:2px;transition:width .8s linear;}
+.yt-track.playing .yt-track-fill{animation:ytBarPulse 3s ease-in-out infinite;}
+@keyframes ytBarPulse{0%,100%{opacity:.7;}50%{opacity:1;}}
+.yt-track-btn{font-size:18px;color:var(--text-dim);flex-shrink:0;width:28px;text-align:center;transition:color .2s;}
+.yt-track:hover .yt-track-btn{color:var(--gold-dim);}
+.yt-track.playing .yt-track-btn{color:var(--gold);}
 
 /* ============================================================
    PAGE 404
@@ -1607,36 +1616,27 @@ tr:hover td{background:rgba(201,168,76,.015);}
     <div class="ctitle" style="margin-bottom:6px;text-align:center">🎵 Ambiance Sonore</div>
     <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);text-align:center;margin-bottom:20px;letter-spacing:2px">CHOISIS TON ATMOSPHÈRE</div>
 
-    <!-- Track selector pills -->
-    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:16px" id="ytTrackPills">
-      <button class="yt-pill active" onclick="switchYT(0,this)">🌿 Nature 1</button>
-      <button class="yt-pill" onclick="switchYT(1,this)">🌊 Nature 2</button>
-      <button class="yt-pill" onclick="switchYT(2,this)">🔥 Feu</button>
-      <button class="yt-pill" onclick="switchYT(3,this)">⛩️ Temple</button>
-    </div>
-
-    <!-- Embedded YouTube player — hidden, audio only feel -->
-    <div style="position:relative;border:1px solid var(--border);background:var(--panel);overflow:hidden">
-      <div style="padding:16px 20px;display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--border)">
-        <div id="ytNowPlaying" style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--gold-dim)">▶ EN ATTENTE</div>
-        <div style="margin-left:auto;display:flex;gap:8px">
-          <button class="yt-ctrl-btn" onclick="ytTogglePlay()" id="ytPlayBtn">▶ Play</button>
-          <button class="yt-ctrl-btn" onclick="ytStop()">■ Stop</button>
-        </div>
+    <!-- Track list -->
+    <div id="ytTrackList" style="display:flex;flex-direction:column;gap:6px">
+      <div class="yt-track" id="ytrack-0" onclick="switchYT(0)">
+        <div class="yt-track-icon">🌿</div>
+        <div class="yt-track-info"><div class="yt-track-name">Nature 1</div><div class="yt-track-bar"><div class="yt-track-fill" id="yfill-0"></div></div></div>
+        <div class="yt-track-btn" id="ybtn-0">▶</div>
       </div>
-      <div style="position:relative;width:100%;padding-top:30%;">
-        <iframe id="ytPlayer"
-          src="https://www.youtube.com/embed/6K7-SUkyZf8?enablejsapi=1&autoplay=0&controls=1&rel=0&modestbranding=1&loop=1"
-          style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
-          allowfullscreen>
-        </iframe>
+      <div class="yt-track" id="ytrack-1" onclick="switchYT(1)">
+        <div class="yt-track-icon">🌊</div>
+        <div class="yt-track-info"><div class="yt-track-name">Nature 2</div><div class="yt-track-bar"><div class="yt-track-fill" id="yfill-1"></div></div></div>
+        <div class="yt-track-btn" id="ybtn-1">▶</div>
+      </div>
+      <div class="yt-track" id="ytrack-2" onclick="switchYT(2)">
+        <div class="yt-track-icon">⛩️</div>
+        <div class="yt-track-info"><div class="yt-track-name">Temple</div><div class="yt-track-bar"><div class="yt-track-fill" id="yfill-2"></div></div></div>
+        <div class="yt-track-btn" id="ybtn-2">▶</div>
       </div>
     </div>
 
-    <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);text-align:center;margin-top:10px">
-      💡 Clique sur un style ci-dessus pour changer l'ambiance
-    </div>
+    <!-- iframe caché -->
+    <iframe id="ytPlayer" src="" style="display:none" allow="autoplay" allowfullscreen></iframe>
   </div>
 
   <!-- ÉTAPE 1 : RESSENTI -->
@@ -4047,61 +4047,88 @@ renderCalendar=function(){
 };
 
 // ============================================================
-// AMBIANCE YOUTUBE
+// AMBIANCE YOUTUBE — AUDIO PLAYER
 // ============================================================
 const YT_TRACKS=[
   {id:'6K7-SUkyZf8', label:'🌿 Nature 1'},
   {id:'oaExU0D1hB0', label:'🌊 Nature 2'},
-  {id:'ZWyv_w_cFiw', label:'🔥 Feu'},
   {id:'FULCBFlX3Eo', label:'⛩️ Temple'},
 ];
-let ytCurrentIdx=0;
+let ytCurrentIdx=null;
 let ytPlaying=false;
+let ytFillInterval=null;
 
-function switchYT(idx, btn){
-  ytCurrentIdx=idx;
-  document.querySelectorAll('.yt-pill').forEach(b=>b.classList.remove('active'));
-  if(btn)btn.classList.add('active');
+function switchYT(idx){
   const iframe=document.getElementById('ytPlayer');
-  const lbl=document.getElementById('ytNowPlaying');
   if(!iframe)return;
-  const track=YT_TRACKS[idx];
-  iframe.src=`https://www.youtube.com/embed/${track.id}?enablejsapi=1&autoplay=1&controls=1&rel=0&modestbranding=1&loop=1&playlist=${track.id}`;
-  ytPlaying=true;
-  if(lbl)lbl.textContent=`▶ ${track.label}`;
-  const btn2=document.getElementById('ytPlayBtn');
-  if(btn2)btn2.textContent='⏸ Pause';
-}
 
-function ytTogglePlay(){
-  const iframe=document.getElementById('ytPlayer');
-  const btn=document.getElementById('ytPlayBtn');
-  const lbl=document.getElementById('ytNowPlaying');
-  if(!iframe)return;
-  if(!ytPlaying){
-    // Resume — reload src with autoplay
-    const track=YT_TRACKS[ytCurrentIdx];
-    iframe.src=`https://www.youtube.com/embed/${track.id}?enablejsapi=1&autoplay=1&controls=1&rel=0&modestbranding=1&loop=1&playlist=${track.id}`;
-    ytPlaying=true;
-    if(btn)btn.textContent='⏸ Pause';
-    if(lbl)lbl.textContent=`▶ ${track.label}`;
-  } else {
-    iframe.src=`https://www.youtube.com/embed/${YT_TRACKS[ytCurrentIdx].id}?enablejsapi=1&autoplay=0&controls=1&rel=0&modestbranding=1`;
-    ytPlaying=false;
-    if(btn)btn.textContent='▶ Play';
-    if(lbl)lbl.textContent='⏸ EN PAUSE';
+  // If clicking the currently playing track → pause
+  if(ytCurrentIdx===idx && ytPlaying){
+    ytPause();
+    return;
   }
+
+  // Stop previous
+  ytStopAll();
+
+  ytCurrentIdx=idx;
+  ytPlaying=true;
+  const track=YT_TRACKS[idx];
+  iframe.src=`https://www.youtube.com/embed/${track.id}?autoplay=1&controls=0&rel=0&modestbranding=1&loop=1&playlist=${track.id}`;
+
+  // Update UI
+  const el=document.getElementById('ytrack-'+idx);
+  const btn=document.getElementById('ybtn-'+idx);
+  if(el)el.classList.add('playing');
+  if(btn)btn.textContent='⏸';
+
+  // Animate progress bar
+  ytStartFill(idx);
 }
 
-function ytStop(){
+function ytPause(){
   const iframe=document.getElementById('ytPlayer');
-  const btn=document.getElementById('ytPlayBtn');
-  const lbl=document.getElementById('ytNowPlaying');
-  if(!iframe)return;
-  iframe.src=`https://www.youtube.com/embed/${YT_TRACKS[ytCurrentIdx].id}?enablejsapi=1&autoplay=0&controls=1&rel=0&modestbranding=1`;
+  if(!iframe||ytCurrentIdx===null)return;
+  iframe.src=`https://www.youtube.com/embed/${YT_TRACKS[ytCurrentIdx].id}?autoplay=0&controls=0&rel=0`;
   ytPlaying=false;
-  if(btn)btn.textContent='▶ Play';
-  if(lbl)lbl.textContent='▶ EN ATTENTE';
+  const el=document.getElementById('ytrack-'+ytCurrentIdx);
+  const btn=document.getElementById('ybtn-'+ytCurrentIdx);
+  if(el)el.classList.remove('playing');
+  if(btn)btn.textContent='▶';
+  clearInterval(ytFillInterval);
+}
+
+function ytStopAll(){
+  clearInterval(ytFillInterval);
+  YT_TRACKS.forEach((_,i)=>{
+    const el=document.getElementById('ytrack-'+i);
+    const btn=document.getElementById('ybtn-'+i);
+    const fill=document.getElementById('yfill-'+i);
+    if(el)el.classList.remove('playing');
+    if(btn)btn.textContent='▶';
+    if(fill)fill.style.width='0%';
+  });
+  const iframe=document.getElementById('ytPlayer');
+  if(iframe)iframe.src='';
+  ytPlaying=false;
+  ytCurrentIdx=null;
+}
+
+function ytStartFill(idx){
+  clearInterval(ytFillInterval);
+  const fill=document.getElementById('yfill-'+idx);
+  if(!fill)return;
+  // Animate fill slowly across ~60s then reset (loop visual)
+  let pct=0;
+  const duration=60000; // 60s visual loop
+  const interval=200;
+  const step=100/( duration/interval);
+  ytFillInterval=setInterval(()=>{
+    if(!ytPlaying){clearInterval(ytFillInterval);return;}
+    pct+=step;
+    if(pct>=100)pct=0;
+    fill.style.width=pct+'%';
+  },interval);
 }
 
 // ============================================================
