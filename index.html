@@ -1640,8 +1640,8 @@ tr:hover td{background:rgba(201,168,76,.015);}
       </div>
     </div>
 
-    <!-- iframe caché -->
-    <iframe id="ytPlayer" src="" style="display:none" allow="autoplay" allowfullscreen></iframe>
+    <!-- YT IFrame API target — invisible -->
+    <div id="ytPlayer" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;overflow:hidden"></div>
   </div>
 
   <!-- ÉTAPE 1 : RESSENTI -->
@@ -4052,60 +4052,96 @@ renderCalendar=function(){
 };
 
 // ============================================================
-// AMBIANCE YOUTUBE — AUDIO PLAYER
+// AMBIANCE YOUTUBE — IFRAME API
 // ============================================================
+let ytPlayer=null;
+let ytCurrentIdx=null;
+let ytPlaying=false;
+let ytFillInterval=null;
+let ytAPIReady=false;
+
+// Load YT IFrame API
+(function(){
+  const tag=document.createElement('script');
+  tag.src='https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+})();
+
+window.onYouTubeIframeAPIReady=function(){
+  ytAPIReady=true;
+  ytPlayer=new YT.Player('ytPlayer',{
+    height:'0',width:'0',
+    videoId:'',
+    playerVars:{autoplay:0,controls:0,rel:0,modestbranding:1,loop:1},
+    events:{
+      onStateChange:function(e){
+        // If video ended (shouldn't with loop, but just in case)
+        if(e.data===YT.PlayerState.ENDED&&ytCurrentIdx!==null){
+          ytPlayer.playVideo();
+        }
+      }
+    }
+  });
+};
+
 const YT_TRACKS=[
   {id:'6K7-SUkyZf8', label:'🌿 Nature 1'},
   {id:'oaExU0D1hB0', label:'🌊 Nature 2'},
   {id:'FULCBFlX3Eo', label:'⛩️ Temple'},
   {id:'bvMmeAs3Jyc', label:'🌙 Nuit'},
 ];
-let ytCurrentIdx=null;
-let ytPlaying=false;
-let ytFillInterval=null;
 
 function switchYT(idx){
-  const iframe=document.getElementById('ytPlayer');
-  if(!iframe)return;
+  if(!ytAPIReady||!ytPlayer)return;
 
-  // If clicking the currently playing track → pause
-  if(ytCurrentIdx===idx && ytPlaying){
-    ytPause();
+  // Same track playing → pause/resume
+  if(ytCurrentIdx===idx&&ytPlaying){
+    ytPlayer.pauseVideo();
+    ytPlaying=false;
+    setTrackUI(idx,false);
+    clearInterval(ytFillInterval);
     return;
   }
 
-  // Stop previous
+  // Same track paused → resume (no reload)
+  if(ytCurrentIdx===idx&&!ytPlaying){
+    ytPlayer.playVideo();
+    ytPlaying=true;
+    setTrackUI(idx,true);
+    ytStartFill(idx);
+    return;
+  }
+
+  // New track → load & play
   ytStopAll();
-
   ytCurrentIdx=idx;
+  ytPlayer.loadVideoById({videoId:YT_TRACKS[idx].id,suggestedQuality:'small'});
+  ytPlayer.playVideo();
   ytPlaying=true;
-  const track=YT_TRACKS[idx];
-  iframe.src=`https://www.youtube.com/embed/${track.id}?autoplay=1&controls=0&rel=0&modestbranding=1&loop=1&playlist=${track.id}`;
-
-  // Update UI
-  const el=document.getElementById('ytrack-'+idx);
-  const btn=document.getElementById('ybtn-'+idx);
-  if(el)el.classList.add('playing');
-  if(btn)btn.textContent='⏸';
-
-  // Animate progress bar
+  setTrackUI(idx,true);
   ytStartFill(idx);
 }
 
-function ytPause(){
-  const iframe=document.getElementById('ytPlayer');
-  if(!iframe||ytCurrentIdx===null)return;
-  iframe.src=`https://www.youtube.com/embed/${YT_TRACKS[ytCurrentIdx].id}?autoplay=0&controls=0&rel=0`;
-  ytPlaying=false;
-  const el=document.getElementById('ytrack-'+ytCurrentIdx);
-  const btn=document.getElementById('ybtn-'+ytCurrentIdx);
-  if(el)el.classList.remove('playing');
-  if(btn)btn.textContent='▶';
-  clearInterval(ytFillInterval);
+function setTrackUI(idx,playing){
+  YT_TRACKS.forEach((_,i)=>{
+    const el=document.getElementById('ytrack-'+i);
+    const btn=document.getElementById('ybtn-'+i);
+    if(el)el.classList.remove('playing');
+    if(btn)btn.textContent='▶';
+  });
+  if(playing){
+    const el=document.getElementById('ytrack-'+idx);
+    const btn=document.getElementById('ybtn-'+idx);
+    if(el)el.classList.add('playing');
+    if(btn)btn.textContent='⏸';
+  }
 }
 
 function ytStopAll(){
   clearInterval(ytFillInterval);
+  if(ytPlayer&&ytAPIReady)ytPlayer.stopVideo();
+  ytPlaying=false;
+  ytCurrentIdx=null;
   YT_TRACKS.forEach((_,i)=>{
     const el=document.getElementById('ytrack-'+i);
     const btn=document.getElementById('ybtn-'+i);
@@ -4114,21 +4150,15 @@ function ytStopAll(){
     if(btn)btn.textContent='▶';
     if(fill)fill.style.width='0%';
   });
-  const iframe=document.getElementById('ytPlayer');
-  if(iframe)iframe.src='';
-  ytPlaying=false;
-  ytCurrentIdx=null;
 }
 
 function ytStartFill(idx){
   clearInterval(ytFillInterval);
   const fill=document.getElementById('yfill-'+idx);
   if(!fill)return;
-  // Animate fill slowly across ~60s then reset (loop visual)
   let pct=0;
-  const duration=60000; // 60s visual loop
   const interval=200;
-  const step=100/( duration/interval);
+  const step=100/(60000/interval);
   ytFillInterval=setInterval(()=>{
     if(!ytPlaying){clearInterval(ytFillInterval);return;}
     pct+=step;
