@@ -58,12 +58,12 @@ body.light .data-bar{background:var(--panel);border-color:var(--border);}
 #themeToggle{
   background:none;border:1px solid var(--border);color:var(--text-dim);cursor:pointer;
   width:34px;height:34px;display:flex;align-items:center;justify-content:center;
-  font-size:15px;transition:all .22s;flex-shrink:0;
+  font-size:17px;transition:all .22s;flex-shrink:0;
 }
 #themeToggle:hover{border-color:var(--gold-dim);color:var(--gold);}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{background:var(--black);color:var(--text);font-family:'Cormorant Garamond',serif;font-size:16px;line-height:1.65;overflow-x:hidden;min-height:100vh;}
+body{background:var(--black);color:var(--text);font-family:'Cormorant Garamond',serif;font-size:17px;line-height:1.7;overflow-x:hidden;min-height:100vh;}
 
 /* noise texture */
 body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.028'/%3E%3C/svg%3E");pointer-events:none;z-index:9998;}
@@ -84,12 +84,12 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 }
 .nav-brand{display:flex;align-items:center;gap:12px;cursor:pointer;} 
 .nav-brand-icon{font-size:22px;filter:drop-shadow(0 0 10px var(--gold-glow));}
-.nav-brand-text{font-family:'Cinzel',serif;font-size:13px;font-weight:600;color:var(--gold-light);letter-spacing:3px;text-shadow:0 0 20px rgba(212,168,67,.3);}
-.nav-brand-sub{font-family:'Space Mono',monospace;font-size:8px;color:var(--gold-dim);letter-spacing:2px;}
+.nav-brand-text{font-family:'Cinzel',serif;font-size:15px;font-weight:600;color:var(--gold-light);letter-spacing:3px;text-shadow:0 0 20px rgba(212,168,67,.3);}
+.nav-brand-sub{font-family:'Space Mono',monospace;font-size:10px;color:var(--gold-dim);letter-spacing:2px;}
 
 .nav-links{display:flex;align-items:center;gap:2px;}
 .nav-link{
-  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;
   color:#8a8070;padding:8px 14px;border:1px solid transparent;
   background:none;cursor:pointer;transition:all .22s;white-space:nowrap;
   position:relative;
@@ -99,7 +99,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 
 .nav-session-pill{
   display:flex;align-items:center;gap:8px;
-  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;
+  font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;
   padding:5px 12px;border:1px solid;
 }
 .nav-session-pill.open{border-color:var(--green-border);color:var(--green);background:var(--green-bg);}
@@ -124,7 +124,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .wrap-sm{max-width:900px;margin:0 auto;padding:64px 24px;}
 
 .sec-hdr{display:flex;align-items:center;gap:16px;margin-bottom:44px;}
-.sec-num{font-family:'Space Mono',monospace;font-size:9px;color:var(--gold-dim);letter-spacing:2px;flex-shrink:0;}
+.sec-num{font-family:'Space Mono',monospace;font-size:11px;color:var(--gold-dim);letter-spacing:2px;flex-shrink:0;}
 .sec-title{font-family:'Cinzel',serif;font-size:clamp(16px,3.5vw,28px);font-weight:600;color:var(--white);letter-spacing:2px;}
 .sec-line{flex:1;height:1px;background:linear-gradient(90deg,var(--gold-dim),transparent);}
 
@@ -140,18 +140,18 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .card:hover::before{opacity:1;}
 
 .ctitle{font-family:'Cinzel',serif;font-size:11px;font-weight:600;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;}
-.kv{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:14px;}
+.kv{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:16px;}
 .kv:last-child{border-bottom:none;}
 .mono{font-family:'Space Mono',monospace;}
 
-.tag{display:inline-block;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;padding:3px 9px;border:1px solid var(--gold-dim);color:var(--gold-dim);text-transform:uppercase;margin:2px;}
+.tag{display:inline-block;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;padding:3px 9px;border:1px solid var(--gold-dim);color:var(--gold-dim);text-transform:uppercase;margin:2px;}
 .tag.ok{border-color:var(--green);color:var(--green);background:var(--green-bg);}
 .tag.no{border-color:var(--red);color:var(--red);background:var(--red-bg);}
 
-.rbox{background:var(--panel);border-left:2px solid var(--gold);padding:14px 20px;margin-bottom:10px;font-size:14px;}
+.rbox{background:var(--panel);border-left:2px solid var(--gold);padding:14px 20px;margin-bottom:10px;font-size:16px;}
 .rbox.danger{border-left-color:var(--red);}
 
-.btn{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;padding:10px 22px;border:1px solid var(--gold-dim);color:var(--gold);background:transparent;cursor:pointer;text-transform:uppercase;transition:all .22s;}
+.btn{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:3px;padding:10px 22px;border:1px solid var(--gold-dim);color:var(--gold);background:transparent;cursor:pointer;text-transform:uppercase;transition:all .22s;}
 .btn:hover{background:var(--gold-faint);border-color:var(--gold);}
 .btn.red{border-color:var(--red-border);color:var(--red);}
 .btn.red:hover{background:var(--red-bg);}
@@ -175,7 +175,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .hero-torii{font-size:80px;margin-bottom:20px;animation:glow 4s ease-in-out infinite;filter:drop-shadow(0 0 20px rgba(201,168,76,.35));position:relative;z-index:1;}
 @keyframes glow{0%,100%{filter:drop-shadow(0 0 12px rgba(201,168,76,.25));}50%{filter:drop-shadow(0 0 36px rgba(201,168,76,.6));}}
 
-.hero-eyebrow{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:6px;color:var(--gold-dim);text-transform:uppercase;margin-bottom:16px;animation:fadeUp .9s .1s both;position:relative;z-index:1;}
+.hero-eyebrow{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:6px;color:var(--gold-dim);text-transform:uppercase;margin-bottom:16px;animation:fadeUp .9s .1s both;position:relative;z-index:1;}
 .hero-title{font-family:'Cinzel',serif;font-size:clamp(36px,8vw,88px);font-weight:900;color:var(--gold);letter-spacing:4px;line-height:1.06;text-shadow:0 0 60px rgba(201,168,76,.2);animation:fadeUp .9s .25s both;margin-bottom:8px;position:relative;z-index:1;}
 .hero-sub{font-family:'Cinzel',serif;font-size:clamp(10px,1.6vw,14px);color:var(--gold-dim);letter-spacing:9px;text-transform:uppercase;animation:fadeUp .9s .4s both;margin-bottom:28px;position:relative;z-index:1;}
 .hero-divider{width:200px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 28px;animation:fadeUp .9s .55s both;position:relative;z-index:1;}
@@ -183,7 +183,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 
 .hero-nav{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;animation:fadeUp .9s .85s both;position:relative;z-index:1;}
 .hero-nav-btn{
-  font-family:'Space Mono',monospace;font-size:9px;font-weight:700;letter-spacing:3px;
+  font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:3px;
   padding:12px 24px;border:1px solid var(--gold-dim);color:var(--gold);
   background:var(--gold-faint);cursor:pointer;text-transform:uppercase;
   clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
@@ -193,7 +193,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .hero-nav-btn.primary{background:var(--gold);color:var(--black);border-color:var(--gold);}
 .hero-nav-btn.primary:hover{background:var(--gold-light);}
 
-.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);font-family:'Space Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--gold-dim);animation:bob 2s ease-in-out infinite;z-index:1;}
+.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--gold-dim);animation:bob 2s ease-in-out infinite;z-index:1;}
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 
@@ -203,18 +203,18 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 @media(max-width:500px){.home-kpis{grid-template-columns:repeat(2,1fr);}}
 .hkpi{background:var(--panel);padding:22px 18px;text-align:center;}
 .hkpi-val{font-family:'Cinzel',serif;font-size:28px;color:var(--gold);margin-bottom:4px;line-height:1;}
-.hkpi-lbl{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;}
+.hkpi-lbl{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;}
 
 /* HOME — QUICK STATUS */
 .home-status{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:20px 0;}
 .status-box{background:var(--panel);border:1px solid var(--border);padding:28px;position:relative;overflow:hidden;}
-.status-box-title{font-family:'Cinzel',serif;font-size:13px;color:var(--gold);letter-spacing:2px;margin-bottom:18px;}
+.status-box-title{font-family:'Cinzel',serif;font-size:15px;color:var(--gold);letter-spacing:2px;margin-bottom:18px;}
 
 /* HOME — RULES CONDENSED */
 .rule-strip{display:flex;align-items:center;gap:14px;padding:14px 20px;border:1px solid var(--border);background:var(--panel);margin-bottom:8px;transition:border-color .25s;}
 .rule-strip:hover{border-color:var(--gold-dim);}
-.rule-num{font-family:'Space Mono',monospace;font-size:9px;color:var(--gold-dim);background:var(--gold-faint);border:1px solid var(--gold-dim);width:26px;height:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.rule-label{font-family:'Cinzel',serif;font-size:13px;color:var(--white);letter-spacing:1px;flex:1;}
+.rule-num{font-family:'Space Mono',monospace;font-size:11px;color:var(--gold-dim);background:var(--gold-faint);border:1px solid var(--gold-dim);width:26px;height:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.rule-label{font-family:'Cinzel',serif;font-size:15px;color:var(--white);letter-spacing:1px;flex:1;}
 .rule-val{font-family:'Space Mono',monospace;font-size:11px;color:var(--gold);}
 
 /* ============================================================
@@ -224,9 +224,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .score-ring canvas{position:absolute;top:0;left:0;}
 .score-ring-val{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
 .score-num{font-family:'Cinzel',serif;font-size:22px;font-weight:900;line-height:1;}
-.score-lbl{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:1px;color:var(--text-dim);margin-top:2px;}
+.score-lbl{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--text-dim);margin-top:2px;}
 
-.trade-score-badge{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;font-family:'Space Mono',monospace;font-size:9px;font-weight:700;flex-shrink:0;}
+.trade-score-badge{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;flex-shrink:0;}
 .score-great{background:rgba(46,204,113,.15);color:var(--green);border:1px solid var(--green-border);}
 .score-good{background:rgba(201,168,76,.1);color:var(--gold);border:1px solid var(--gold-dim);}
 .score-ok{background:rgba(230,126,34,.1);color:var(--orange);border:1px solid rgba(230,126,34,.3);}
@@ -238,8 +238,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .pattern-card.good{border-left:3px solid var(--green);}
 .pattern-card.info{border-left:3px solid var(--gold-dim);}
 .pattern-icon{font-size:22px;flex-shrink:0;margin-top:2px;}
-.pattern-title{font-family:'Cinzel',serif;font-size:13px;color:var(--white);letter-spacing:1px;margin-bottom:4px;}
-.pattern-desc{font-size:13px;color:var(--text-dim);line-height:1.7;}
+.pattern-title{font-family:'Cinzel',serif;font-size:15px;color:var(--white);letter-spacing:1px;margin-bottom:4px;}
+.pattern-desc{font-size:15px;color:var(--text-dim);line-height:1.7;}
 .pattern-stat{font-family:'Space Mono',monospace;font-size:10px;margin-top:6px;}
 
 .form-chart-wrap{background:var(--panel);border:1px solid var(--border);padding:22px;}
@@ -249,15 +249,15 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 
 /* ---- EXPORT / IMPORT ---- */
 .data-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 16px;background:var(--panel);border:1px solid var(--border);margin-bottom:20px;}
-.data-bar-label{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;margin-right:4px;}
-.data-btn{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;padding:6px 14px;border:1px solid;cursor:pointer;background:transparent;text-transform:uppercase;transition:all .2s;white-space:nowrap;}
+.data-bar-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;margin-right:4px;}
+.data-btn{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;padding:6px 14px;border:1px solid;cursor:pointer;background:transparent;text-transform:uppercase;transition:all .2s;white-space:nowrap;}
 .data-btn.export{border-color:var(--gold-dim);color:var(--gold);}
 .data-btn.export:hover{background:var(--gold-faint);border-color:var(--gold);}
 .data-btn.import{border-color:var(--border2);color:var(--text-dim);}
 .data-btn.import:hover{border-color:var(--green-border);color:var(--green);}
 .data-btn.danger{border-color:var(--red-border);color:var(--red);}
 .data-btn.danger:hover{background:var(--red-bg);}
-.data-info{font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);margin-left:auto;}
+.data-info{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);margin-left:auto;}
 #importFileInput{display:none;}
 
 /* ============================================================
@@ -273,14 +273,14 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
    STATS PAR PÉRIODE
    ============================================================ */
 .period-tabs{display:flex;gap:0;border:1px solid var(--border);overflow:hidden;margin-bottom:22px;}
-.period-tab{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;padding:10px 18px;background:transparent;border:none;border-right:1px solid var(--border);color:var(--text-dim);cursor:pointer;transition:all .2s;text-transform:uppercase;flex:1;}
+.period-tab{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;padding:10px 18px;background:transparent;border:none;border-right:1px solid var(--border);color:var(--text-dim);cursor:pointer;transition:all .2s;text-transform:uppercase;flex:1;}
 .period-tab:last-child{border-right:none;}
 .period-tab.active{background:var(--gold-faint);color:var(--gold);}
 .period-tab:hover{color:var(--text);}
 .period-kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:20px;}
 .period-kpi{background:var(--panel);padding:18px 14px;text-align:center;}
 .period-val{font-family:'Cinzel',serif;font-size:22px;margin-bottom:3px;line-height:1;}
-.period-lbl{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;}
+.period-lbl{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;}
 
 /* ============================================================
    RECORDS PERSONNELS
@@ -292,13 +292,13 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .record-card:hover::after{opacity:1;}
 .record-medal{font-size:24px;margin-bottom:8px;}
 .record-val{font-family:'Cinzel',serif;font-size:26px;color:var(--gold);margin-bottom:4px;line-height:1;}
-.record-lbl{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;margin-bottom:4px;}
+.record-lbl{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;margin-bottom:4px;}
 .record-ctx{font-size:11px;color:var(--text-dim);font-style:italic;}
 
 /* ============================================================
    PLAN ÉDITABLE
    ============================================================ */
-.plan-edit-btn{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;padding:5px 12px;border:1px solid var(--gold-dim);color:var(--gold);background:transparent;cursor:pointer;transition:all .2s;}
+.plan-edit-btn{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;padding:5px 12px;border:1px solid var(--gold-dim);color:var(--gold);background:transparent;cursor:pointer;transition:all .2s;}
 .plan-edit-btn:hover{background:var(--gold-faint);}
 .plan-edit-btn.saving{border-color:var(--green-border);color:var(--green);}
 .plan-editable{outline:none;transition:background .2s;}
@@ -309,20 +309,20 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .cal-arrow{background:none;border:1px solid var(--border);color:var(--text-dim);cursor:pointer;padding:7px 14px;font-size:16px;transition:all .2s;}
 .cal-arrow:hover{border-color:var(--gold-dim);color:var(--gold);}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;background:var(--border);}
-.cal-dow{background:var(--panel2);padding:8px 4px;text-align:center;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--gold-dim);text-transform:uppercase;}
+.cal-dow{background:var(--panel2);padding:8px 4px;text-align:center;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gold-dim);text-transform:uppercase;}
 .cal-day{background:var(--panel);min-height:90px;padding:8px;cursor:pointer;transition:background .2s;position:relative;}
 .cal-day:hover{background:var(--panel2);}
 .cal-day.other-month{opacity:.3;}
 .cal-day.today{outline:1px solid var(--gold-dim);}
 .cal-day-num{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);margin-bottom:5px;}
 .cal-day.has-trades .cal-day-num{color:var(--white);}
-.cal-trade-dot{font-family:'Space Mono',monospace;font-size:8px;padding:2px 5px;margin-bottom:2px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;}
+.cal-trade-dot{font-family:'Space Mono',monospace;font-size:10px;padding:2px 5px;margin-bottom:2px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;}
 .cal-trade-dot.win{background:rgba(46,204,113,.12);color:var(--green);border-left:2px solid var(--green);}
 .cal-trade-dot.loss{background:rgba(192,57,43,.12);color:var(--red);border-left:2px solid var(--red);}
 .cal-trade-dot.be{background:rgba(90,84,72,.15);color:var(--text-dim);border-left:2px solid var(--text-dim);}
-.cal-day-pnl{position:absolute;bottom:5px;right:6px;font-family:'Space Mono',monospace;font-size:8px;}
+.cal-day-pnl{position:absolute;bottom:5px;right:6px;font-family:'Space Mono',monospace;font-size:10px;}
 .cal-legend{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;}
-.cal-leg-item{display:flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);letter-spacing:1px;}
+.cal-leg-item{display:flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:1px;}
 .cal-leg-dot{width:8px;height:8px;border-radius:50%;}
 
 /* ============================================================
@@ -353,7 +353,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .err-sub{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--text-dim);text-transform:uppercase;margin-bottom:32px;position:relative;z-index:1;}
 .err-quote{font-size:17px;font-style:italic;color:var(--text-dim);line-height:1.9;max-width:420px;margin:0 auto 40px;position:relative;z-index:1;}
 .err-quote span{color:var(--gold);}
-.err-btn{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;padding:14px 28px;border:1px solid var(--gold-dim);color:var(--gold);background:var(--gold-faint);cursor:pointer;transition:all .25s;text-transform:uppercase;position:relative;z-index:1;}
+.err-btn{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:3px;padding:14px 28px;border:1px solid var(--gold-dim);color:var(--gold);background:var(--gold-faint);cursor:pointer;transition:all .25s;text-transform:uppercase;position:relative;z-index:1;}
 .err-btn:hover{background:rgba(212,168,67,.15);border-color:var(--gold);box-shadow:0 0 24px var(--gold-glow);}
 .err-glitch{position:relative;display:inline-block;}
 .err-glitch::before,.err-glitch::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,var(--gold-dim),var(--gold),var(--gold-dim));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
@@ -370,7 +370,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .splash-bar{width:200px;height:1px;background:var(--border);margin:36px auto 0;overflow:hidden;animation:fadeUp .8s .9s both;}
 .splash-bar-fill{height:100%;width:0;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:splashLoad 1.6s 1s ease-out forwards;}
 @keyframes splashLoad{0%{width:0;}100%{width:100%;}}
-.splash-quote{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--text-dim);margin-top:20px;animation:fadeUp .8s 1.1s both;max-width:340px;text-align:center;line-height:1.8;}
+.splash-quote{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:var(--text-dim);margin-top:20px;animation:fadeUp .8s 1.1s both;max-width:340px;text-align:center;line-height:1.8;}
 
 /* ============================================================
    NOTES RAPIDES — BLOC-NOTES ANCRÉ
@@ -384,55 +384,55 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .qn-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:var(--gold);}
 .qn-close{background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:16px;line-height:1;}
 .qn-tabs{display:flex;border-bottom:1px solid var(--border);}
-.qn-tab{flex:1;font-family:'Space Mono',monospace;font-size:7px;letter-spacing:1px;padding:6px;background:none;border:none;border-bottom:2px solid transparent;color:var(--text-dim);cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.qn-tab{flex:1;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;padding:6px;background:none;border:none;border-bottom:2px solid transparent;color:var(--text-dim);cursor:pointer;transition:all .2s;text-transform:uppercase;}
 .qn-tab.active{color:var(--gold);border-bottom-color:var(--gold);}
 .qn-body{padding:10px;}
-.qn-textarea{width:100%;background:var(--panel2);border:1px solid var(--border);color:var(--white);font-family:'Cormorant Garamond',serif;font-size:15px;padding:10px;outline:none;resize:none;height:160px;line-height:1.7;transition:border-color .2s;}
+.qn-textarea{width:100%;background:var(--panel2);border:1px solid var(--border);color:var(--white);font-family:'Cormorant Garamond',serif;font-size:17px;padding:10px;outline:none;resize:none;height:160px;line-height:1.7;transition:border-color .2s;}
 .qn-textarea:focus{border-color:var(--gold-dim);}
 .qn-textarea::placeholder{color:var(--text-dim);font-style:italic;}
 .qn-footer{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;border-top:1px solid var(--border);}
-.qn-save-status{font-family:'Space Mono',monospace;font-size:7px;color:var(--text-dim);}
-.qn-clear{font-family:'Space Mono',monospace;font-size:7px;padding:3px 8px;border:1px solid var(--border);background:none;color:var(--text-dim);cursor:pointer;transition:all .2s;}
+.qn-save-status{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);}
+.qn-clear{font-family:'Space Mono',monospace;font-size:9px;padding:3px 8px;border:1px solid var(--border);background:none;color:var(--text-dim);cursor:pointer;transition:all .2s;}
 .qn-clear:hover{border-color:var(--red-border);color:var(--red);}
 
 /* ============================================================
    CALENDRIER — VUE SEMAINE
    ============================================================ */
 .cal-view-toggle{display:flex;gap:0;border:1px solid var(--border);overflow:hidden;width:fit-content;margin-bottom:20px;}
-.cal-view-btn{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;padding:7px 16px;background:transparent;border:none;border-right:1px solid var(--border);color:var(--text-dim);cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.cal-view-btn{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;padding:7px 16px;background:transparent;border:none;border-right:1px solid var(--border);color:var(--text-dim);cursor:pointer;transition:all .2s;text-transform:uppercase;}
 .cal-view-btn:last-child{border-right:none;}
 .cal-view-btn.active{background:var(--gold-faint);color:var(--gold);}
 .week-grid{background:var(--border);border:1px solid var(--border);}
 .week-row{display:grid;grid-template-columns:80px repeat(7,1fr);gap:1px;}
-.week-header-cell{background:var(--panel2);padding:8px 10px;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--text-dim);text-align:center;}
+.week-header-cell{background:var(--panel2);padding:8px 10px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--text-dim);text-align:center;}
 .week-header-cell.today-col{color:var(--gold);}
-.week-time-label{background:var(--panel);padding:8px;font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);text-align:right;display:flex;align-items:center;justify-content:flex-end;}
+.week-time-label{background:var(--panel);padding:8px;font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);text-align:right;display:flex;align-items:center;justify-content:flex-end;}
 .week-day-cell{background:var(--panel);min-height:52px;padding:6px;position:relative;transition:background .2s;cursor:pointer;}
 .week-day-cell:hover{background:var(--panel2);}
 .week-day-cell.today-col{outline:1px solid var(--gold-dim);outline-offset:-1px;}
-.week-trade-chip{font-family:'Space Mono',monospace;font-size:7px;padding:2px 6px;margin-bottom:3px;cursor:pointer;transition:opacity .2s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.week-trade-chip{font-family:'Space Mono',monospace;font-size:9px;padding:2px 6px;margin-bottom:3px;cursor:pointer;transition:opacity .2s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .week-trade-chip:hover{opacity:.8;}
 .week-trade-chip.win{background:rgba(46,204,113,.15);border:1px solid rgba(46,204,113,.3);color:#2ecc71;}
 .week-trade-chip.loss{background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.3);color:#e74c3c;}
 .week-trade-chip.be{background:rgba(200,200,200,.08);border:1px solid rgba(200,200,200,.15);color:var(--text-dim);}
-.week-day-pnl{position:absolute;bottom:3px;right:4px;font-family:'Space Mono',monospace;font-size:7px;}
+.week-day-pnl{position:absolute;bottom:3px;right:4px;font-family:'Space Mono',monospace;font-size:9px;}
 .week-summary-row{display:grid;grid-template-columns:80px repeat(7,1fr);gap:1px;margin-top:1px;}
-.week-summary-cell{background:var(--panel2);padding:6px 8px;font-family:'Space Mono',monospace;font-size:8px;text-align:center;}
+.week-summary-cell{background:var(--panel2);padding:6px 8px;font-family:'Space Mono',monospace;font-size:10px;text-align:center;}
 .search-bar{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;}
 .search-input{flex:1;min-width:200px;background:var(--panel2);border:1px solid var(--border);color:var(--white);font-family:'Space Mono',monospace;font-size:11px;padding:10px 14px;outline:none;transition:border-color .2s;}
 .search-input:focus{border-color:var(--gold-dim);}
-.search-select{background:var(--panel2);border:1px solid var(--border);color:var(--text-dim);font-family:'Space Mono',monospace;font-size:9px;padding:10px 10px;outline:none;cursor:pointer;}
-.search-results-count{font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);letter-spacing:2px;padding:8px 0;margin-bottom:8px;}
+.search-select{background:var(--panel2);border:1px solid var(--border);color:var(--text-dim);font-family:'Space Mono',monospace;font-size:11px;padding:10px 10px;outline:none;cursor:pointer;}
+.search-results-count{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:2px;padding:8px 0;margin-bottom:8px;}
 .search-highlight{background:rgba(201,168,76,.25);color:var(--gold);}
 
 /* ============================================================
    HEATMAP
    ============================================================ */
-.heatmap-grid{display:grid;grid-template-columns:60px repeat(24,1fr);gap:2px;font-family:'Space Mono',monospace;font-size:8px;}
-.heatmap-cell{aspect-ratio:1;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:7px;cursor:pointer;transition:transform .15s;position:relative;}
+.heatmap-grid{display:grid;grid-template-columns:60px repeat(24,1fr);gap:2px;font-family:'Space Mono',monospace;font-size:10px;}
+.heatmap-cell{aspect-ratio:1;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:9px;cursor:pointer;transition:transform .15s;position:relative;}
 .heatmap-cell:hover{transform:scale(1.3);z-index:10;}
-.heatmap-label{display:flex;align-items:center;color:var(--text-dim);font-size:8px;letter-spacing:1px;}
-.heatmap-legend{display:flex;gap:6px;align-items:center;margin-top:12px;font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);}
+.heatmap-label{display:flex;align-items:center;color:var(--text-dim);font-size:10px;letter-spacing:1px;}
+.heatmap-legend{display:flex;gap:6px;align-items:center;margin-top:12px;font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);}
 .heatmap-legend-bar{display:flex;gap:2px;}
 .heatmap-legend-cell{width:16px;height:16px;border-radius:2px;}
 
@@ -441,13 +441,13 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
    ============================================================ */
 .sim-controls{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-bottom:24px;padding:22px;background:var(--panel);border:1px solid var(--border);}
 .sim-field{display:flex;flex-direction:column;gap:6px;}
-.sim-lbl{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;}
-.sim-input{background:var(--panel2);border:1px solid var(--border);color:var(--white);font-family:'Space Mono',monospace;font-size:13px;padding:8px 10px;outline:none;transition:border-color .2s;width:100%;}
+.sim-lbl{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;}
+.sim-input{background:var(--panel2);border:1px solid var(--border);color:var(--white);font-family:'Space Mono',monospace;font-size:15px;padding:8px 10px;outline:none;transition:border-color .2s;width:100%;}
 .sim-input:focus{border-color:var(--gold-dim);}
 .sim-result-bar{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:20px;}
 .sim-kpi{background:var(--panel);padding:16px 14px;text-align:center;}
 .sim-kpi-val{font-family:'Cinzel',serif;font-size:22px;margin-bottom:3px;}
-.sim-kpi-lbl{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;}
+.sim-kpi-lbl{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;}
 
 /* ============================================================
    BADGES & ACHIEVEMENTS
@@ -459,10 +459,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .badge-card.locked{opacity:.4;filter:grayscale(1);}
 .badge-icon{font-size:36px;margin-bottom:8px;display:block;}
 .badge-name{font-family:'Cinzel',serif;font-size:11px;color:var(--white);letter-spacing:1px;margin-bottom:4px;}
-.badge-desc{font-family:'Space Mono',monospace;font-size:7px;color:var(--text-dim);line-height:1.6;}
+.badge-desc{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);line-height:1.6;}
 .badge-progress{margin-top:8px;height:3px;background:var(--border);border-radius:2px;overflow:hidden;}
 .badge-progress-fill{height:100%;background:var(--gold-dim);transition:width .5s;}
-.badge-new{position:absolute;top:8px;right:8px;font-family:'Space Mono',monospace;font-size:6px;letter-spacing:1px;padding:2px 5px;background:var(--gold);color:var(--black);animation:badgePulse 2s ease-in-out infinite;}
+.badge-new{position:absolute;top:8px;right:8px;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:1px;padding:2px 5px;background:var(--gold);color:var(--black);animation:badgePulse 2s ease-in-out infinite;}
 @keyframes badgePulse{0%,100%{opacity:1;}50%{opacity:.6;}}
 
 
@@ -481,8 +481,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
    ============================================================ */
 .goal-card{background:var(--panel);border:1px solid var(--border);padding:26px;position:relative;overflow:hidden;}
 .goal-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
-.goal-title{font-family:'Cinzel',serif;font-size:14px;color:var(--gold);letter-spacing:2px;margin-bottom:6px;}
-.goal-desc{font-size:13px;color:var(--text-dim);margin-bottom:18px;}
+.goal-title{font-family:'Cinzel',serif;font-size:16px;color:var(--gold);letter-spacing:2px;margin-bottom:6px;}
+.goal-desc{font-size:15px;color:var(--text-dim);margin-bottom:18px;}
 .goal-input-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
 .goal-bar-wrap{background:var(--border);height:6px;border-radius:3px;overflow:hidden;margin-bottom:8px;}
 .goal-bar{height:100%;border-radius:3px;transition:width .8s cubic-bezier(.34,1.56,.64,1);}
@@ -497,7 +497,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .level-emoji{font-size:22px;margin-bottom:6px;}
 .level-name{font-family:'Cinzel',serif;font-size:10px;color:var(--text-dim);letter-spacing:1px;}
 .level-item.active .level-name{color:var(--gold);}
-.level-req{font-family:'Space Mono',monospace;font-size:7px;color:var(--text-dim);margin-top:3px;}
+.level-req{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-top:3px;}
 
 /* ============================================================
    PAGE SANCTUAIRE — refonte complète
@@ -517,7 +517,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .mood-btn:hover{border-color:var(--gold-dim);transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.2);}
 .mood-btn.selected{border-color:var(--gold);background:var(--gold-faint);box-shadow:0 0 16px var(--gold-glow);}
 .mood-emoji{font-size:28px;margin-bottom:7px;}
-.mood-label{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--text-dim);text-transform:uppercase;}
+.mood-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--text-dim);text-transform:uppercase;}
 .mood-btn.selected .mood-label{color:var(--gold);}
 
 /* Mood response card */
@@ -525,21 +525,21 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .mood-response.visible{display:block;}
 .mood-card{border:1px solid var(--gold-dim);background:var(--gold-faint);padding:28px 32px;position:relative;overflow:hidden;}
 .mood-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
-.mood-card-title{font-family:'Cinzel',serif;font-size:15px;color:var(--gold);letter-spacing:2px;margin-bottom:14px;}
+.mood-card-title{font-family:'Cinzel',serif;font-size:17px;color:var(--gold);letter-spacing:2px;margin-bottom:14px;}
 .mood-card-text{font-size:16px;font-style:italic;color:var(--white);line-height:1.9;}
 .mood-card-actions{margin-top:20px;display:flex;gap:8px;flex-wrap:wrap;}
-.mood-action-pill{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;padding:5px 12px;border:1px solid var(--gold-dim);color:var(--gold-dim);cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.mood-action-pill{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;padding:5px 12px;border:1px solid var(--gold-dim);color:var(--gold-dim);cursor:pointer;transition:all .2s;text-transform:uppercase;}
 .mood-action-pill:hover,.mood-action-pill.done{background:var(--gold-faint);border-color:var(--gold);color:var(--gold);}
 .mood-action-pill.done::before{content:'✓ ';}
 
 /* Error audit */
 .error-audit{background:var(--panel);border:1px solid var(--border);padding:24px;}
-.audit-title{font-family:'Cinzel',serif;font-size:13px;color:var(--gold);letter-spacing:2px;margin-bottom:16px;}
+.audit-title{font-family:'Cinzel',serif;font-size:15px;color:var(--gold);letter-spacing:2px;margin-bottom:16px;}
 .audit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;}
-.audit-chip{padding:10px 14px;border:1px solid var(--border);cursor:pointer;transition:all .22s;text-align:center;font-size:13px;color:var(--text-dim);}
+.audit-chip{padding:10px 14px;border:1px solid var(--border);cursor:pointer;transition:all .22s;text-align:center;font-size:15px;color:var(--text-dim);}
 .audit-chip:hover{border-color:var(--gold-dim);color:var(--text);}
 .audit-chip.selected{border-color:var(--red-border);background:var(--red-bg);color:var(--white);}
-.audit-response{margin-top:14px;padding:16px 20px;border:1px solid var(--red-border);background:var(--red-bg);font-size:14px;color:var(--white);line-height:1.8;display:none;}
+.audit-response{margin-top:14px;padding:16px 20px;border:1px solid var(--red-border);background:var(--red-bg);font-size:16px;color:var(--white);line-height:1.8;display:none;}
 .audit-response.visible{display:block;}
 
 /* Breathing */
@@ -550,16 +550,16 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .breath-ring.exhale{animation:breatheOut 4s ease-in-out forwards;}
 @keyframes breatheIn{0%{transform:scale(1);}100%{transform:scale(1.38);border-color:var(--gold);box-shadow:0 0 48px rgba(201,168,76,.35);}}
 @keyframes breatheOut{0%{transform:scale(1.38);}100%{transform:scale(1);border-color:var(--gold-dim);box-shadow:none;}}
-.breath-label{font-family:'Cinzel',serif;font-size:13px;letter-spacing:3px;color:var(--gold);line-height:1.4;}
+.breath-label{font-family:'Cinzel',serif;font-size:15px;letter-spacing:3px;color:var(--gold);line-height:1.4;}
 .breath-count{font-family:'Space Mono',monospace;font-size:32px;font-weight:700;color:var(--white);margin-top:4px;}
-.breath-instruction{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--text-dim);text-transform:uppercase;min-height:16px;margin-top:10px;}
+.breath-instruction{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--text-dim);text-transform:uppercase;min-height:16px;margin-top:10px;}
 
 /* Mantras */
 .mantra-rotator{background:var(--panel);border:1px solid var(--gold-dim);padding:40px 48px;text-align:center;position:relative;overflow:hidden;}
 .mantra-rotator::before,.mantra-rotator::after{content:'⛩';position:absolute;font-size:64px;opacity:.03;top:50%;transform:translateY(-50%);}
 .mantra-rotator::before{left:12px;}.mantra-rotator::after{right:12px;}
 .mantra-current{font-size:clamp(16px,2.5vw,21px);font-style:italic;color:var(--white);line-height:1.9;min-height:64px;transition:opacity .4s;}
-.mantra-nav-btn{background:none;border:1px solid var(--border);color:var(--text-dim);cursor:pointer;padding:7px 16px;font-size:15px;transition:all .2s;margin-top:16px;}
+.mantra-nav-btn{background:none;border:1px solid var(--border);color:var(--text-dim);cursor:pointer;padding:7px 16px;font-size:17px;transition:all .2s;margin-top:16px;}
 .mantra-nav-btn:hover{border-color:var(--gold-dim);color:var(--gold);}
 
 /* Journal */
@@ -573,7 +573,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .resolve-card.visible{display:block;}
 .resolve-icon{font-size:40px;margin-bottom:10px;}
 .resolve-title{font-family:'Cinzel',serif;font-size:20px;color:var(--green);letter-spacing:3px;margin-bottom:8px;}
-.resolve-sub{font-size:15px;color:var(--text-dim);font-style:italic;}
+.resolve-sub{font-size:17px;color:var(--text-dim);font-style:italic;}
 
 @media(max-width:760px){
   .cal-grid{gap:1px;}
@@ -589,11 +589,11 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .tf-desc{font-size:12px;color:var(--text-dim);line-height:1.6;}
 
 .setup-block{background:var(--panel);border:1px solid var(--border);padding:28px;}
-.setup-grade{display:inline-block;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:3px;padding:4px 12px;border:1px solid var(--gold);color:var(--gold);margin-bottom:16px;background:rgba(201,168,76,.05);}
+.setup-grade{display:inline-block;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;padding:4px 12px;border:1px solid var(--gold);color:var(--gold);margin-bottom:16px;background:rgba(201,168,76,.05);}
 .steps{list-style:none;}
-.steps li{display:flex;align-items:flex-start;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;}
+.steps li{display:flex;align-items:flex-start;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:16px;}
 .steps li:last-child{border-bottom:none;}
-.snum{font-family:'Space Mono',monospace;font-size:8px;color:var(--gold-dim);background:rgba(201,168,76,.06);border:1px solid var(--gold-dim);width:22px;height:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.snum{font-family:'Space Mono',monospace;font-size:10px;color:var(--gold-dim);background:rgba(201,168,76,.06);border:1px solid var(--gold-dim);width:22px;height:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
 
 .zone-card{padding:22px 18px;border:1px solid;position:relative;}
 .zone-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;}
@@ -620,33 +620,33 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .tp-lbl{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:var(--gold);}
 .tp-bar{height:2px;background:var(--border);}
 .tp-fill{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold));}
-.tp-info{font-size:13px;color:var(--text);text-align:right;white-space:nowrap;}
+.tp-info{font-size:15px;color:var(--text);text-align:right;white-space:nowrap;}
 
 .sess-strip{display:flex;align-items:center;gap:16px;padding:18px 22px;border:1px solid var(--border);background:var(--panel);margin-bottom:10px;transition:border-color .25s;}
 .sess-strip:hover{border-color:var(--gold-dim);}
 .sess-t{font-family:'Space Mono',monospace;font-size:16px;font-weight:700;color:var(--gold);min-width:120px;}
 .sess-sep{width:1px;height:28px;background:var(--border);}
-.sess-d{font-size:14px;color:var(--text-dim);}
+.sess-d{font-size:16px;color:var(--text-dim);}
 
 .chk{list-style:none;}
-.chk li{display:flex;align-items:center;gap:12px;padding:11px 16px;border:1px solid var(--border);margin-bottom:5px;font-size:15px;background:var(--panel);}
-.chk-ico{width:18px;height:18px;border:1px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--gold);flex-shrink:0;}
+.chk li{display:flex;align-items:center;gap:12px;padding:11px 16px;border:1px solid var(--border);margin-bottom:5px;font-size:17px;background:var(--panel);}
+.chk-ico{width:18px;height:18px;border:1px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gold);flex-shrink:0;}
 
 .banned-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;}
-.banned{padding:16px;border:1px solid rgba(192,57,43,.25);background:rgba(139,26,26,.08);text-align:center;font-size:13px;color:var(--text);}
+.banned{padding:16px;border:1px solid rgba(192,57,43,.25);background:rgba(139,26,26,.08);text-align:center;font-size:15px;color:var(--text);}
 .banned::before{content:'❌';display:block;font-size:18px;margin-bottom:6px;}
 
 .mantra{background:var(--panel);border:1px solid var(--gold-dim);padding:48px 36px;text-align:center;position:relative;overflow:hidden;margin-top:32px;}
 .mantra::before,.mantra::after{content:'⛩';position:absolute;font-size:64px;opacity:.04;top:50%;transform:translateY(-50%);}
 .mantra::before{left:12px;}.mantra::after{right:12px;}
 .mantra-txt{font-size:clamp(14px,2.2vw,20px);font-style:italic;color:var(--white);line-height:1.85;max-width:700px;margin:0 auto 20px;}
-.mantra-sub{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:4px;color:var(--gold-dim);text-transform:uppercase;}
+.mantra-sub{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:4px;color:var(--gold-dim);text-transform:uppercase;}
 
 /* ============================================================
    PAGE JOURNAL
    ============================================================ */
 .tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:28px;flex-wrap:wrap;}
-.tab-btn{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;padding:11px 16px;border:none;background:transparent;color:var(--text-dim);cursor:pointer;text-transform:uppercase;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .22s;white-space:nowrap;}
+.tab-btn{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:3px;padding:11px 16px;border:none;background:transparent;color:var(--text-dim);cursor:pointer;text-transform:uppercase;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .22s;white-space:nowrap;}
 .tab-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
 .tab-btn:hover{color:var(--text);}
 .tab-panel{display:none;}
@@ -655,40 +655,40 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .form-wrap{background:var(--panel);border:1px solid var(--border);padding:26px;margin-bottom:20px;}
 .form-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px;margin-bottom:16px;}
 .fg{display:flex;flex-direction:column;gap:5px;}
-.flbl{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--gold-dim);text-transform:uppercase;}
+.flbl{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gold-dim);text-transform:uppercase;}
 .finput,.fsel{background:var(--panel2);border:1px solid var(--border);padding:9px 11px;color:var(--white);font-family:'Space Mono',monospace;font-size:11px;outline:none;transition:border-color .2s;width:100%;}
 .finput:focus,.fsel:focus{border-color:var(--gold-dim);}
 .fsel{cursor:pointer;appearance:none;}
-.ftxt{background:var(--panel2);border:1px solid var(--border);padding:10px 12px;color:var(--white);font-family:'Cormorant Garamond',serif;font-size:15px;outline:none;transition:border-color .2s;width:100%;resize:vertical;}
+.ftxt{background:var(--panel2);border:1px solid var(--border);padding:10px 12px;color:var(--white);font-family:'Cormorant Garamond',serif;font-size:17px;outline:none;transition:border-color .2s;width:100%;resize:vertical;}
 .ftxt:focus{border-color:var(--gold-dim);}
 
 .err-grid{display:flex;flex-wrap:wrap;gap:5px;padding:6px 0;}
-.err-chip{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:1px;padding:4px 9px;border:1px solid var(--border);color:var(--text-dim);cursor:pointer;transition:all .18s;text-transform:uppercase;white-space:nowrap;}
+.err-chip{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;padding:4px 9px;border:1px solid var(--border);color:var(--text-dim);cursor:pointer;transition:all .18s;text-transform:uppercase;white-space:nowrap;}
 .err-chip.selected{border-color:var(--red);color:var(--red);background:var(--red-bg);}
 .err-chip:hover{border-color:var(--text-dim);}
 
 .kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(125px,1fr));gap:12px;margin-bottom:22px;}
 .kpi{background:var(--panel);border:1px solid var(--border);padding:16px;text-align:center;}
 .kpi-val{font-family:'Cinzel',serif;font-size:24px;color:var(--gold);margin-bottom:2px;}
-.kpi-lbl{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;}
+.kpi-lbl{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;}
 
 .tbl-wrap{background:var(--panel);border:1px solid var(--border);overflow-x:auto;}
 table{width:100%;border-collapse:collapse;font-size:12px;}
-th{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--gold-dim);text-transform:uppercase;padding:10px 10px;border-bottom:1px solid var(--border);text-align:left;background:var(--panel2);white-space:nowrap;}
+th{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--gold-dim);text-transform:uppercase;padding:10px 10px;border-bottom:1px solid var(--border);text-align:left;background:var(--panel2);white-space:nowrap;}
 td{padding:8px 10px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:middle;}
 tr:hover td{background:rgba(201,168,76,.015);}
 .del-btn{background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:12px;padding:2px 4px;transition:color .2s;}
 .del-btn:hover{color:var(--red);}
-.view-btn{background:none;border:1px solid var(--border);color:var(--text-dim);cursor:pointer;font-family:'Space Mono',monospace;font-size:7px;padding:3px 8px;letter-spacing:1px;transition:all .2s;white-space:nowrap;}
+.view-btn{background:none;border:1px solid var(--border);color:var(--text-dim);cursor:pointer;font-family:'Space Mono',monospace;font-size:9px;padding:3px 8px;letter-spacing:1px;transition:all .2s;white-space:nowrap;}
 .view-btn:hover{border-color:var(--gold);color:var(--gold);}
 .empty-st{text-align:center;padding:48px 20px;color:var(--text-dim);font-style:italic;}
 .empty-icon{font-size:32px;margin-bottom:10px;opacity:.2;}
 
 .charts-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:4px;}
 .chart-box{background:var(--panel);border:1px solid var(--border);padding:22px;}
-.chart-title{font-family:'Cinzel',serif;font-size:14px;color:var(--gold);margin-bottom:16px;letter-spacing:1px;}
+.chart-title{font-family:'Cinzel',serif;font-size:16px;color:var(--gold);margin-bottom:16px;letter-spacing:1px;}
 
-.zbadge{display:inline-block;font-family:'Space Mono',monospace;font-size:8px;padding:2px 7px;letter-spacing:1px;}
+.zbadge{display:inline-block;font-family:'Space Mono',monospace;font-size:10px;padding:2px 7px;letter-spacing:1px;}
 .zbadge.zv{background:var(--green-bg);border:1px solid var(--green-border);color:var(--green);}
 .zbadge.zo{background:rgba(230,126,34,.1);border:1px solid rgba(230,126,34,.3);color:var(--orange);}
 .zbadge.zr{background:var(--red-bg);border:1px solid var(--red-border);color:var(--red);}
@@ -698,7 +698,7 @@ tr:hover td{background:rgba(201,168,76,.015);}
    PAGE REVIEW
    ============================================================ */
 .review-year-tabs{display:flex;gap:0;margin-bottom:28px;border-bottom:1px solid var(--border);}
-.ry-btn{font-family:'Cinzel',serif;font-size:14px;letter-spacing:3px;padding:11px 26px;border:none;background:transparent;color:var(--text-dim);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .22s;}
+.ry-btn{font-family:'Cinzel',serif;font-size:16px;letter-spacing:3px;padding:11px 26px;border:none;background:transparent;color:var(--text-dim);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .22s;}
 .ry-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
 .ry-btn:hover{color:var(--white);}
 .quarter-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px;margin-bottom:28px;}
@@ -707,45 +707,45 @@ tr:hover td{background:rgba(201,168,76,.015);}
 .quarter-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--gold),transparent);}
 .q-header{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--border);background:rgba(201,168,76,.025);}
 .q-title{font-family:'Cinzel',serif;font-size:18px;color:var(--gold);letter-spacing:3px;}
-.q-months-lbl{font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);letter-spacing:2px;}
+.q-months-lbl{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:2px;}
 .q-body{padding:18px 22px;}
 .q-stats{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:14px;}
 .q-stat{padding:7px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
 .q-stat:nth-child(odd){padding-right:12px;border-right:1px solid var(--border);}
 .q-stat:nth-child(even){padding-left:12px;}
-.q-stat-lbl{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--text-dim);text-transform:uppercase;}
+.q-stat-lbl{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--text-dim);text-transform:uppercase;}
 .q-stat-val{font-family:'Space Mono',monospace;font-size:12px;font-weight:700;}
 .q-wr-bar{height:2px;background:var(--border);margin:10px 0 12px;}
 .q-wr-fill{height:100%;transition:width .6s ease;}
 .q-month-row{display:flex;align-items:center;gap:10px;padding:4px 0;}
-.q-month-lbl{font-family:'Space Mono',monospace;font-size:9px;color:var(--gold-dim);width:32px;flex-shrink:0;}
+.q-month-lbl{font-family:'Space Mono',monospace;font-size:11px;color:var(--gold-dim);width:32px;flex-shrink:0;}
 .q-month-input{background:transparent;border:none;border-bottom:1px solid var(--border2);color:var(--text);font-family:'Space Mono',monospace;font-size:10px;padding:3px 5px;width:100%;outline:none;transition:border-color .2s;}
 .q-month-input:focus{border-bottom-color:var(--gold-dim);color:var(--white);}
-.q-save-btn{margin-top:14px;width:100%;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:3px;padding:8px;border:1px solid var(--gold-dim);color:var(--gold-dim);background:transparent;cursor:pointer;text-transform:uppercase;transition:all .2s;}
+.q-save-btn{margin-top:14px;width:100%;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;padding:8px;border:1px solid var(--gold-dim);color:var(--gold-dim);background:transparent;cursor:pointer;text-transform:uppercase;transition:all .2s;}
 .q-save-btn:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-faint);}
 .q-save-btn.saved{border-color:var(--green);color:var(--green);}
 .review-global{background:var(--panel);border:1px solid var(--border);padding:28px;margin-top:6px;}
 .rg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:12px;}
 .rg-kpi{text-align:center;padding:14px 8px;border:1px solid var(--border);}
 .rg-val{font-family:'Cinzel',serif;font-size:20px;color:var(--gold);margin-bottom:3px;}
-.rg-lbl{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;}
+.rg-lbl{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;}
 
 /* ============================================================
    PAGE OUTILS
    ============================================================ */
-.risk-btn{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;padding:6px 12px;border:1px solid var(--border);color:var(--text-dim);background:transparent;cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.risk-btn{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;padding:6px 12px;border:1px solid var(--border);color:var(--text-dim);background:transparent;cursor:pointer;transition:all .2s;text-transform:uppercase;}
 .risk-btn:hover{border-color:var(--gold-dim);color:var(--gold);}
 .risk-btn.active{border-color:var(--gold);color:var(--gold);background:var(--gold-faint);}
 
 .sess-card{background:var(--panel);border:1px solid var(--border);padding:22px;position:relative;transition:border-color .3s;}
 .sess-card.open{border-color:var(--green-border);background:rgba(46,204,113,.04);}
 .sess-card.closed{opacity:.55;}
-.sess-card-name{font-family:'Cinzel',serif;font-size:15px;letter-spacing:2px;margin-bottom:3px;}
+.sess-card-name{font-family:'Cinzel',serif;font-size:17px;letter-spacing:2px;margin-bottom:3px;}
 .sess-card-hours{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);margin-bottom:10px;}
 .sess-dot{width:7px;height:7px;border-radius:50%;position:absolute;top:20px;right:20px;}
 .sess-dot.open{background:var(--green);box-shadow:0 0 7px var(--green);}
 .sess-dot.closed{background:var(--text-dim);}
-.sess-allowed-badge{display:inline-block;font-family:'Space Mono',monospace;font-size:7px;padding:2px 7px;border:1px solid var(--gold-dim);color:var(--gold-dim);letter-spacing:2px;margin-top:7px;}
+.sess-allowed-badge{display:inline-block;font-family:'Space Mono',monospace;font-size:9px;padding:2px 7px;border:1px solid var(--gold-dim);color:var(--gold-dim);letter-spacing:2px;margin-top:7px;}
 
 /* ============================================================
    MODAL
@@ -759,11 +759,11 @@ tr:hover td{background:rgba(201,168,76,.015);}
 .modal-close:hover{border-color:var(--red);color:var(--red);}
 .modal-body{padding:26px;}
 .modal-meta{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:22px;}
-.mmeta{font-family:'Space Mono',monospace;font-size:8px;padding:3px 9px;border:1px solid var(--border);color:var(--text-dim);letter-spacing:2px;}
+.mmeta{font-family:'Space Mono',monospace;font-size:10px;padding:3px 9px;border:1px solid var(--border);color:var(--text-dim);letter-spacing:2px;}
 .screens-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px;}
 .screen-slot{border:1px solid var(--border);background:var(--panel2);aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;overflow:hidden;transition:border-color .2s;}
 .screen-slot:hover{border-color:var(--gold-dim);}
-.screen-slot-lbl{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--text-dim);margin-bottom:5px;}
+.screen-slot-lbl{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--text-dim);margin-bottom:5px;}
 .screen-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .slot-overlay{position:absolute;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;}
 .screen-slot:hover .slot-overlay{opacity:1;}
@@ -780,7 +780,7 @@ tr:hover td{background:rgba(201,168,76,.015);}
 .site-footer{border-top:1px solid var(--border);padding:40px 20px;text-align:center;background:var(--deep);}
 .ft-torii{font-size:32px;margin-bottom:12px;filter:drop-shadow(0 0 8px var(--gold-glow));}
 .ft-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:5px;color:var(--gold-dim);margin-bottom:8px;}
-.ft-q{font-size:13px;font-style:italic;color:var(--text-dim);line-height:1.7;}
+.ft-q{font-size:15px;font-style:italic;color:var(--text-dim);line-height:1.7;}
 
 /* ============================================================
    RESPONSIVE
@@ -914,11 +914,11 @@ tr:hover td{background:rgba(201,168,76,.015);}
         <div class="status-box-title">⏰ Sessions</div>
         <div style="font-family:'Cinzel',serif;font-size:clamp(26px,5vw,42px);color:var(--gold);letter-spacing:3px;text-shadow:0 0 20px rgba(201,168,76,.25);margin-bottom:6px" id="homeClockTime">--:--:--</div>
         <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);margin-bottom:18px" id="homeClockDate">—</div>
-        <div style="font-family:'Cinzel',serif;font-size:15px;letter-spacing:2px;margin-bottom:18px" id="homeClockStatus">—</div>
+        <div style="font-family:'Cinzel',serif;font-size:17px;letter-spacing:2px;margin-bottom:18px" id="homeClockStatus">—</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;" id="homeSessionMini"></div>
         <div style="margin-top:16px;padding:12px 16px;border:1px solid var(--border);background:var(--panel2);">
-          <div style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--gold-dim);margin-bottom:5px">PROCHAINE SESSION</div>
-          <div style="font-family:'Cinzel',serif;font-size:15px;color:var(--white)" id="homeNextSession">—</div>
+          <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gold-dim);margin-bottom:5px">PROCHAINE SESSION</div>
+          <div style="font-family:'Cinzel',serif;font-size:17px;color:var(--white)" id="homeNextSession">—</div>
           <div style="font-family:'Space Mono',monospace;font-size:12px;color:var(--gold)" id="homeNextCountdown">—</div>
         </div>
       </div>
@@ -931,28 +931,28 @@ tr:hover td{background:rgba(201,168,76,.015);}
             <canvas id="homeFgGauge" width="120" height="120"></canvas>
             <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-top:12px">
               <div style="font-family:'Cinzel',serif;font-size:30px;font-weight:900;line-height:1" id="homeFgVal">—</div>
-              <div style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:1px;margin-top:4px" id="homeFgLbl">—</div>
+              <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;margin-top:4px" id="homeFgLbl">—</div>
             </div>
           </div>
           <div>
-            <div id="homeFgSignal" style="font-size:14px;color:var(--text);line-height:1.8">Chargement...</div>
-            <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);margin-top:8px" id="homeFgDate">—</div>
+            <div id="homeFgSignal" style="font-size:16px;color:var(--text);line-height:1.8">Chargement...</div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);margin-top:8px" id="homeFgDate">—</div>
           </div>
         </div>
         <div style="display:flex;flex-direction:column;gap:6px">
-          <div style="display:flex;gap:6px;align-items:center;font-family:'Space Mono',monospace;font-size:9px">
+          <div style="display:flex;gap:6px;align-items:center;font-family:'Space Mono',monospace;font-size:11px">
             <span style="color:#c0392b;min-width:36px">0–24</span><div style="flex:1;height:1px;background:linear-gradient(90deg,#c0392b,transparent)"></div><span style="color:var(--text-dim)">Peur Extrême</span>
           </div>
-          <div style="display:flex;gap:6px;align-items:center;font-family:'Space Mono',monospace;font-size:9px">
+          <div style="display:flex;gap:6px;align-items:center;font-family:'Space Mono',monospace;font-size:11px">
             <span style="color:#e67e22;min-width:36px">25–44</span><div style="flex:1;height:1px;background:linear-gradient(90deg,#e67e22,transparent)"></div><span style="color:var(--text-dim)">Peur</span>
           </div>
-          <div style="display:flex;gap:6px;align-items:center;font-family:'Space Mono',monospace;font-size:9px">
+          <div style="display:flex;gap:6px;align-items:center;font-family:'Space Mono',monospace;font-size:11px">
             <span style="color:#f1c40f;min-width:36px">45–55</span><div style="flex:1;height:1px;background:linear-gradient(90deg,#f1c40f,transparent)"></div><span style="color:var(--text-dim)">Neutre</span>
           </div>
-          <div style="display:flex;gap:6px;align-items:center;font-family:'Space Mono',monospace;font-size:9px">
+          <div style="display:flex;gap:6px;align-items:center;font-family:'Space Mono',monospace;font-size:11px">
             <span style="color:#27ae60;min-width:36px">56–74</span><div style="flex:1;height:1px;background:linear-gradient(90deg,#27ae60,transparent)"></div><span style="color:var(--text-dim)">Avidité</span>
           </div>
-          <div style="display:flex;gap:6px;align-items:center;font-family:'Space Mono',monospace;font-size:9px">
+          <div style="display:flex;gap:6px;align-items:center;font-family:'Space Mono',monospace;font-size:11px">
             <span style="color:#c9a84c;min-width:36px">75+</span><div style="flex:1;height:1px;background:linear-gradient(90deg,#c9a84c,transparent)"></div><span style="color:var(--text-dim)">Avidité Extrême</span>
           </div>
         </div>
@@ -1040,7 +1040,7 @@ tr:hover td{background:rgba(201,168,76,.015);}
     <div class="setup-block">
       <div class="setup-grade">Setup A+</div>
       <div class="ctitle" style="margin-bottom:4px">Entrée Directe</div>
-      <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);letter-spacing:1px;margin-bottom:14px">LU SUR M1 / M5</div>
+      <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:1px;margin-bottom:14px">LU SUR M1 / M5</div>
       <ul class="steps">
         <li><div class="snum">01</div>Sweep de liquidité</li>
         <li><div class="snum">02</div>Market Shift (BOS)</li>
@@ -1051,7 +1051,7 @@ tr:hover td{background:rgba(201,168,76,.015);}
     <div class="setup-block" style="border-color:var(--gold-dim)">
       <div class="setup-grade" style="background:rgba(201,168,67,.09)">Setup A++</div>
       <div class="ctitle" style="margin-bottom:4px">Entrée Sniper</div>
-      <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);letter-spacing:1px;margin-bottom:14px">LU SUR M1 / M5 · ZONE M15</div>
+      <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:1px;margin-bottom:14px">LU SUR M1 / M5 · ZONE M15</div>
       <ul class="steps">
         <li><div class="snum">01</div>Sweep de liquidité</li>
         <li><div class="snum">02</div>Market Shift (BOS)</li>
@@ -1062,12 +1062,12 @@ tr:hover td{background:rgba(201,168,76,.015);}
       </ul>
       <div style="margin-top:18px;display:flex;flex-direction:column;gap:8px">
         <div style="padding:10px 14px;border:1px solid rgba(212,168,67,.3);background:rgba(212,168,67,.05)">
-          <div style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--gold);margin-bottom:6px">VARIANTE 1 — ORDER BLOCK</div>
-          <div style="font-size:13px;color:var(--text-dim);line-height:1.8">Dernière bougie baissière avant le BOS haussier (ou inverse). Entrée au retest de la mèche ou du corps selon la structure.</div>
+          <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gold);margin-bottom:6px">VARIANTE 1 — ORDER BLOCK</div>
+          <div style="font-size:15px;color:var(--text-dim);line-height:1.8">Dernière bougie baissière avant le BOS haussier (ou inverse). Entrée au retest de la mèche ou du corps selon la structure.</div>
         </div>
         <div style="padding:10px 14px;border:1px solid rgba(61,220,132,.2);background:rgba(61,220,132,.04)">
-          <div style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--green);margin-bottom:6px">VARIANTE 2 — IMBALANCE (FVG)</div>
-          <div style="font-size:13px;color:var(--text-dim);line-height:1.8">Déséquilibre laissé par le BOS. Entrée au retest du gap — idéalement sur le 50% ou le bord inférieur de l'IMB.</div>
+          <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--green);margin-bottom:6px">VARIANTE 2 — IMBALANCE (FVG)</div>
+          <div style="font-size:15px;color:var(--text-dim);line-height:1.8">Déséquilibre laissé par le BOS. Entrée au retest du gap — idéalement sur le 50% ou le bord inférieur de l'IMB.</div>
         </div>
       </div>
     </div>
@@ -1092,13 +1092,13 @@ tr:hover td{background:rgba(201,168,76,.015);}
       <div class="kv"><span style="color:var(--green)">✓ SL pris par mèche</span></div>
       <div class="kv"><span style="color:var(--green)">✓ Structure intacte</span></div>
       <div class="kv"><span style="color:var(--green)">✓ Nouvelle confirmation</span></div>
-      <div style="margin-top:12px;padding:9px;border:1px solid var(--gold-dim);background:var(--gold-faint)"><span class="mono" style="font-size:9px;color:var(--gold)">📌 1 ZONE = MAX 2 TENTATIVES</span></div>
+      <div style="margin-top:12px;padding:9px;border:1px solid var(--gold-dim);background:var(--gold-faint)"><span class="mono" style="font-size:11px;color:var(--gold)">📌 1 ZONE = MAX 2 TENTATIVES</span></div>
     </div>
   </div>
 
   <div style="height:56px"></div>
   <div class="sec-hdr reveal"><span class="sec-num">05</span><h2 class="sec-title">Drawdown Management</h2><div class="sec-line"></div></div>
-  <div style="text-align:center;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--gold-dim);margin-bottom:18px" class="reveal">COMPTE 5 000 €</div>
+  <div style="text-align:center;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--gold-dim);margin-bottom:18px" class="reveal">COMPTE 5 000 €</div>
   <div class="g4 reveal">
     <div class="zone-card zg"><div class="z-emoji">🟩</div><div class="z-range plan-editable" data-key="z1_range" contenteditable="false">5000€ → 4800€</div><div class="z-risk plan-editable" data-key="z1_risk" contenteditable="false">1R</div><div class="z-rules plan-editable" data-key="z1_rules" contenteditable="false">Max 4 SL consécutifs<br>Swing + Scalp autorisés</div></div>
     <div class="zone-card zo"><div class="z-emoji">🟧</div><div class="z-range plan-editable" data-key="z2_range" contenteditable="false">4800€ → 4700€</div><div class="z-risk plan-editable" data-key="z2_risk" contenteditable="false">0,75R</div><div class="z-rules plan-editable" data-key="z2_rules" contenteditable="false">Max 3 SL consécutifs<br>Pas de scalp</div></div>
@@ -1112,7 +1112,7 @@ tr:hover td{background:rgba(201,168,76,.015);}
     <div class="tp-row"><div class="tp-lbl">TP1</div><div class="tp-bar"><div class="tp-fill" style="width:16%"></div></div><div class="tp-info"><span class="mono plan-editable" data-key="tp1_r" contenteditable="false" style="color:var(--gold)">1R</span> — <span class="plan-editable" data-key="tp1_desc" contenteditable="false">Sécurité · BE</span></div></div>
     <div class="tp-row"><div class="tp-lbl">TP2</div><div class="tp-bar"><div class="tp-fill" style="width:50%"></div></div><div class="tp-info"><span class="mono plan-editable" data-key="tp2_r" contenteditable="false" style="color:var(--gold)">3R</span> — <span class="plan-editable" data-key="tp2_desc" contenteditable="false">Respiration</span></div></div>
     <div class="tp-row"><div class="tp-lbl">TP3</div><div class="tp-bar"><div class="tp-fill" style="width:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold-light))"></div></div><div class="tp-info"><span class="mono plan-editable" data-key="tp3_r" contenteditable="false" style="color:var(--gold-light)">6R+</span> — <span class="plan-editable" data-key="tp3_desc" contenteditable="false">Laisser courir</span></div></div>
-    <div style="margin-top:16px;padding:12px;border:1px solid rgba(201,168,76,.12);background:var(--gold-faint);font-size:13px;color:var(--text-dim)">🔑 TP3 ouvert — laisser courir tant que la structure tient.</div>
+    <div style="margin-top:16px;padding:12px;border:1px solid rgba(201,168,76,.12);background:var(--gold-faint);font-size:15px;color:var(--text-dim)">🔑 TP3 ouvert — laisser courir tant que la structure tient.</div>
   </div>
 
   <div style="height:56px"></div>
@@ -1126,7 +1126,7 @@ tr:hover td{background:rgba(201,168,76,.015);}
       <li><div class="chk-ico">?</div>Suis-je dans mes horaires autorisés ?</li>
       <li><div class="chk-ico">?</div>Suis-je émotionnellement stable ?</li>
     </ul>
-    <div style="margin-top:10px;padding:12px 18px;border:1px solid var(--red-border);background:var(--red-bg);font-size:13px">❌ Si une réponse = <strong style="color:var(--red)">NON</strong> → Pas de trade.</div>
+    <div style="margin-top:10px;padding:12px 18px;border:1px solid var(--red-border);background:var(--red-bg);font-size:15px">❌ Si une réponse = <strong style="color:var(--red)">NON</strong> → Pas de trade.</div>
   </div>
   <div class="banned-grid reveal" style="margin-top:20px">
     <div class="banned">Revenge trade</div><div class="banned">Overtrade</div><div class="banned">Hors plan</div><div class="banned">Retake ×3</div><div class="banned">Pin bar seule</div><div class="banned">Feeling</div>
@@ -1197,8 +1197,8 @@ tr:hover td{background:rgba(201,168,76,.015);}
       </div>
       <div style="display:flex;gap:16px;align-items:center;margin-bottom:14px;flex-wrap:wrap">
         <div class="flbl">Respect du plan :</div>
-        <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:14px"><input type="radio" name="fPlan" value="OUI" checked style="accent-color:var(--green)"> <span style="color:var(--green)">✅ OUI</span></label>
-        <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:14px"><input type="radio" name="fPlan" value="NON" style="accent-color:var(--red)"> <span style="color:var(--red)">❌ NON</span></label>
+        <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:16px"><input type="radio" name="fPlan" value="OUI" checked style="accent-color:var(--green)"> <span style="color:var(--green)">✅ OUI</span></label>
+        <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:16px"><input type="radio" name="fPlan" value="NON" style="accent-color:var(--red)"> <span style="color:var(--red)">❌ NON</span></label>
       </div>
       <div style="margin-bottom:16px">
         <div class="flbl" style="margin-bottom:7px">Erreurs (multi-select) :</div>
@@ -1289,13 +1289,13 @@ tr:hover td{background:rgba(201,168,76,.015);}
 
   <!-- TAB RECORDS -->
   <div id="jtab-records" class="tab-panel">
-    <p style="color:var(--text-dim);font-style:italic;margin-bottom:24px;font-size:14px">Tes meilleures performances. Ce que le temple garde en mémoire.</p>
+    <p style="color:var(--text-dim);font-style:italic;margin-bottom:24px;font-size:16px">Tes meilleures performances. Ce que le temple garde en mémoire.</p>
     <div class="record-grid" id="recordGrid"></div>
   </div>
 
   <!-- TAB HEATMAP -->
   <div id="jtab-heatmap" class="tab-panel">
-    <p style="color:var(--text-dim);font-style:italic;margin-bottom:20px;font-size:14px">Tes meilleures heures de trading. Plus la case est dorée, meilleur est ton P/L sur ce créneau.</p>
+    <p style="color:var(--text-dim);font-style:italic;margin-bottom:20px;font-size:16px">Tes meilleures heures de trading. Plus la case est dorée, meilleur est ton P/L sur ce créneau.</p>
     <div id="heatmapWrap"></div>
     <div class="heatmap-legend" id="heatmapLegend"></div>
     <div style="margin-top:20px;padding:16px;background:var(--panel);border:1px solid var(--border)" id="heatmapInsight"></div>
@@ -1303,7 +1303,7 @@ tr:hover td{background:rgba(201,168,76,.015);}
 
   <!-- TAB SIMULATEUR -->
   <div id="jtab-simulator" class="tab-panel">
-    <p style="color:var(--text-dim);font-style:italic;margin-bottom:20px;font-size:14px">Projette ta croissance future selon ton winrate, ton RR moyen et ton risque par trade.</p>
+    <p style="color:var(--text-dim);font-style:italic;margin-bottom:20px;font-size:16px">Projette ta croissance future selon ton winrate, ton RR moyen et ton risque par trade.</p>
     <div class="sim-controls">
       <div class="sim-field"><label class="sim-lbl">Capital initial (€)</label><input class="sim-input" id="simCapital" type="number" value="5000" oninput="runSimulator()"></div>
       <div class="sim-field"><label class="sim-lbl">Winrate (%)</label><input class="sim-input" id="simWR" type="number" value="60" oninput="runSimulator()"></div>
@@ -1314,12 +1314,12 @@ tr:hover td{background:rgba(201,168,76,.015);}
     </div>
     <div class="sim-result-bar" id="simKpis"></div>
     <div style="background:var(--panel);border:1px solid var(--border);padding:22px"><canvas id="cSimulator" height="100"></canvas></div>
-    <div id="simInsight" style="margin-top:14px;padding:14px 18px;border:1px solid var(--border);background:var(--panel);font-size:13px;color:var(--text-dim);font-style:italic;display:none"></div>
+    <div id="simInsight" style="margin-top:14px;padding:14px 18px;border:1px solid var(--border);background:var(--panel);font-size:15px;color:var(--text-dim);font-style:italic;display:none"></div>
   </div>
 
   <!-- TAB BADGES -->
   <div id="jtab-badges" class="tab-panel">
-    <p style="color:var(--text-dim);font-style:italic;margin-bottom:24px;font-size:14px">Débloque des achievements en progressant. Chaque badge est une étape dans ton parcours.</p>
+    <p style="color:var(--text-dim);font-style:italic;margin-bottom:24px;font-size:16px">Débloque des achievements en progressant. Chaque badge est une étape dans ton parcours.</p>
     <div class="badge-grid" id="badgeGrid"></div>
   </div>
 
@@ -1346,7 +1346,7 @@ tr:hover td{background:rgba(201,168,76,.015);}
   <!-- CALCULATEUR -->
   <div style="margin-bottom:56px">
     <div class="sec-hdr" style="margin-bottom:24px"><span class="sec-num">01</span><h3 class="sec-title" style="font-size:20px">Calculateur de Position</h3><div class="sec-line"></div></div>
-    <p style="color:var(--text-dim);font-style:italic;margin-bottom:24px;font-size:15px">Entre ton capital et ton risque — obtiens la taille de lot exacte.</p>
+    <p style="color:var(--text-dim);font-style:italic;margin-bottom:24px;font-size:17px">Entre ton capital et ton risque — obtiens la taille de lot exacte.</p>
     <div class="g2">
       <div style="background:var(--panel);border:1px solid var(--border);padding:28px;">
         <div class="ctitle" style="margin-bottom:20px">Paramètres</div>
@@ -1375,10 +1375,10 @@ tr:hover td{background:rgba(201,168,76,.015);}
         <div style="background:var(--panel);border:1px solid var(--gold-dim);padding:28px;flex:1;">
           <div class="ctitle" style="margin-bottom:20px">Résultat</div>
           <div style="display:flex;flex-direction:column;gap:12px;">
-            <div class="kv"><span class="mono" style="font-size:9px;letter-spacing:2px;color:var(--text-dim)">RISQUE €</span><span style="font-family:'Cinzel',serif;font-size:20px;color:var(--red)" id="rEuros">—</span></div>
-            <div class="kv"><span class="mono" style="font-size:9px;letter-spacing:2px;color:var(--text-dim)">TAILLE DE LOT</span><span style="font-family:'Cinzel',serif;font-size:26px;color:var(--gold)" id="rLot">—</span></div>
-            <div class="kv"><span class="mono" style="font-size:9px;letter-spacing:2px;color:var(--text-dim)">VALEUR DU PIP</span><span class="mono" style="font-size:13px;color:var(--white)" id="rPip">—</span></div>
-            <div class="kv" style="border:none"><span class="mono" style="font-size:9px;letter-spacing:2px;color:var(--text-dim)">ZONE DRAWDOWN</span><span id="rZone">—</span></div>
+            <div class="kv"><span class="mono" style="font-size:11px;letter-spacing:2px;color:var(--text-dim)">RISQUE €</span><span style="font-family:'Cinzel',serif;font-size:20px;color:var(--red)" id="rEuros">—</span></div>
+            <div class="kv"><span class="mono" style="font-size:11px;letter-spacing:2px;color:var(--text-dim)">TAILLE DE LOT</span><span style="font-family:'Cinzel',serif;font-size:26px;color:var(--gold)" id="rLot">—</span></div>
+            <div class="kv"><span class="mono" style="font-size:11px;letter-spacing:2px;color:var(--text-dim)">VALEUR DU PIP</span><span class="mono" style="font-size:15px;color:var(--white)" id="rPip">—</span></div>
+            <div class="kv" style="border:none"><span class="mono" style="font-size:11px;letter-spacing:2px;color:var(--text-dim)">ZONE DRAWDOWN</span><span id="rZone">—</span></div>
           </div>
         </div>
         <div style="background:var(--panel);border:1px solid var(--border);padding:22px;">
@@ -1393,16 +1393,16 @@ tr:hover td{background:rgba(201,168,76,.015);}
   <div style="margin-bottom:56px">
     <div class="sec-hdr" style="margin-bottom:24px"><span class="sec-num">02</span><h3 class="sec-title" style="font-size:20px">Session Clock</h3><div class="sec-line"></div></div>
     <div style="background:var(--panel);border:1px solid var(--border);padding:28px;text-align:center;margin-bottom:18px;">
-      <div class="mono" style="font-size:9px;letter-spacing:4px;color:var(--text-dim);margin-bottom:7px">HEURE PARIS</div>
+      <div class="mono" style="font-size:11px;letter-spacing:4px;color:var(--text-dim);margin-bottom:7px">HEURE PARIS</div>
       <div style="font-family:'Cinzel',serif;font-size:clamp(32px,6vw,60px);color:var(--gold);letter-spacing:4px;text-shadow:0 0 28px rgba(201,168,76,.28)" id="clockTime">--:--:--</div>
       <div class="mono" style="font-size:10px;color:var(--text-dim);margin-top:7px;margin-bottom:16px" id="clockDate">—</div>
-      <div style="font-family:'Cinzel',serif;font-size:15px;letter-spacing:2px" id="clockStatus">—</div>
+      <div style="font-family:'Cinzel',serif;font-size:17px;letter-spacing:2px" id="clockStatus">—</div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:14px" id="sessionCards"></div>
     <div style="background:var(--panel);border:1px solid var(--border);padding:18px 22px;display:flex;align-items:center;gap:14px" id="nextSessionBox">
       <span style="font-size:22px">⏳</span>
       <div>
-        <div class="mono" style="font-size:8px;letter-spacing:3px;color:var(--gold-dim);margin-bottom:4px">PROCHAINE SESSION AUTORISÉE</div>
+        <div class="mono" style="font-size:10px;letter-spacing:3px;color:var(--gold-dim);margin-bottom:4px">PROCHAINE SESSION AUTORISÉE</div>
         <div style="font-family:'Cinzel',serif;font-size:17px;color:var(--white)" id="nextSessionLabel">—</div>
         <div class="mono" style="font-size:12px;color:var(--gold)" id="nextSessionCountdown">—</div>
       </div>
@@ -1414,24 +1414,24 @@ tr:hover td{background:rgba(201,168,76,.015);}
     <div class="sec-hdr" style="margin-bottom:24px"><span class="sec-num">03</span><h3 class="sec-title" style="font-size:20px">Fear & Greed Index</h3><div class="sec-line"></div></div>
     <div class="g2">
       <div style="background:var(--panel);border:1px solid var(--border);padding:36px;text-align:center;">
-        <div class="mono" style="font-size:9px;letter-spacing:4px;color:var(--text-dim);margin-bottom:22px">INDEX EN DIRECT</div>
+        <div class="mono" style="font-size:11px;letter-spacing:4px;color:var(--text-dim);margin-bottom:22px">INDEX EN DIRECT</div>
         <div style="position:relative;width:190px;height:190px;margin:0 auto 22px;">
           <canvas id="fgGauge" width="190" height="190"></canvas>
           <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-top:18px">
             <div style="font-family:'Cinzel',serif;font-size:48px;font-weight:900;line-height:1" id="fgValue">—</div>
-            <div class="mono" style="font-size:9px;letter-spacing:2px;margin-top:5px" id="fgLabel">LOADING</div>
+            <div class="mono" style="font-size:11px;letter-spacing:2px;margin-top:5px" id="fgLabel">LOADING</div>
           </div>
         </div>
-        <div class="mono" style="font-size:8px;color:var(--text-dim)" id="fgDate">—</div>
+        <div class="mono" style="font-size:10px;color:var(--text-dim)" id="fgDate">—</div>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px;">
         <div style="background:var(--panel);border:1px solid var(--border);padding:22px;">
           <div class="ctitle" style="margin-bottom:14px;font-size:10px">Lecture du Signal</div>
-          <div id="fgSignal" style="font-size:15px;line-height:1.85;color:var(--text)">Chargement...</div>
+          <div id="fgSignal" style="font-size:17px;line-height:1.85;color:var(--text)">Chargement...</div>
         </div>
         <div style="background:var(--panel);border:1px solid var(--border);padding:22px;">
           <div class="ctitle" style="margin-bottom:12px;font-size:10px">Échelle de référence</div>
-          <div style="display:flex;flex-direction:column;gap:7px;font-family:'Space Mono',monospace;font-size:9px;">
+          <div style="display:flex;flex-direction:column;gap:7px;font-family:'Space Mono',monospace;font-size:11px;">
             <div style="display:flex;justify-content:space-between"><span style="color:#c0392b">0–24</span><span style="color:var(--text-dim)">Peur Extrême</span></div>
             <div style="display:flex;justify-content:space-between"><span style="color:#e67e22">25–44</span><span style="color:var(--text-dim)">Peur</span></div>
             <div style="display:flex;justify-content:space-between"><span style="color:#f1c40f">45–55</span><span style="color:var(--text-dim)">Neutre</span></div>
@@ -1446,11 +1446,11 @@ tr:hover td{background:rgba(201,168,76,.015);}
   <!-- NEWS MACRO -->
   <div>
     <div class="sec-hdr" style="margin-bottom:24px"><span class="sec-num">04</span><h3 class="sec-title" style="font-size:20px">News & Calendrier Macro</h3><div class="sec-line"></div></div>
-    <p style="color:var(--text-dim);font-style:italic;margin-bottom:24px;font-size:15px">Événements US 3 étoiles — savoir quand NE PAS trader.</p>
+    <p style="color:var(--text-dim);font-style:italic;margin-bottom:24px;font-size:17px">Événements US 3 étoiles — savoir quand NE PAS trader.</p>
     <div style="background:var(--panel);border:1px solid var(--border);overflow:hidden;">
       <div style="padding:14px 18px;border-bottom:1px solid var(--border);background:rgba(201,168,76,.025);display:flex;align-items:center;justify-content:space-between;">
-        <div style="font-family:'Cinzel',serif;font-size:13px;color:var(--gold);letter-spacing:2px;">Calendrier Économique</div>
-        <span class="mono" style="font-size:8px;padding:3px 8px;border:1px solid var(--green-border);color:var(--green);background:var(--green-bg);">● LIVE</span>
+        <div style="font-family:'Cinzel',serif;font-size:15px;color:var(--gold);letter-spacing:2px;">Calendrier Économique</div>
+        <span class="mono" style="font-size:10px;padding:3px 8px;border:1px solid var(--green-border);color:var(--green);background:var(--green-bg);">● LIVE</span>
       </div>
       <div class="tradingview-widget-container">
         <div class="tradingview-widget-container__widget"></div>
@@ -1526,7 +1526,7 @@ tr:hover td{background:rgba(201,168,76,.015);}
 <div class="page" id="page-goals">
 <div class="wrap">
   <div class="sec-hdr"><span class="sec-num">—</span><h2 class="sec-title">🎯 Objectifs & Goals</h2><div class="sec-line"></div></div>
-  <p style="color:var(--text-dim);font-style:italic;margin-bottom:32px;font-size:15px">Fixe tes targets, suis ta progression. La discipline se mesure.</p>
+  <p style="color:var(--text-dim);font-style:italic;margin-bottom:32px;font-size:17px">Fixe tes targets, suis ta progression. La discipline se mesure.</p>
 
   <div class="g2" style="margin-bottom:24px">
     <div class="goal-card">
@@ -1593,7 +1593,7 @@ tr:hover td{background:rgba(201,168,76,.015);}
     <div class="level-item" data-level="4"><div class="level-emoji">🔱</div><div class="level-name">Maître</div><div class="level-req">201–500 trades</div></div>
     <div class="level-item" data-level="5"><div class="level-emoji">🏯</div><div class="level-name">Sensei</div><div class="level-req">500+ trades</div></div>
   </div>
-  <div style="text-align:center;margin-top:16px;font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim)" id="levelDesc">—</div>
+  <div style="text-align:center;margin-top:16px;font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim)" id="levelDesc">—</div>
 </div>
 <footer class="site-footer"><div class="ft-torii">⛩️</div><div class="ft-title">THE TRADER'S TEMPLE · V2</div></footer>
 </div>
@@ -1614,7 +1614,7 @@ tr:hover td{background:rgba(201,168,76,.015);}
   <!-- SONS D'AMBIANCE -->
   <div style="margin-bottom:40px" class="reveal">
     <div class="ctitle" style="margin-bottom:6px;text-align:center">🎵 Ambiance Sonore</div>
-    <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);text-align:center;margin-bottom:20px;letter-spacing:2px">CHOISIS TON ATMOSPHÈRE</div>
+    <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim);text-align:center;margin-bottom:20px;letter-spacing:2px">CHOISIS TON ATMOSPHÈRE</div>
 
     <!-- Track list -->
     <div id="ytTrackList" style="display:flex;flex-direction:column;gap:6px">
@@ -1647,7 +1647,7 @@ tr:hover td{background:rgba(201,168,76,.015);}
   <!-- ÉTAPE 1 : RESSENTI -->
   <div style="margin-bottom:40px" class="reveal">
     <div class="ctitle" style="margin-bottom:6px;text-align:center">① Qu'est-ce qui s'est passé ?</div>
-    <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);text-align:center;margin-bottom:20px;letter-spacing:2px">NOMME CE QUE TU RESSENS</div>
+    <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim);text-align:center;margin-bottom:20px;letter-spacing:2px">NOMME CE QUE TU RESSENS</div>
     <div class="mood-grid">
       <div class="mood-btn" onclick="selectMood(this,'sl')"><div class="mood-emoji">💸</div><div class="mood-label">SL / Perte</div></div>
       <div class="mood-btn" onclick="selectMood(this,'frustrated')"><div class="mood-emoji">😤</div><div class="mood-label">Frustré</div></div>
@@ -1668,7 +1668,7 @@ tr:hover td{background:rgba(201,168,76,.015);}
   <!-- ÉTAPE 2 : AUDIT DE L'ERREUR -->
   <div style="margin-bottom:40px" class="reveal">
     <div class="ctitle" style="margin-bottom:6px;text-align:center">② Identifie l'erreur</div>
-    <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);text-align:center;margin-bottom:20px;letter-spacing:2px">SANS JUGEMENT — JUSTE LES FAITS</div>
+    <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim);text-align:center;margin-bottom:20px;letter-spacing:2px">SANS JUGEMENT — JUSTE LES FAITS</div>
     <div class="error-audit">
       <div class="audit-grid" id="auditGrid">
         <div class="audit-chip" onclick="selectError(this,'fomo')">😤 FOMO</div>
@@ -1691,7 +1691,7 @@ tr:hover td{background:rgba(201,168,76,.015);}
   <!-- ÉTAPE 3 : RESPIRATION -->
   <div style="margin-bottom:40px;text-align:center" class="reveal">
     <div class="ctitle" style="margin-bottom:6px;text-align:center">③ Reprends le contrôle</div>
-    <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);text-align:center;margin-bottom:24px;letter-spacing:2px">RESPIRATION 4 — 7 — 4</div>
+    <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim);text-align:center;margin-bottom:24px;letter-spacing:2px">RESPIRATION 4 — 7 — 4</div>
     <div class="breath-ring" id="breathRing" onclick="startBreath()">
       <div>
         <div class="breath-label" id="breathLabel">APPUIE<br>POUR<br>COMMENCER</div>
@@ -1699,13 +1699,13 @@ tr:hover td{background:rgba(201,168,76,.015);}
       </div>
     </div>
     <div class="breath-instruction" id="breathInstruction">Inspire 4s · Retiens 7s · Expire 4s</div>
-    <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-top:10px">Cycles : <span id="breathCycles" style="color:var(--gold)">0</span> · Recommandé : 3 cycles minimum</div>
+    <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim);margin-top:10px">Cycles : <span id="breathCycles" style="color:var(--gold)">0</span> · Recommandé : 3 cycles minimum</div>
   </div>
 
   <!-- ÉTAPE 4 : MANTRA -->
   <div style="margin-bottom:40px" class="reveal">
     <div class="ctitle" style="margin-bottom:6px;text-align:center">④ Un mot du Temple</div>
-    <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);text-align:center;margin-bottom:20px;letter-spacing:2px">LAISSE CES MOTS T'ANCRER</div>
+    <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim);text-align:center;margin-bottom:20px;letter-spacing:2px">LAISSE CES MOTS T'ANCRER</div>
     <div class="mantra-rotator">
       <div class="mantra-current" id="mantraCurrent"></div>
       <div style="display:flex;gap:10px;justify-content:center;margin-top:16px">
@@ -1713,18 +1713,18 @@ tr:hover td{background:rgba(201,168,76,.015);}
         <button class="mantra-nav-btn" onclick="nextMantra()">→</button>
         <button class="mantra-nav-btn" onclick="shuffleMantra()">🔀</button>
       </div>
-      <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);margin-top:12px" id="mantraCounter"></div>
+      <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);margin-top:12px" id="mantraCounter"></div>
     </div>
   </div>
 
   <!-- ÉTAPE 5 : JOURNAL -->
   <div style="margin-bottom:40px" class="reveal">
     <div class="ctitle" style="margin-bottom:6px;text-align:center">⑤ Écris ce que tu gardes</div>
-    <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);text-align:center;margin-bottom:20px;letter-spacing:2px">QU'EST-CE QUE CE TRADE T'APPREND ?</div>
+    <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim);text-align:center;margin-bottom:20px;letter-spacing:2px">QU'EST-CE QUE CE TRADE T'APPREND ?</div>
     <div class="journal-sanc">
       <textarea id="sancJournal" placeholder="Qu'est-ce qui s'est passé exactement ? Quelle était l'erreur ? Qu'est-ce que je retiens pour la prochaine fois ?&#10;&#10;Pas de jugement. Juste la vérité."></textarea>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
-        <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim)" id="sancSaveStatus">Sauvegarde auto</div>
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim)" id="sancSaveStatus">Sauvegarde auto</div>
         <button class="btn" onclick="clearSancJournal()">Effacer</button>
       </div>
     </div>
@@ -1750,7 +1750,7 @@ tr:hover td{background:rgba(201,168,76,.015);}
 <div class="page" id="page-search">
 <div class="wrap">
   <div class="sec-hdr"><span class="sec-num">—</span><h2 class="sec-title">🔍 Recherche de Trades</h2><div class="sec-line"></div></div>
-  <p style="color:var(--text-dim);font-style:italic;margin-bottom:24px;font-size:14px">Retrouve n'importe quel trade par date, actif, setup, résultat, ou mot-clé.</p>
+  <p style="color:var(--text-dim);font-style:italic;margin-bottom:24px;font-size:16px">Retrouve n'importe quel trade par date, actif, setup, résultat, ou mot-clé.</p>
   <div class="search-bar">
     <input class="search-input" id="searchQuery" placeholder="Recherche libre (date, leçon, note...)" oninput="runSearch()">
     <select class="search-select" id="searchAsset" onchange="runSearch()">
@@ -1797,23 +1797,23 @@ tr:hover td{background:rgba(201,168,76,.015);}
   <!-- SCORE MOYEN -->
   <div style="margin-bottom:48px">
     <div class="sec-hdr" style="margin-bottom:20px"><span class="sec-num">01</span><h3 class="sec-title" style="font-size:18px">Score de Qualité</h3><div class="sec-line"></div></div>
-    <p style="color:var(--text-dim);font-style:italic;margin-bottom:22px;font-size:14px">Chaque trade est noté /10 automatiquement : setup (3pts), zone POI (2pts), session autorisée (2pts), plan respecté (2pts), confirmation (1pt).</p>
+    <p style="color:var(--text-dim);font-style:italic;margin-bottom:22px;font-size:16px">Chaque trade est noté /10 automatiquement : setup (3pts), zone POI (2pts), session autorisée (2pts), plan respecté (2pts), confirmation (1pt).</p>
     <div class="g4" style="margin-bottom:20px">
       <div class="card" style="text-align:center;padding:28px 16px">
         <div style="font-family:'Cinzel',serif;font-size:42px;color:var(--gold);margin-bottom:4px" id="avgScoreVal">—</div>
-        <div class="mono" style="font-size:8px;letter-spacing:2px;color:var(--text-dim)">SCORE MOYEN</div>
+        <div class="mono" style="font-size:10px;letter-spacing:2px;color:var(--text-dim)">SCORE MOYEN</div>
       </div>
       <div class="card" style="text-align:center;padding:28px 16px">
         <div style="font-family:'Cinzel',serif;font-size:42px;color:var(--green);margin-bottom:4px" id="topScoreVal">—</div>
-        <div class="mono" style="font-size:8px;letter-spacing:2px;color:var(--text-dim)">MEILLEUR SCORE</div>
+        <div class="mono" style="font-size:10px;letter-spacing:2px;color:var(--text-dim)">MEILLEUR SCORE</div>
       </div>
       <div class="card" style="text-align:center;padding:28px 16px">
         <div style="font-family:'Cinzel',serif;font-size:42px;color:var(--red);margin-bottom:4px" id="lowScoreVal">—</div>
-        <div class="mono" style="font-size:8px;letter-spacing:2px;color:var(--text-dim)">SCORE LE PLUS BAS</div>
+        <div class="mono" style="font-size:10px;letter-spacing:2px;color:var(--text-dim)">SCORE LE PLUS BAS</div>
       </div>
       <div class="card" style="text-align:center;padding:28px 16px">
         <div style="font-family:'Cinzel',serif;font-size:42px;color:var(--gold);margin-bottom:4px" id="highScoreWR">—</div>
-        <div class="mono" style="font-size:8px;letter-spacing:2px;color:var(--text-dim)">WR TRADES ≥7/10</div>
+        <div class="mono" style="font-size:10px;letter-spacing:2px;color:var(--text-dim)">WR TRADES ≥7/10</div>
       </div>
     </div>
     <div class="form-chart-wrap">
@@ -1823,7 +1823,7 @@ tr:hover td{background:rgba(201,168,76,.015);}
         <div class="ctitle" style="margin-bottom:14px;font-size:10px">Barème de notation /10</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:0">
           <div style="padding-right:32px">
-            <div style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--gold-dim);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)">SETUP — max 3 pts</div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gold-dim);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)">SETUP — max 3 pts</div>
             <div class="kv" style="font-size:12px"><span>A++</span><span class="mono" style="color:var(--green)">3.0 pts</span></div>
             <div class="kv" style="font-size:12px"><span>A+</span><span class="mono" style="color:var(--green)">2.5 pts</span></div>
             <div class="kv" style="font-size:12px"><span>A</span><span class="mono" style="color:var(--gold)">1.5 pts</span></div>
@@ -1831,7 +1831,7 @@ tr:hover td{background:rgba(201,168,76,.015);}
             <div class="kv" style="font-size:12px;border-bottom:none"><span>A-</span><span class="mono" style="color:var(--red)">0 pt</span></div>
           </div>
           <div style="padding-left:32px;border-left:1px solid var(--border)">
-            <div style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--gold-dim);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)">AUTRES CRITÈRES</div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gold-dim);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)">AUTRES CRITÈRES</div>
             <div class="kv" style="font-size:12px"><span>2 zones POI</span><span class="mono" style="color:var(--green)">+2 pts</span></div>
             <div class="kv" style="font-size:12px"><span>1 zone POI</span><span class="mono" style="color:var(--gold)">+1 pt</span></div>
             <div class="kv" style="font-size:12px"><span>Session autorisée</span><span class="mono" style="color:var(--green)">+2 pts</span></div>
@@ -1839,7 +1839,7 @@ tr:hover td{background:rgba(201,168,76,.015);}
             <div class="kv" style="font-size:12px;border-bottom:none"><span>Par erreur commise</span><span class="mono" style="color:var(--red)">-0.5 pt</span></div>
           </div>
         </div>
-        <div style="margin-top:14px;padding:12px 16px;border:1px solid var(--gold-dim);background:var(--gold-faint);font-family:'Space Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:1px">
+        <div style="margin-top:14px;padding:12px 16px;border:1px solid var(--gold-dim);background:var(--gold-faint);font-family:'Space Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:1px">
           🏆 SCORE MAX THÉORIQUE : A++ (3) + 2 POI (2) + Session (2) + Plan (2) = <strong>9/10</strong> sans erreur
         </div>
       </div>
@@ -1849,18 +1849,18 @@ tr:hover td{background:rgba(201,168,76,.015);}
   <!-- DÉTECTEUR DE PATTERNS -->
   <div style="margin-bottom:48px">
     <div class="sec-hdr" style="margin-bottom:20px"><span class="sec-num">02</span><h3 class="sec-title" style="font-size:18px">Détecteur de Patterns</h3><div class="sec-line"></div></div>
-    <p style="color:var(--text-dim);font-style:italic;margin-bottom:22px;font-size:14px">Le temple analyse tes données et détecte tes forces, faiblesses et habitudes cachées.</p>
+    <p style="color:var(--text-dim);font-style:italic;margin-bottom:22px;font-size:16px">Le temple analyse tes données et détecte tes forces, faiblesses et habitudes cachées.</p>
     <div id="patternsList"><div class="empty-st"><div class="empty-icon">🔍</div>Ajoute des trades pour voir tes patterns.</div></div>
   </div>
 
   <!-- COURBE DE FORME -->
   <div>
     <div class="sec-hdr" style="margin-bottom:20px"><span class="sec-num">03</span><h3 class="sec-title" style="font-size:18px">Courbe de Forme</h3><div class="sec-line"></div></div>
-    <p style="color:var(--text-dim);font-style:italic;margin-bottom:22px;font-size:14px">Score de performance hebdomadaire — identifie tes périodes de grâce et tes creux.</p>
+    <p style="color:var(--text-dim);font-style:italic;margin-bottom:22px;font-size:16px">Score de performance hebdomadaire — identifie tes périodes de grâce et tes creux.</p>
     <div class="form-chart-wrap">
       <canvas id="cFormeCurve" height="100"></canvas>
     </div>
-    <div id="formeInsight" style="margin-top:14px;padding:14px 18px;border:1px solid var(--border);background:var(--panel);font-size:13px;color:var(--text-dim);font-style:italic"></div>
+    <div id="formeInsight" style="margin-top:14px;padding:14px 18px;border:1px solid var(--border);background:var(--panel);font-size:15px;color:var(--text-dim);font-style:italic"></div>
   </div>
 
 </div>
@@ -1910,8 +1910,8 @@ tr:hover td{background:rgba(201,168,76,.015);}
       </div>
       <div style="display:flex;gap:16px;align-items:center;margin-top:14px;flex-wrap:wrap">
         <div class="flbl">Respect du plan :</div>
-        <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:14px"><input type="radio" name="eFPlan" value="OUI" style="accent-color:var(--green)"> <span style="color:var(--green)">✅ OUI</span></label>
-        <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:14px"><input type="radio" name="eFPlan" value="NON" style="accent-color:var(--red)"> <span style="color:var(--red)">❌ NON</span></label>
+        <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:16px"><input type="radio" name="eFPlan" value="OUI" style="accent-color:var(--green)"> <span style="color:var(--green)">✅ OUI</span></label>
+        <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:16px"><input type="radio" name="eFPlan" value="NON" style="accent-color:var(--red)"> <span style="color:var(--red)">❌ NON</span></label>
       </div>
       <div style="margin-top:14px">
         <div class="flbl" style="margin-bottom:7px">Erreurs :</div>
@@ -2072,7 +2072,7 @@ function renderTable(){
   if(!trades.length){tbody.innerHTML=`<tr><td colspan="15"><div class="empty-st"><div class="empty-icon">📋</div>Aucun trade.</div></td></tr>`;return;}
   const pois=t=>[t.poi1,t.poi2].filter(Boolean).join(' + ')||'—';
   const rc=r=>r==='SL'?'var(--red)':r==='BE'?'var(--text-dim)':'var(--green)';
-  const eb=t=>t.errors&&t.errors.length?t.errors.map(e=>`<span style="font-family:'Space Mono',monospace;font-size:7px;padding:1px 5px;border:1px solid var(--red);color:var(--red);margin:1px;display:inline-block">${e}</span>`).join(''):'<span style="color:var(--text-dim);font-size:11px">—</span>';
+  const eb=t=>t.errors&&t.errors.length?t.errors.map(e=>`<span style="font-family:'Space Mono',monospace;font-size:9px;padding:1px 5px;border:1px solid var(--red);color:var(--red);margin:1px;display:inline-block">${e}</span>`).join(''):'<span style="color:var(--text-dim);font-size:11px">—</span>';
   tbody.innerHTML=[...trades].reverse().map(t=>{
     const score=calcTradeScore(t);
     const sCls=scoreClass(score);
@@ -2080,11 +2080,11 @@ function renderTable(){
     <td><div class="trade-score-badge ${sCls}">${score}</div></td>
     <td class="mono" style="font-size:10px">${t.date}</td>
     <td class="mono" style="font-size:10px;color:var(--gold)">${t.asset}</td>
-    <td class="mono" style="font-size:9px;color:var(--text-dim)">${t.session}</td>
-    <td><span style="font-family:'Space Mono',monospace;font-size:9px;padding:2px 6px;border:1px solid var(--gold-dim);color:var(--gold)">${t.setup}</span></td>
+    <td class="mono" style="font-size:11px;color:var(--text-dim)">${t.session}</td>
+    <td><span style="font-family:'Space Mono',monospace;font-size:11px;padding:2px 6px;border:1px solid var(--gold-dim);color:var(--gold)">${t.setup}</span></td>
     <td style="font-size:11px;color:var(--text-dim)">${pois(t)}</td>
-    <td style="color:${t.dir==='LONG'?'var(--green)':'var(--red)'};font-family:'Space Mono',monospace;font-size:9px">${t.dir}</td>
-    <td style="color:${rc(t.result)};font-family:'Space Mono',monospace;font-size:9px">${t.result}</td>
+    <td style="color:${t.dir==='LONG'?'var(--green)':'var(--red)'};font-family:'Space Mono',monospace;font-size:11px">${t.dir}</td>
+    <td style="color:${rc(t.result)};font-family:'Space Mono',monospace;font-size:11px">${t.result}</td>
     <td class="mono" style="font-size:10px">${t.risk}R</td>
     <td class="mono" style="font-size:10px;color:${t.gain>=0?'var(--green)':'var(--red)'}">${t.gain>=0?'+':''}${t.gain}R</td>
     <td class="mono" style="font-size:10px;color:var(--text-dim)">${t.rr||'—'}</td>
@@ -2201,7 +2201,7 @@ function openModal(id){
       <div class="screens-grid">
         ${['htf','mtf','ltf'].map(tf=>`
           <div>
-            <div class="mono" style="font-size:7px;letter-spacing:2px;color:var(--gold-dim);margin-bottom:5px;text-align:center">${tf.toUpperCase()}</div>
+            <div class="mono" style="font-size:9px;letter-spacing:2px;color:var(--gold-dim);margin-bottom:5px;text-align:center">${tf.toUpperCase()}</div>
             <div class="screen-slot" id="slot_${tf}" onclick="triggerUpload('${tf}')">
               ${t.screens[tf]?`<img src="${t.screens[tf]}" alt="${tf}"><div class="slot-overlay"><button class="slot-del" onclick="removeScreen(event,'${tf}')">Suppr.</button></div>`:`<div class="screen-slot-lbl">${tf.toUpperCase()}</div><div style="font-size:18px;opacity:.25">📷</div>`}
             </div>
@@ -2297,7 +2297,7 @@ function updateClock(){
         <div class="sess-card-name" style="color:${isOpen?'var(--white)':'var(--text-dim)'}">${sess.emoji} ${sess.name}</div>
         <div class="sess-card-hours">${pad(sess.start)}h00 → ${pad(sess.end)}h00</div>
         ${isOpen?`<div class="mono" style="font-size:10px;color:var(--text-dim)">Ferme dans <span style="color:var(--gold)">${Math.floor(timeLeft/60)}h${pad(timeLeft%60)}m</span></div>`:''}
-        ${sess.allowed?`<div class="sess-allowed-badge">✅ AUTORISÉE</div>`:`<div class="mono" style="font-size:7px;color:var(--text-dim);margin-top:6px;letter-spacing:1px">hors plan</div>`}
+        ${sess.allowed?`<div class="sess-allowed-badge">✅ AUTORISÉE</div>`:`<div class="mono" style="font-size:9px;color:var(--text-dim);margin-top:6px;letter-spacing:1px">hors plan</div>`}
       </div>`;
     }).join('');
   }
@@ -2309,7 +2309,7 @@ function updateClock(){
       const isOpen=totalMin>=sess.start*60&&totalMin<sess.end*60;
       return`<div style="padding:8px 10px;border:1px solid ${isOpen?(sess.allowed?'var(--green-border)':'var(--border)'):'var(--border)'};background:${isOpen?'rgba(46,204,113,.04)':'transparent'};opacity:${isOpen?1:.5}">
         <div style="font-family:'Cinzel',serif;font-size:11px;color:${isOpen?'var(--white)':'var(--text-dim)'};">${sess.emoji} ${sess.name}</div>
-        <div class="mono" style="font-size:8px;color:var(--text-dim)">${pad(sess.start)}h→${pad(sess.end)}h</div>
+        <div class="mono" style="font-size:10px;color:var(--text-dim)">${pad(sess.start)}h→${pad(sess.end)}h</div>
       </div>`;
     }).join('');
   }
@@ -2420,12 +2420,12 @@ function calcPosition(){
   const rt=document.getElementById('rTargets');
   if(rt)rt.innerHTML=[{l:'TP1',r:'1R',g:tp1,cum:tp1,n:'TP1 seul'},{l:'TP2',r:'3R',g:tp2,cum:tp1+tp2,n:'TP1+TP2'},{l:'TP3',r:'6R+',g:tp3,cum:tp1+tp2+tp3,n:'TP1+TP2+TP3'}].map(t=>`
     <div style="text-align:center;padding:12px 6px;border:1px solid var(--border);background:var(--panel2)">
-      <div class="mono" style="font-size:8px;color:var(--gold-dim);margin-bottom:3px">${t.l} · ${t.r}</div>
-      <div style="font-family:'Cinzel',serif;font-size:14px;color:var(--green)">+${t.g.toFixed(2)}€</div>
+      <div class="mono" style="font-size:10px;color:var(--gold-dim);margin-bottom:3px">${t.l} · ${t.r}</div>
+      <div style="font-family:'Cinzel',serif;font-size:16px;color:var(--green)">+${t.g.toFixed(2)}€</div>
       <div style="height:1px;background:var(--border);margin:5px 0"></div>
-      <div class="mono" style="font-size:7px;color:var(--gold-dim);margin-bottom:2px">CUMULÉ</div>
+      <div class="mono" style="font-size:9px;color:var(--gold-dim);margin-bottom:2px">CUMULÉ</div>
       <div style="font-family:'Cinzel',serif;font-size:18px;color:var(--gold)">+${t.cum.toFixed(2)}€</div>
-      <div class="mono" style="font-size:7px;color:var(--text-dim);margin-top:3px">${t.n}</div>
+      <div class="mono" style="font-size:9px;color:var(--text-dim);margin-top:3px">${t.n}</div>
     </div>`).join('');
 }
 
@@ -2484,7 +2484,7 @@ function renderQCard(year,q){
         <div class="q-stat"><span class="q-stat-lbl">Breakeven</span>${inp('be',d.be,'var(--text-dim)')}</div>
         <div class="q-stat"><span class="q-stat-lbl">Total</span>${inp('total',d.total,'var(--white)')}</div>
         <div class="q-stat" style="grid-column:span 2;border-right:none;padding-right:0"><span class="q-stat-lbl">Win Rate</span><span class="q-stat-val" style="color:${wrc}">${wr}%</span></div>
-        <div class="q-stat" style="grid-column:span 2;border-right:none;padding-right:0;border-bottom:none"><span class="q-stat-lbl">Net P/L</span><div style="display:flex;align-items:center;gap:5px">${inp('netpl',d.netpl,np>=0?'var(--green)':'var(--red)','70px')}<span class="mono" style="font-size:9px;color:var(--text-dim)">R</span></div></div>
+        <div class="q-stat" style="grid-column:span 2;border-right:none;padding-right:0;border-bottom:none"><span class="q-stat-lbl">Net P/L</span><div style="display:flex;align-items:center;gap:5px">${inp('netpl',d.netpl,np>=0?'var(--green)':'var(--red)','70px')}<span class="mono" style="font-size:11px;color:var(--text-dim)">R</span></div></div>
       </div>
       <div class="q-wr-bar"><div class="q-wr-fill" style="width:${wr}%;background:${wrc}"></div></div>
       <div style="border-top:1px solid var(--border);padding-top:12px">
@@ -2933,9 +2933,9 @@ function exportPDF(){
   .kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:32px;}
   .kpi{text-align:center;padding:16px 8px;border:1px solid #ddd8cc;}
   .kpi-val{font-size:22px;font-weight:bold;color:#a8782a;margin-bottom:4px;}
-  .kpi-lbl{font-size:9px;letter-spacing:1px;color:#9a9080;text-transform:uppercase;}
+  .kpi-lbl{font-size:11px;letter-spacing:1px;color:#9a9080;text-transform:uppercase;}
   table{width:100%;border-collapse:collapse;font-size:11px;}
-  th{background:#f7f4ed;padding:8px 6px;text-align:left;font-size:9px;letter-spacing:1px;color:#9a9080;text-transform:uppercase;border-bottom:2px solid #ddd8cc;}
+  th{background:#f7f4ed;padding:8px 6px;text-align:left;font-size:11px;letter-spacing:1px;color:#9a9080;text-transform:uppercase;border-bottom:2px solid #ddd8cc;}
   td{padding:7px 6px;border-bottom:1px solid #ede8dc;}
   tr:nth-child(even) td{background:#faf8f4;}
   .footer{margin-top:32px;text-align:center;font-size:10px;color:#9a9080;letter-spacing:2px;}
@@ -3056,7 +3056,7 @@ function renderCalendar(){
       const cls=t.result==='SL'?'loss':t.result==='BE'?'be':'win';
       return`<span class="cal-trade-dot ${cls}" onclick="event.stopPropagation();openModal(${t.id})">${t.asset} ${t.setup}</span>`;
     }).join('');
-    const more=dayTrades.length>3?`<span style="font-family:'Space Mono',monospace;font-size:7px;color:var(--text-dim)">+${dayTrades.length-3} autres</span>`:'';
+    const more=dayTrades.length>3?`<span style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim)">+${dayTrades.length-3} autres</span>`:'';
     const pnlHtml=hasTrades?`<div class="cal-day-pnl" style="color:${totalPnl>=0?'var(--green)':'var(--red)'}">${totalPnl>=0?'+':''}${totalPnl.toFixed(1)}R</div>`:'';
     return`<div class="cal-day${!cur?' other-month':''}${isToday?' today':''}${hasTrades?' has-trades':''}" onclick="calDayClick('${key}')">
       <div class="cal-day-num">${date.getDate()}</div>
@@ -3078,9 +3078,9 @@ function calDayClick(dateKey){
   contentEl.innerHTML=`<div style="margin-bottom:12px;font-family:'Space Mono',monospace;font-size:10px;color:${totalPnl>=0?'var(--green)':'var(--red)'}">P&L du jour : ${totalPnl>=0?'+':''}${totalPnl.toFixed(1)}R</div>`+
   dayTrades.map(t=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border:1px solid var(--border);margin-bottom:6px;background:var(--panel2)">
     <div style="display:flex;gap:12px;align-items:center">
-      <span style="font-family:'Space Mono',monospace;font-size:9px;color:var(--gold)">${t.asset}</span>
-      <span style="font-family:'Space Mono',monospace;font-size:9px;padding:2px 6px;border:1px solid var(--gold-dim);color:var(--gold)">${t.setup}</span>
-      <span style="font-family:'Space Mono',monospace;font-size:9px;color:${t.dir==='LONG'?'var(--green)':'var(--red)'}">${t.dir}</span>
+      <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--gold)">${t.asset}</span>
+      <span style="font-family:'Space Mono',monospace;font-size:11px;padding:2px 6px;border:1px solid var(--gold-dim);color:var(--gold)">${t.setup}</span>
+      <span style="font-family:'Space Mono',monospace;font-size:11px;color:${t.dir==='LONG'?'var(--green)':'var(--red)'}">${t.dir}</span>
     </div>
     <div style="display:flex;gap:10px;align-items:center">
       <span style="font-family:'Space Mono',monospace;font-size:10px;color:${t.result==='SL'?'var(--red)':t.result==='BE'?'var(--text-dim)':'var(--green)'}">${t.result}</span>
@@ -3462,9 +3462,9 @@ function renderPeriodStats(){
     setupEl.innerHTML=rows.map(([s,d])=>{
       const wr2=Math.round(d.wins/d.n*100);
       return`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border:1px solid var(--border);margin-bottom:6px;background:var(--panel2)">
-        <span style="font-family:'Space Mono',monospace;font-size:9px;padding:2px 8px;border:1px solid var(--gold-dim);color:var(--gold)">${s}</span>
-        <span style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim)">${d.n} trades</span>
-        <span style="font-family:'Space Mono',monospace;font-size:9px;color:${wr2>=50?'var(--green)':'var(--red)'}">${wr2}% WR</span>
+        <span style="font-family:'Space Mono',monospace;font-size:11px;padding:2px 8px;border:1px solid var(--gold-dim);color:var(--gold)">${s}</span>
+        <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim)">${d.n} trades</span>
+        <span style="font-family:'Space Mono',monospace;font-size:11px;color:${wr2>=50?'var(--green)':'var(--red)'}">${wr2}% WR</span>
         <span style="font-family:'Space Mono',monospace;font-size:10px;color:${d.r>=0?'var(--green)':'var(--red)'}">${d.r>=0?'+':''}${d.r.toFixed(1)}R</span>
       </div>`;
     }).join('')||'<span style="color:var(--text-dim);font-style:italic">Aucun setup sur cette période.</span>';
@@ -3649,14 +3649,14 @@ function runSearch(){
       <div class="trade-score-badge ${sCls}">${score}</div>
       <span class="mono" style="font-size:10px;color:var(--text-dim);min-width:80px">${hi(t.date,q)}</span>
       <span class="mono" style="font-size:10px;color:var(--gold);min-width:60px">${hi(t.asset,q)}</span>
-      <span style="font-family:'Space Mono',monospace;font-size:9px;padding:2px 7px;border:1px solid var(--gold-dim);color:var(--gold)">${hi(t.setup,q)}</span>
-      <span class="mono" style="font-size:9px;color:var(--text-dim)">${hi(t.session,q)}</span>
-      <span style="color:${t.dir==='LONG'?'var(--green)':'var(--red)'};font-family:'Space Mono',monospace;font-size:9px">${t.dir}</span>
-      <span style="color:${rc(t.result)};font-family:'Space Mono',monospace;font-size:9px">${hi(t.result,q)}</span>
+      <span style="font-family:'Space Mono',monospace;font-size:11px;padding:2px 7px;border:1px solid var(--gold-dim);color:var(--gold)">${hi(t.setup,q)}</span>
+      <span class="mono" style="font-size:11px;color:var(--text-dim)">${hi(t.session,q)}</span>
+      <span style="color:${t.dir==='LONG'?'var(--green)':'var(--red)'};font-family:'Space Mono',monospace;font-size:11px">${t.dir}</span>
+      <span style="color:${rc(t.result)};font-family:'Space Mono',monospace;font-size:11px">${hi(t.result,q)}</span>
       <span class="mono" style="font-size:10px;color:${t.gain>=0?'var(--green)':'var(--red)'}">${t.gain>=0?'+':''}${t.gain}R</span>
       <span style="font-size:11px;color:${t.plan==='OUI'?'var(--green)':'var(--red)'}">${t.plan==='OUI'?'✅ Plan':'❌ Plan'}</span>
       ${t.comments?.lessons?`<span style="font-size:11px;color:var(--text-dim);font-style:italic;flex:1;min-width:120px">"${hi(t.comments.lessons.substring(0,60),q)}..."</span>`:''}
-      <span style="margin-left:auto;font-family:'Space Mono',monospace;font-size:8px;color:var(--gold-dim)">VOIR →</span>
+      <span style="margin-left:auto;font-family:'Space Mono',monospace;font-size:10px;color:var(--gold-dim)">VOIR →</span>
     </div>`;
   }).join('');
 }
@@ -3700,7 +3700,7 @@ function renderHeatmap(){
   let html=`<div class="heatmap-grid" style="overflow-x:auto">`;
   // Header row: hours
   html+=`<div class="heatmap-label"></div>`;
-  for(let h=0;h<24;h++)html+=`<div style="font-family:'Space Mono',monospace;font-size:6px;color:var(--text-dim);text-align:center;padding-bottom:4px">${String(h).padStart(2,'0')}</div>`;
+  for(let h=0;h<24;h++)html+=`<div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);text-align:center;padding-bottom:4px">${String(h).padStart(2,'0')}</div>`;
   // Day rows
   days.forEach((day,d)=>{
     html+=`<div class="heatmap-label">${day}</div>`;
@@ -3771,7 +3771,7 @@ function runSimulator(){
   if(kpiEl){
     kpiEl.innerHTML=Object.entries(finalCaps).map(([name,fc])=>{
       const delta=fc-cap;const pct=Math.round(delta/cap*100);
-      return`<div class="sim-kpi"><div class="sim-kpi-val" style="color:${delta>=0?'var(--green)':'var(--red)'};font-size:18px">${fc.toLocaleString('fr-FR')}€</div><div class="sim-kpi-lbl">${name}</div><div style="font-family:'Space Mono',monospace;font-size:8px;color:${delta>=0?'var(--green)':'var(--red)'};margin-top:3px">${delta>=0?'+':''}${pct}%</div></div>`;
+      return`<div class="sim-kpi"><div class="sim-kpi-val" style="color:${delta>=0?'var(--green)':'var(--red)'};font-size:18px">${fc.toLocaleString('fr-FR')}€</div><div class="sim-kpi-lbl">${name}</div><div style="font-family:'Space Mono',monospace;font-size:10px;color:${delta>=0?'var(--green)':'var(--red)'};margin-top:3px">${delta>=0?'+':''}${pct}%</div></div>`;
     }).join('');
   }
 
@@ -3837,7 +3837,7 @@ function renderBadges(){
       <div class="badge-name">${b.name}</div>
       <div class="badge-desc">${b.desc}</div>
       <div class="badge-progress"><div class="badge-progress-fill" style="width:${prog}%"></div></div>
-      ${b.target?`<div style="font-family:'Space Mono',monospace;font-size:7px;color:var(--text-dim);margin-top:4px">${b.progress?b.progress(trades):isUnlocked?b.target:0} / ${b.target}</div>`:''}
+      ${b.target?`<div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-top:4px">${b.progress?b.progress(trades):isUnlocked?b.target:0} / ${b.target}</div>`:''}
     </div>`;
   }).join('');
 }
@@ -3998,9 +3998,9 @@ function renderWeekView(){
     const tot=tbd[fmtDate(d)]?.reduce((s,t)=>s+t.gain,0)||0;
     const hasTrd=(tbd[fmtDate(d)]||[]).length>0;
     html+=`<div class="week-header-cell${isToday(d)?' today-col':''}">
-      <div style="font-size:9px;letter-spacing:1px">${DAYS[i]}</div>
+      <div style="font-size:11px;letter-spacing:1px">${DAYS[i]}</div>
       <div style="font-family:'Cinzel',serif;font-size:16px;margin:2px 0">${d.getDate()}</div>
-      ${hasTrd?`<div style="font-family:'Space Mono',monospace;font-size:7px;color:${tot>=0?'var(--green)':'var(--red)'}">${tot>=0?'+':''}${tot.toFixed(1)}R</div>`:''}
+      ${hasTrd?`<div style="font-family:'Space Mono',monospace;font-size:9px;color:${tot>=0?'var(--green)':'var(--red)'}">${tot>=0?'+':''}${tot.toFixed(1)}R</div>`:''}
     </div>`;
   });
   html+=`</div>`;
@@ -4008,7 +4008,7 @@ function renderWeekView(){
   // Session rows
   SESSIONS.forEach(sess=>{
     html+=`<div class="week-row">`;
-    html+=`<div class="week-time-label" style="font-size:7px;padding:6px 8px;line-height:1.4;text-align:right">${sess}</div>`;
+    html+=`<div class="week-time-label" style="font-size:9px;padding:6px 8px;line-height:1.4;text-align:right">${sess}</div>`;
     weekDays.forEach(d=>{
       const key=fmtDate(d);
       const dayTrades=(tbd[key]||[]).filter(t=>t.session===sess);
@@ -4032,8 +4032,8 @@ function renderWeekView(){
     const wins=dayTrades.filter(t=>!['SL','BE'].includes(t.result)).length;
     html+=`<div class="week-summary-cell">`;
     if(dayTrades.length){
-      html+=`<div style="color:${pnl>=0?'var(--green)':'var(--red)'};font-size:9px">${pnl>=0?'+':''}${pnl.toFixed(1)}R</div>`;
-      html+=`<div style="color:var(--text-dim);font-size:7px">${wins}/${dayTrades.length} W</div>`;
+      html+=`<div style="color:${pnl>=0?'var(--green)':'var(--red)'};font-size:11px">${pnl>=0?'+':''}${pnl.toFixed(1)}R</div>`;
+      html+=`<div style="color:var(--text-dim);font-size:9px">${wins}/${dayTrades.length} W</div>`;
     } else {
       html+=`<span style="color:var(--border2)">—</span>`;
     }
