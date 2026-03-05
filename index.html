@@ -259,6 +259,51 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .data-btn.danger:hover{background:var(--red-bg);}
 .data-info{font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);margin-left:auto;}
 #importFileInput{display:none;}
+
+/* ============================================================
+   HERO IMMERSIF
+   ============================================================ */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:var(--nav-h) 20px 60px;position:relative;overflow:hidden;}
+.hero-torii{font-size:clamp(52px,10vw,90px);filter:drop-shadow(0 0 32px rgba(201,168,76,.45));animation:toriiFloat 7s ease-in-out infinite;position:relative;z-index:1;margin-bottom:16px;}
+@keyframes toriiFloat{0%,100%{transform:translateY(0) scale(1);}40%{transform:translateY(-12px) scale(1.04);}70%{transform:translateY(-6px) scale(1.01);}}
+.hero-kanji{position:absolute;font-family:'Cinzel',serif;font-size:220px;font-weight:900;color:var(--gold);opacity:.015;letter-spacing:-8px;white-space:nowrap;pointer-events:none;user-select:none;bottom:80px;animation:kanjiDrift 30s linear infinite;}
+@keyframes kanjiDrift{0%{transform:translateX(10%) rotate(-2deg);}100%{transform:translateX(-20%) rotate(-2deg);}}
+
+/* ============================================================
+   STATS PAR PÉRIODE
+   ============================================================ */
+.period-tabs{display:flex;gap:0;border:1px solid var(--border);overflow:hidden;margin-bottom:22px;}
+.period-tab{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;padding:10px 18px;background:transparent;border:none;border-right:1px solid var(--border);color:var(--text-dim);cursor:pointer;transition:all .2s;text-transform:uppercase;flex:1;}
+.period-tab:last-child{border-right:none;}
+.period-tab.active{background:var(--gold-faint);color:var(--gold);}
+.period-tab:hover{color:var(--text);}
+.period-kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:20px;}
+.period-kpi{background:var(--panel);padding:18px 14px;text-align:center;}
+.period-val{font-family:'Cinzel',serif;font-size:22px;margin-bottom:3px;line-height:1;}
+.period-lbl{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;}
+
+/* ============================================================
+   RECORDS PERSONNELS
+   ============================================================ */
+.record-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;}
+.record-card{background:var(--panel);border:1px solid var(--border);padding:20px 18px;position:relative;overflow:hidden;transition:border-color .25s;}
+.record-card:hover{border-color:var(--gold-dim);}
+.record-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);opacity:0;transition:opacity .3s;}
+.record-card:hover::after{opacity:1;}
+.record-medal{font-size:24px;margin-bottom:8px;}
+.record-val{font-family:'Cinzel',serif;font-size:26px;color:var(--gold);margin-bottom:4px;line-height:1;}
+.record-lbl{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;margin-bottom:4px;}
+.record-ctx{font-size:11px;color:var(--text-dim);font-style:italic;}
+
+/* ============================================================
+   PLAN ÉDITABLE
+   ============================================================ */
+.plan-edit-btn{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;padding:5px 12px;border:1px solid var(--gold-dim);color:var(--gold);background:transparent;cursor:pointer;transition:all .2s;}
+.plan-edit-btn:hover{background:var(--gold-faint);}
+.plan-edit-btn.saving{border-color:var(--green-border);color:var(--green);}
+.plan-editable{outline:none;transition:background .2s;}
+.plan-editable[contenteditable="true"]{background:rgba(201,168,76,.04);outline:1px dashed var(--gold-dim);padding:2px 4px;}
+
 .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
 .cal-month-title{font-family:'Cinzel',serif;font-size:22px;color:var(--gold);letter-spacing:3px;}
 .cal-arrow{background:none;border:1px solid var(--border);color:var(--text-dim);cursor:pointer;padding:7px 14px;font-size:16px;transition:all .2s;}
@@ -685,6 +730,7 @@ tr:hover td{background:rgba(201,168,76,.015);}
   <!-- HERO -->
   <div class="hero">
     <div class="hero-bg"></div><div class="hero-grid"></div>
+    <div class="hero-kanji">規律 · 忍耐 · 習慣 · 規律 · 忍耐 · 習慣 · 規律 · 忍耐</div>
     <div class="hero-torii">⛩️</div>
     <div class="hero-eyebrow">Plan Officiel · Smart Money Concepts</div>
     <h1 class="hero-title">THE TRADER'S<br>TEMPLE</h1>
@@ -694,7 +740,8 @@ tr:hover td{background:rgba(201,168,76,.015);}
     <div class="hero-nav">
       <button class="hero-nav-btn primary" onclick="gotoPage('journal')">📋 Journal</button>
       <button class="hero-nav-btn" onclick="gotoPage('plan')">📜 Plan</button>
-      <button class="hero-nav-btn" onclick="gotoPage('review')">🪞 Review</button>
+      <button class="hero-nav-btn" onclick="gotoPage('sanctuaire')">🧘 Sanctuaire</button>
+      <button class="hero-nav-btn" onclick="gotoPage('analyse')">🧠 Analyse</button>
       <button class="hero-nav-btn" onclick="gotoPage('outils')">🧮 Outils</button>
     </div>
     <div class="scroll-hint">▼ &nbsp; SCROLL</div>
@@ -774,12 +821,12 @@ tr:hover td{background:rgba(201,168,76,.015);}
     <!-- RÈGLES CONDENSÉES -->
     <div class="sec-hdr reveal"><span class="sec-num">—</span><h2 class="sec-title">Les Règles du Temple</h2><div class="sec-line"></div></div>
     <div class="reveal">
-      <div class="rule-strip"><div class="rule-num">01</div><div class="rule-label">Sessions autorisées</div><div class="rule-val">09h→12h · 14h→18h</div></div>
-      <div class="rule-strip"><div class="rule-num">02</div><div class="rule-label">Actifs tradés</div><div class="rule-val">BTC/USD · XAU/USD</div></div>
-      <div class="rule-strip"><div class="rule-num">03</div><div class="rule-label">Risque par trade</div><div class="rule-val">1R MAX</div></div>
-      <div class="rule-strip"><div class="rule-num">04</div><div class="rule-label">Max trades / jour</div><div class="rule-val">2 plans</div></div>
-      <div class="rule-strip"><div class="rule-num">05</div><div class="rule-label">Setup minimum requis</div><div class="rule-val">A+ ou A++</div></div>
-      <div class="rule-strip"><div class="rule-num">06</div><div class="rule-label">Structure requise</div><div class="rule-val">Sweep + BOS + Zone H4/M15</div></div>
+      <div class="rule-strip"><div class="rule-num">01</div><div class="rule-label">Sessions autorisées</div><div class="rule-val plan-editable" data-key="rule_sessions" contenteditable="false">09h→12h · 14h→18h</div></div>
+      <div class="rule-strip"><div class="rule-num">02</div><div class="rule-label">Actifs tradés</div><div class="rule-val plan-editable" data-key="rule_actifs" contenteditable="false">BTC/USD · XAU/USD</div></div>
+      <div class="rule-strip"><div class="rule-num">03</div><div class="rule-label">Risque par trade</div><div class="rule-val plan-editable" data-key="rule_risque" contenteditable="false">1R MAX</div></div>
+      <div class="rule-strip"><div class="rule-num">04</div><div class="rule-label">Max trades / jour</div><div class="rule-val plan-editable" data-key="rule_maxtrades" contenteditable="false">2 plans</div></div>
+      <div class="rule-strip"><div class="rule-num">05</div><div class="rule-label">Setup minimum requis</div><div class="rule-val plan-editable" data-key="rule_setup" contenteditable="false">A+ ou A++</div></div>
+      <div class="rule-strip"><div class="rule-num">06</div><div class="rule-label">Structure requise</div><div class="rule-val plan-editable" data-key="rule_structure" contenteditable="false">Sweep + BOS + Zone H4/M15</div></div>
       <div class="rule-strip"><div class="rule-num">07</div><div class="rule-label">Stop si 2 SL / jour</div><div class="rule-val" style="color:var(--red)">STOP journée</div></div>
       <div style="margin-top:14px;text-align:right">
         <button class="btn" onclick="gotoPage('plan')">Voir le plan complet →</button>
@@ -801,6 +848,10 @@ tr:hover td{background:rgba(201,168,76,.015);}
 <div class="page" id="page-plan">
 <div class="wrap">
 
+  <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:8px">
+    <button class="plan-edit-btn" onclick="togglePlanEdit()">✏️ Modifier le Plan</button>
+  </div>
+
   <div class="sec-hdr reveal"><span class="sec-num">01</span><h2 class="sec-title">Actifs & Sessions</h2><div class="sec-line"></div></div>
   <div class="g2 reveal">
     <div>
@@ -810,10 +861,10 @@ tr:hover td{background:rgba(201,168,76,.015);}
     </div>
     <div class="card">
       <div class="ctitle">Limites journalières</div>
-      <div class="kv"><span>Max plans / jour</span><span class="mono" style="color:var(--gold)">2</span></div>
-      <div class="kv"><span>Max plans / semaine</span><span class="mono" style="color:var(--gold)">6</span></div>
-      <div class="kv"><span>Stop journée (TP)</span><span class="mono" style="color:var(--green)">2 TP</span></div>
-      <div class="kv"><span>Stop journée (SL)</span><span class="mono" style="color:var(--red)">2 SL</span></div>
+      <div class="kv"><span>Max plans / jour</span><span class="mono plan-editable" data-key="max_plans_jour" contenteditable="false" style="color:var(--gold)">2</span></div>
+      <div class="kv"><span>Max plans / semaine</span><span class="mono plan-editable" data-key="max_plans_sem" contenteditable="false" style="color:var(--gold)">6</span></div>
+      <div class="kv"><span>Stop journée (TP)</span><span class="mono plan-editable" data-key="stop_tp" contenteditable="false" style="color:var(--green)">2 TP</span></div>
+      <div class="kv"><span>Stop journée (SL)</span><span class="mono plan-editable" data-key="stop_sl" contenteditable="false" style="color:var(--red)">2 SL</span></div>
     </div>
   </div>
 
@@ -874,7 +925,7 @@ tr:hover td{background:rgba(201,168,76,.015);}
   <div class="g2 reveal">
     <div class="card">
       <div class="ctitle">Paramètres</div>
-      <div class="kv"><span>Risque / plan</span><span class="mono" style="color:var(--gold);font-size:16px">1R</span></div>
+      <div class="kv"><span>Risque / plan</span><span class="mono plan-editable" data-key="risque_plan" contenteditable="false" style="color:var(--gold);font-size:16px">1R</span></div>
       <div class="kv"><span>Risque / TP</span><span class="mono" style="color:var(--gold)">~0,33R</span></div>
       <div class="kv"><span>BE automatique</span><span style="color:var(--green)">Après TP1</span></div>
       <div class="kv"><span>Structure</span><span>1 plan = 3 TP</span></div>
@@ -892,18 +943,18 @@ tr:hover td{background:rgba(201,168,76,.015);}
   <div class="sec-hdr reveal"><span class="sec-num">05</span><h2 class="sec-title">Drawdown Management</h2><div class="sec-line"></div></div>
   <div style="text-align:center;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--gold-dim);margin-bottom:18px" class="reveal">COMPTE 5 000 €</div>
   <div class="g4 reveal">
-    <div class="zone-card zg"><div class="z-emoji">🟩</div><div class="z-range">5000€ → 4800€</div><div class="z-risk">1R</div><div class="z-rules">Max 4 SL consécutifs<br>Swing + Scalp autorisés</div></div>
-    <div class="zone-card zo"><div class="z-emoji">🟧</div><div class="z-range">4800€ → 4700€</div><div class="z-risk">0,75R</div><div class="z-rules">Max 3 SL consécutifs<br>Pas de scalp</div></div>
-    <div class="zone-card zr"><div class="z-emoji">🟥</div><div class="z-range">4700€ → 4600€</div><div class="z-risk">0,5R</div><div class="z-rules">1 trade/jour<br>Swing uniquement</div></div>
+    <div class="zone-card zg"><div class="z-emoji">🟩</div><div class="z-range plan-editable" data-key="z1_range" contenteditable="false">5000€ → 4800€</div><div class="z-risk plan-editable" data-key="z1_risk" contenteditable="false">1R</div><div class="z-rules plan-editable" data-key="z1_rules" contenteditable="false">Max 4 SL consécutifs<br>Swing + Scalp autorisés</div></div>
+    <div class="zone-card zo"><div class="z-emoji">🟧</div><div class="z-range plan-editable" data-key="z2_range" contenteditable="false">4800€ → 4700€</div><div class="z-risk plan-editable" data-key="z2_risk" contenteditable="false">0,75R</div><div class="z-rules plan-editable" data-key="z2_rules" contenteditable="false">Max 3 SL consécutifs<br>Pas de scalp</div></div>
+    <div class="zone-card zr"><div class="z-emoji">🟥</div><div class="z-range plan-editable" data-key="z3_range" contenteditable="false">4700€ → 4600€</div><div class="z-risk plan-editable" data-key="z3_risk" contenteditable="false">0,5R</div><div class="z-rules plan-editable" data-key="z3_rules" contenteditable="false">1 trade/jour<br>Swing uniquement</div></div>
     <div class="zone-card zn"><div class="z-emoji">⬛</div><div class="z-range">4600€ → 4500€</div><div class="z-risk">0,25R</div><div class="z-rules">2 jours OFF<br>A++ uniquement</div></div>
   </div>
 
   <div style="height:56px"></div>
   <div class="sec-hdr reveal"><span class="sec-num">06</span><h2 class="sec-title">Take Profits</h2><div class="sec-line"></div></div>
   <div class="card reveal" style="padding:28px">
-    <div class="tp-row"><div class="tp-lbl">TP1</div><div class="tp-bar"><div class="tp-fill" style="width:16%"></div></div><div class="tp-info"><span class="mono" style="color:var(--gold)">1R</span> — Sécurité · BE</div></div>
-    <div class="tp-row"><div class="tp-lbl">TP2</div><div class="tp-bar"><div class="tp-fill" style="width:50%"></div></div><div class="tp-info"><span class="mono" style="color:var(--gold)">3R</span> — Respiration</div></div>
-    <div class="tp-row"><div class="tp-lbl">TP3</div><div class="tp-bar"><div class="tp-fill" style="width:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold-light))"></div></div><div class="tp-info"><span class="mono" style="color:var(--gold-light)">6R+</span> — Laisser courir</div></div>
+    <div class="tp-row"><div class="tp-lbl">TP1</div><div class="tp-bar"><div class="tp-fill" style="width:16%"></div></div><div class="tp-info"><span class="mono plan-editable" data-key="tp1_r" contenteditable="false" style="color:var(--gold)">1R</span> — <span class="plan-editable" data-key="tp1_desc" contenteditable="false">Sécurité · BE</span></div></div>
+    <div class="tp-row"><div class="tp-lbl">TP2</div><div class="tp-bar"><div class="tp-fill" style="width:50%"></div></div><div class="tp-info"><span class="mono plan-editable" data-key="tp2_r" contenteditable="false" style="color:var(--gold)">3R</span> — <span class="plan-editable" data-key="tp2_desc" contenteditable="false">Respiration</span></div></div>
+    <div class="tp-row"><div class="tp-lbl">TP3</div><div class="tp-bar"><div class="tp-fill" style="width:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold-light))"></div></div><div class="tp-info"><span class="mono plan-editable" data-key="tp3_r" contenteditable="false" style="color:var(--gold-light)">6R+</span> — <span class="plan-editable" data-key="tp3_desc" contenteditable="false">Laisser courir</span></div></div>
     <div style="margin-top:16px;padding:12px;border:1px solid rgba(201,168,76,.12);background:var(--gold-faint);font-size:13px;color:var(--text-dim)">🔑 TP3 ouvert — laisser courir tant que la structure tient.</div>
   </div>
 
@@ -955,6 +1006,8 @@ tr:hover td{background:rgba(201,168,76,.015);}
     <button class="tab-btn active" onclick="switchJTab('journal')">📋 Journal</button>
     <button class="tab-btn" onclick="switchJTab('mensuel')">📅 Mensuel</button>
     <button class="tab-btn" onclick="switchJTab('graphiques')">📈 Graphiques</button>
+    <button class="tab-btn" onclick="switchJTab('stats')">📆 Périodes</button>
+    <button class="tab-btn" onclick="switchJTab('records')">🏆 Records</button>
   </div>
 
   <!-- TAB JOURNAL -->
@@ -1055,13 +1108,34 @@ tr:hover td{background:rgba(201,168,76,.015);}
     </div>
   </div>
 
+  <!-- TAB STATS PAR PÉRIODE -->
+  <div id="jtab-stats" class="tab-panel">
+    <div class="period-tabs">
+      <button class="period-tab active" onclick="switchPeriod('week',this)">Cette semaine</button>
+      <button class="period-tab" onclick="switchPeriod('month',this)">Ce mois</button>
+      <button class="period-tab" onclick="switchPeriod('3months',this)">3 derniers mois</button>
+      <button class="period-tab" onclick="switchPeriod('all',this)">Tout temps</button>
+    </div>
+    <div class="period-kpis" id="periodKpis"></div>
+    <div style="background:var(--panel);border:1px solid var(--border);padding:22px;margin-bottom:16px">
+      <div class="chart-title" style="margin-bottom:12px">P&L sur la période</div>
+      <canvas id="cPeriodPL" height="80"></canvas>
+    </div>
+    <div style="background:var(--panel);border:1px solid var(--border);padding:22px">
+      <div class="chart-title" style="margin-bottom:12px">Meilleurs setups sur la période</div>
+      <div id="periodSetups"></div>
+    </div>
+  </div>
+
+  <!-- TAB RECORDS -->
+  <div id="jtab-records" class="tab-panel">
+    <p style="color:var(--text-dim);font-style:italic;margin-bottom:24px;font-size:14px">Tes meilleures performances. Ce que le temple garde en mémoire.</p>
+    <div class="record-grid" id="recordGrid"></div>
+  </div>
+
 </div>
 <footer class="site-footer"><div class="ft-torii">⛩️</div><div class="ft-title">THE TRADER'S TEMPLE · V2</div></footer>
 </div>
-
-<!-- ============================================================
-     PAGE : REVIEW
-     ============================================================ -->
 <div class="page" id="page-review">
 <div class="wrap">
   <div class="sec-hdr"><span class="sec-num">—</span><h2 class="sec-title">🪞 Review & Analyse</h2><div class="sec-line"></div></div>
@@ -3157,12 +3231,245 @@ function resetSanc(){
 }
 
 // ============================================================
+// STATS PAR PÉRIODE
+// ============================================================
+let currentPeriod='month';
+let chartPeriodPL=null;
+
+function switchPeriod(period, btn){
+  currentPeriod=period;
+  document.querySelectorAll('.period-tab').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  renderPeriodStats();
+}
+
+function getPeriodTrades(period){
+  const now=new Date();
+  return trades.filter(t=>{
+    const d=new Date(t.date);
+    if(period==='week'){
+      const startOfWeek=new Date(now);
+      startOfWeek.setDate(now.getDate()-now.getDay()+1);
+      startOfWeek.setHours(0,0,0,0);
+      return d>=startOfWeek;
+    }
+    if(period==='month'){
+      return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();
+    }
+    if(period==='3months'){
+      const ago=new Date(now);ago.setMonth(ago.getMonth()-3);
+      return d>=ago;
+    }
+    return true;
+  });
+}
+
+function renderPeriodStats(){
+  const pt=getPeriodTrades(currentPeriod);
+  const kpiEl=document.getElementById('periodKpis');
+  const setupEl=document.getElementById('periodSetups');
+  if(!kpiEl)return;
+
+  if(!pt.length){
+    kpiEl.innerHTML=`<div class="period-kpi" style="grid-column:1/-1"><span style="color:var(--text-dim);font-style:italic">Aucun trade sur cette période.</span></div>`;
+    if(setupEl)setupEl.innerHTML='';
+    return;
+  }
+
+  const wins=pt.filter(t=>!['SL','BE'].includes(t.result));
+  const wr=Math.round(wins.length/pt.length*100);
+  const totalR=pt.reduce((s,t)=>s+t.gain,0);
+  const avgR=Math.round(totalR/pt.length*10)/10;
+  const planOk=Math.round(pt.filter(t=>t.plan==='OUI').length/pt.length*100);
+  const avgScore=Math.round(pt.map(t=>calcTradeScore(t)).reduce((a,b)=>a+b,0)/pt.length*10)/10;
+  const lastCap=pt.filter(t=>t.capital>0).slice(-1)[0]?.capital||0;
+  const firstCap=pt.filter(t=>t.capital>0)[0]?.capital||0;
+  const capDelta=lastCap&&firstCap?lastCap-firstCap:null;
+
+  const pkv=(val,lbl,color='var(--gold)')=>`<div class="period-kpi"><div class="period-val" style="color:${color}">${val}</div><div class="period-lbl">${lbl}</div></div>`;
+  kpiEl.innerHTML=
+    pkv(pt.length,'Trades','var(--white)')+
+    pkv(wr+'%','Winrate',wr>=50?'var(--green)':'var(--red)')+
+    pkv((totalR>=0?'+':'')+totalR.toFixed(1)+'R','Net P/L',totalR>=0?'var(--green)':'var(--red)')+
+    pkv(avgR+'R','Moy/trade',avgR>=0?'var(--green)':'var(--red)')+
+    pkv(planOk+'%','Plan',planOk>=80?'var(--green)':'var(--gold)')+
+    pkv(avgScore+'/10','Score moy','var(--gold)')+
+    (capDelta!==null?pkv((capDelta>=0?'+':'')+capDelta.toFixed(0)+'€','Δ Capital',capDelta>=0?'var(--green)':'var(--red)'):'');
+
+  // Period P/L chart
+  const byDay={};
+  pt.forEach(t=>{byDay[t.date]=(byDay[t.date]||0)+t.gain;});
+  const days=Object.keys(byDay).sort();
+  let cum=0;const cumData=days.map(d=>{cum+=byDay[d];return Math.round(cum*10)/10;});
+
+  if(chartPeriodPL){chartPeriodPL.destroy();chartPeriodPL=null;}
+  const c=document.getElementById('cPeriodPL');
+  if(c){
+    chartPeriodPL=new Chart(c,{type:'line',data:{
+      labels:days,
+      datasets:[{label:'P/L cumulé (R)',data:cumData,borderColor:cumData[cumData.length-1]>=0?'#2ecc71':'#c0392b',backgroundColor:cumData[cumData.length-1]>=0?'rgba(46,204,113,.06)':'rgba(192,57,43,.06)',pointRadius:3,tension:.4,fill:true}]
+    },options:{responsive:true,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a5448',font:{family:'Space Mono',size:8},maxRotation:45},grid:{color:'rgba(255,255,255,.03)'}},y:{ticks:{color:'#5a5448',font:{family:'Space Mono',size:9}},grid:{color:'rgba(255,255,255,.03)'}}}}});
+  }
+
+  // Best setups on period
+  if(setupEl){
+    const setupStats={};
+    pt.forEach(t=>{
+      if(!setupStats[t.setup])setupStats[t.setup]={n:0,wins:0,r:0};
+      setupStats[t.setup].n++;
+      if(!['SL','BE'].includes(t.result))setupStats[t.setup].wins++;
+      setupStats[t.setup].r+=t.gain;
+    });
+    const rows=Object.entries(setupStats).sort((a,b)=>b[1].r-a[1].r);
+    setupEl.innerHTML=rows.map(([s,d])=>{
+      const wr2=Math.round(d.wins/d.n*100);
+      return`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border:1px solid var(--border);margin-bottom:6px;background:var(--panel2)">
+        <span style="font-family:'Space Mono',monospace;font-size:9px;padding:2px 8px;border:1px solid var(--gold-dim);color:var(--gold)">${s}</span>
+        <span style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim)">${d.n} trades</span>
+        <span style="font-family:'Space Mono',monospace;font-size:9px;color:${wr2>=50?'var(--green)':'var(--red)'}">${wr2}% WR</span>
+        <span style="font-family:'Space Mono',monospace;font-size:10px;color:${d.r>=0?'var(--green)':'var(--red)'}">${d.r>=0?'+':''}${d.r.toFixed(1)}R</span>
+      </div>`;
+    }).join('')||'<span style="color:var(--text-dim);font-style:italic">Aucun setup sur cette période.</span>';
+  }
+}
+
+// ============================================================
+// RECORDS PERSONNELS
+// ============================================================
+function renderRecords(){
+  const el=document.getElementById('recordGrid');
+  if(!el)return;
+  if(!trades.length){el.innerHTML=`<div style="color:var(--text-dim);font-style:italic;padding:40px;text-align:center;grid-column:1/-1">Ajoute des trades pour voir tes records.</div>`;return;}
+
+  const wins=trades.filter(t=>!['SL','BE'].includes(t.result));
+  const wr=trades.length?Math.round(wins.length/trades.length*100):0;
+
+  // Best single trade
+  const bestTrade=trades.reduce((a,b)=>b.gain>a.gain?b:a,trades[0]);
+  const worstTrade=trades.reduce((a,b)=>b.gain<a.gain?b:a,trades[0]);
+
+  // Best month
+  const byMonth={};
+  trades.forEach(t=>{
+    const k=t.date.substring(0,7);
+    byMonth[k]=(byMonth[k]||0)+t.gain;
+  });
+  const bestMonth=Object.entries(byMonth).sort((a,b)=>b[1]-a[1])[0];
+  const worstMonth=Object.entries(byMonth).sort((a,b)=>a[1]-b[1])[0];
+
+  // Best streak
+  let maxWStreak=0,maxLStreak=0,curW=0,curL=0;
+  trades.forEach(t=>{
+    if(!['SL','BE'].includes(t.result)){curW++;curL=0;maxWStreak=Math.max(maxWStreak,curW);}
+    else if(t.result==='SL'){curL++;curW=0;maxLStreak=Math.max(maxLStreak,curL);}
+    else{curW=0;curL=0;}
+  });
+
+  // Best RR
+  const bestRR=trades.reduce((a,b)=>b.rr>a.rr?b:a,trades[0]);
+
+  // Best score
+  const scored=trades.map(t=>({...t,score:calcTradeScore(t)}));
+  const bestScore=scored.reduce((a,b)=>b.score>a.score?b:a,scored[0]);
+
+  // Most traded asset
+  const assetCount={};
+  trades.forEach(t=>{assetCount[t.asset]=(assetCount[t.asset]||0)+1;});
+  const favAsset=Object.entries(assetCount).sort((a,b)=>b[1]-a[1])[0];
+
+  const rc=v=>`<div class="record-card">`;
+  const records=[
+    {medal:'🏅',val:(bestTrade.gain>=0?'+':'')+bestTrade.gain+'R',lbl:'Meilleur Trade',ctx:`${bestTrade.asset} · ${bestTrade.date} · ${bestTrade.setup}`},
+    {medal:'💸',val:(worstTrade.gain>=0?'+':'')+worstTrade.gain+'R',lbl:'Pire Trade',ctx:`${worstTrade.asset} · ${worstTrade.date}`,bad:true},
+    {medal:'📅',val:bestMonth?(bestMonth[1]>=0?'+':'')+bestMonth[1].toFixed(1)+'R':'—',lbl:'Meilleur Mois',ctx:bestMonth?bestMonth[0]:'—'},
+    {medal:'📉',val:worstMonth?(worstMonth[1]>=0?'+':'')+worstMonth[1].toFixed(1)+'R':'—',lbl:'Pire Mois',ctx:worstMonth?worstMonth[0]:'—',bad:true},
+    {medal:'🔥',val:maxWStreak+' W',lbl:'Meilleure Série',ctx:`${maxWStreak} victoires consécutives`},
+    {medal:'❄️',val:maxLStreak+' SL',lbl:'Pire Série',ctx:`${maxLStreak} SL consécutifs`,bad:true},
+    {medal:'🎯',val:bestRR.rr?bestRR.rr+'R':'—',lbl:'Meilleur RR Visé',ctx:bestRR.rr?`${bestRR.asset} · ${bestRR.date}`:'Remplis le champ RR'},
+    {medal:'⭐',val:bestScore.score+'/10',lbl:'Meilleur Score Qualité',ctx:`${bestScore.asset} · ${bestScore.date} · ${bestScore.setup}`},
+    {medal:'💎',val:favAsset?favAsset[0]:'—',lbl:'Actif Favori',ctx:favAsset?`${favAsset[1]} trades tradés`:'—'},
+    {medal:'📊',val:trades.length,lbl:'Total Trades',ctx:`${wins.length} gagnants · ${trades.length-wins.length} perdants/BE`},
+  ];
+
+  el.innerHTML=records.map(r=>`<div class="record-card">
+    <div class="record-medal">${r.medal}</div>
+    <div class="record-val" style="color:${r.bad?'var(--red)':'var(--gold)'}">${r.val}</div>
+    <div class="record-lbl">${r.lbl}</div>
+    <div class="record-ctx">${r.ctx}</div>
+  </div>`).join('');
+}
+
+// ============================================================
+// PLAN ÉDITABLE
+// ============================================================
+let planEditMode=false;
+let planData=JSON.parse(localStorage.getItem('ttt_plan_v1')||'{}');
+
+function togglePlanEdit(){
+  planEditMode=!planEditMode;
+  document.querySelectorAll('.plan-editable').forEach(el=>{
+    el.contentEditable=planEditMode?'true':'false';
+  });
+  const btns=document.querySelectorAll('.plan-edit-btn');
+  btns.forEach(b=>{
+    b.textContent=planEditMode?'💾 Sauvegarder':'✏️ Modifier';
+    b.classList.toggle('saving',planEditMode);
+  });
+  if(!planEditMode){
+    // Save all editable content
+    document.querySelectorAll('.plan-editable').forEach(el=>{
+      planData[el.dataset.key]=el.innerHTML;
+    });
+    localStorage.setItem('ttt_plan_v1',JSON.stringify(planData));
+    showToast('✅ Plan sauvegardé !');
+  }
+}
+
+function loadPlanData(){
+  document.querySelectorAll('.plan-editable').forEach(el=>{
+    if(planData[el.dataset.key])el.innerHTML=planData[el.dataset.key];
+  });
+}
+
+// override switchJTab to handle new tabs
+function switchJTab(name){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('jtab-'+name)?.classList.add('active');
+  document.querySelector(`.tab-btn[onclick="switchJTab('${name}')"]`)?.classList.add('active');
+  if(name==='graphiques')renderCharts();
+  if(name==='stats'){renderPeriodStats();}
+  if(name==='records'){renderRecords();}
+}
+
+// ============================================================
+// HERO IMMERSIF — particules dorées améliorées
+// ============================================================
+(function(){
+  const hero=document.querySelector('.hero');
+  if(!hero)return;
+  // remove old particles
+  hero.querySelectorAll('.hero-particle-old').forEach(p=>p.remove());
+  for(let i=0;i<28;i++){
+    const p=document.createElement('div');
+    const s=Math.random()*2.5+.5;
+    const dur=Math.random()*18+10;
+    const delay=Math.random()*8;
+    const opacity=Math.random()*.3+.04;
+    p.style.cssText=`position:absolute;width:${s}px;height:${s}px;background:rgba(201,168,76,${opacity});border-radius:50%;top:${Math.random()*100}%;left:${Math.random()*100}%;animation:pf ${dur}s ease-in-out ${delay}s infinite alternate;pointer-events:none;z-index:0;`;
+    hero.appendChild(p);
+  }
+})();
+
+// ============================================================
 // INIT
 // ============================================================
 document.getElementById('fDate').value=new Date().toISOString().split('T')[0];
 renderAll();
 renderHomeKPIs();
 updateDataInfo();
+loadPlanData();
+renderMantras();
 </script>
 </body>
 </html>
