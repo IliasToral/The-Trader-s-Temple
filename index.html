@@ -375,29 +375,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .badge-new{position:absolute;top:8px;right:8px;font-family:'Space Mono',monospace;font-size:6px;letter-spacing:1px;padding:2px 5px;background:var(--gold);color:var(--black);animation:badgePulse 2s ease-in-out infinite;}
 @keyframes badgePulse{0%,100%{opacity:1;}50%{opacity:.6;}}
 
-/* ============================================================
-   COACH IA & RÉSUMÉ IA
-   ============================================================ */
-.ai-chat{background:var(--panel);border:1px solid var(--border);display:flex;flex-direction:column;height:420px;}
-.ai-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;}
-.ai-msg{max-width:85%;padding:12px 16px;font-size:14px;line-height:1.8;}
-.ai-msg.user{align-self:flex-end;background:var(--gold-faint);border:1px solid var(--gold-dim);color:var(--white);}
-.ai-msg.ai{align-self:flex-start;background:var(--panel2);border:1px solid var(--border);color:var(--text);}
-.ai-msg.ai .ai-label{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--gold-dim);margin-bottom:6px;}
-.ai-msg.loading{color:var(--text-dim);font-style:italic;}
-.ai-input-row{display:flex;gap:0;border-top:1px solid var(--border);}
-.ai-input{flex:1;background:var(--panel2);border:none;color:var(--white);font-family:'Space Mono',monospace;font-size:11px;padding:12px 16px;outline:none;}
-.ai-send{background:var(--gold-faint);border:none;border-left:1px solid var(--gold-dim);color:var(--gold);cursor:pointer;padding:0 20px;font-family:'Space Mono',monospace;font-size:11px;transition:background .2s;}
-.ai-send:hover{background:rgba(201,168,76,.15);}
-.ai-suggestion-pills{display:flex;gap:6px;flex-wrap:wrap;padding:10px 16px;border-top:1px solid var(--border);}
-.ai-pill{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:1px;padding:4px 10px;border:1px solid var(--border);color:var(--text-dim);cursor:pointer;transition:all .2s;text-transform:uppercase;}
-.ai-pill:hover{border-color:var(--gold-dim);color:var(--gold);}
 
-.weekly-summary{background:var(--panel);border:1px solid var(--gold-dim);padding:28px 32px;position:relative;overflow:hidden;}
-.weekly-summary::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
-.ws-title{font-family:'Cinzel',serif;font-size:16px;color:var(--gold);letter-spacing:2px;margin-bottom:16px;}
-.ws-body{font-size:15px;color:var(--text);line-height:2;white-space:pre-wrap;}
-.ws-loading{color:var(--text-dim);font-style:italic;font-size:14px;}
+
 
 /* ============================================================
    SONS SANCTUAIRE
@@ -761,7 +740,7 @@ tr:hover td{background:rgba(201,168,76,.015);}
     <button class="nav-link" onclick="gotoPage('journal')">📋 Journal</button>
     <button class="nav-link" onclick="gotoPage('analyse')">🧠 Analyse</button>
     <button class="nav-link" onclick="gotoPage('search')">🔍 Recherche</button>
-    <button class="nav-link" onclick="gotoPage('coach')">🤖 Coach IA</button>
+    
     <button class="nav-link" onclick="gotoPage('calendrier')">📅 Calendrier</button>
     <button class="nav-link" onclick="gotoPage('goals')">🎯 Objectifs</button>
     <button class="nav-link" onclick="gotoPage('sanctuaire')">🧘 Sanctuaire</button>    <button class="nav-link" onclick="gotoPage('review')">🪞 Review</button>
@@ -1651,45 +1630,6 @@ tr:hover td{background:rgba(201,168,76,.015);}
 <footer class="site-footer"><div class="ft-torii">⛩️</div><div class="ft-title">THE TRADER'S TEMPLE · V2</div></footer>
 </div>
 
-<!-- ============================================================
-     PAGE : COACH IA
-     ============================================================ -->
-<div class="page" id="page-coach">
-<div class="wrap">
-  <div class="sec-hdr"><span class="sec-num">—</span><h2 class="sec-title">🤖 Coach IA</h2><div class="sec-line"></div></div>
-
-  <!-- RÉSUMÉ HEBDOMADAIRE -->
-  <div style="margin-bottom:48px">
-    <div class="sec-hdr" style="margin-bottom:16px"><span class="sec-num">01</span><h3 class="sec-title" style="font-size:18px">Résumé de la Semaine</h3><div class="sec-line"></div></div>
-    <p style="color:var(--text-dim);font-style:italic;margin-bottom:18px;font-size:14px">L'IA analyse tes trades de la semaine et génère un résumé personnalisé.</p>
-    <button class="btn green" onclick="generateWeeklySummary()" id="weeklyBtn">⚡ Générer le résumé</button>
-    <div style="margin-top:16px" id="weeklySummaryWrap"></div>
-  </div>
-
-  <!-- COACH CHAT -->
-  <div>
-    <div class="sec-hdr" style="margin-bottom:16px"><span class="sec-num">02</span><h3 class="sec-title" style="font-size:18px">Pose une Question</h3><div class="sec-line"></div></div>
-    <p style="color:var(--text-dim);font-style:italic;margin-bottom:18px;font-size:14px">Le coach connaît tous tes trades et ton plan. Pose-lui n'importe quelle question sur ta performance.</p>
-    <div class="ai-chat">
-      <div class="ai-msgs" id="coachMsgs">
-        <div class="ai-msg ai"><div class="ai-label">COACH IA · THE TRADER'S TEMPLE</div>Bonjour ! Je connais tous tes trades et ton plan de trading. Pose-moi une question sur ta performance, tes patterns, ou demande-moi un conseil personnalisé.</div>
-      </div>
-      <div class="ai-suggestion-pills" id="coachPills">
-        <span class="ai-pill" onclick="askCoach(this.textContent)">Quelle est ma plus grande faiblesse ?</span>
-        <span class="ai-pill" onclick="askCoach(this.textContent)">Dans quelle session je performe le mieux ?</span>
-        <span class="ai-pill" onclick="askCoach(this.textContent)">Mon setup le plus rentable ?</span>
-        <span class="ai-pill" onclick="askCoach(this.textContent)">Analyse mon dernier trade</span>
-        <span class="ai-pill" onclick="askCoach(this.textContent)">Qu'est-ce que je dois améliorer en priorité ?</span>
-      </div>
-      <div class="ai-input-row">
-        <input class="ai-input" id="coachInput" placeholder="Pose ta question au coach..." onkeydown="if(event.key==='Enter')sendCoach()">
-        <button class="ai-send" onclick="sendCoach()">ENVOYER →</button>
-      </div>
-    </div>
-  </div>
-</div>
-<footer class="site-footer"><div class="ft-torii">⛩️</div><div class="ft-title">THE TRADER'S TEMPLE · V2</div></footer>
-</div>
 
 <!-- ============================================================
      PAGE : ANALYSE
@@ -2905,7 +2845,6 @@ function gotoPage(name){
   if(name==='sanctuaire'){resetSanc();}
   if(name==='analyse'){renderAnalyse();}
   if(name==='search'){runSearch();}
-  if(name==='coach'){initCoach();}
 }
 
 // ============================================================
@@ -3840,124 +3779,6 @@ function updateVolume(v){
     const g=nodes[0];
     if(g&&g.gain)g.gain.value=soundVolume;
   });
-}
-
-// ============================================================
-// COACH IA & RÉSUMÉ HEBDOMADAIRE
-// ============================================================
-let coachHistory=[];
-
-function buildTradesContext(){
-  if(!trades.length)return'Aucun trade enregistré.';
-  const recent=[...trades].slice(-30);
-  const wins=trades.filter(t=>!['SL','BE'].includes(t.result));
-  const wr=Math.round(wins.length/trades.length*100);
-  const totalR=trades.reduce((s,t)=>s+t.gain,0);
-  const errors=trades.flatMap(t=>t.errors||[]);
-  const errCount={};errors.forEach(e=>{errCount[e]=(errCount[e]||0)+1;});
-  const topErr=Object.entries(errCount).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([e,c])=>`${e}(${c}x)`).join(', ');
-  const avgScore=Math.round(trades.map(t=>calcTradeScore(t)).reduce((a,b)=>a+b,0)/trades.length*10)/10;
-
-  return`CONTEXTE TRADER :
-- Total trades : ${trades.length} | WR : ${wr}% | Net P/L : ${totalR>=0?'+':''}${totalR.toFixed(1)}R
-- Score qualité moyen : ${avgScore}/10
-- Erreurs les plus fréquentes : ${topErr||'aucune'}
-- Plan respecté : ${Math.round(trades.filter(t=>t.plan==='OUI').length/trades.length*100)}%
-- Derniers 5 trades : ${[...trades].slice(-5).map(t=>`${t.date} ${t.setup} ${t.result} ${t.gain>=0?'+':''}${t.gain}R`).join(' | ')}
-PLAN DE TRADING :
-- Sessions autorisées : LDN.KZ (09h-12h), NY.AM (14h-18h)
-- Actifs : BTC/USD, XAU/USD
-- Risque : 1R max. Setup minimum : A+
-- Structure : Sweep + BOS + Zone H4/M15`;
-}
-
-async function callAI(messages){
-  const res=await fetch('https://api.anthropic.com/v1/messages',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({
-      model:'claude-sonnet-4-20250514',
-      max_tokens:1000,
-      system:`Tu es le Coach IA de The Trader's Temple, un journal de trading professionnel. Tu es expert en SMC (Smart Money Concepts), ICT, trading intraday. Tu analyses les données du trader et donnes des conseils directs, précis et bienveillants. Tu réponds toujours en français, de façon concise (max 5-6 lignes). Tu utilises des emojis avec parcimonie. Tu connais le contexte suivant :\n\n${buildTradesContext()}`,
-      messages
-    })
-  });
-  const d=await res.json();
-  return d.content?.map(c=>c.text||'').join('')||'Erreur de réponse.';
-}
-
-function initCoach(){
-  // already initialized
-}
-
-function appendMsg(role,text,loading=false){
-  const el=document.getElementById('coachMsgs');
-  if(!el)return;
-  const div=document.createElement('div');
-  div.className=`ai-msg ${role}${loading?' loading':''}`;
-  if(role==='ai')div.innerHTML=`<div class="ai-label">COACH IA · THE TRADER'S TEMPLE</div>${text}`;
-  else div.textContent=text;
-  el.appendChild(div);
-  el.scrollTop=el.scrollHeight;
-  return div;
-}
-
-async function sendCoach(){
-  const inp=document.getElementById('coachInput');
-  if(!inp)return;
-  const msg=inp.value.trim();
-  if(!msg)return;
-  inp.value='';
-  askCoach(msg);
-}
-
-async function askCoach(msg){
-  appendMsg('user',msg);
-  coachHistory.push({role:'user',content:msg});
-  const loadDiv=appendMsg('ai','Analyse en cours...⏳',true);
-  try{
-    const reply=await callAI(coachHistory);
-    coachHistory.push({role:'assistant',content:reply});
-    if(loadDiv){loadDiv.classList.remove('loading');loadDiv.innerHTML=`<div class="ai-label">COACH IA · THE TRADER'S TEMPLE</div>${reply.replace(/\n/g,'<br>')}`;
-    const el=document.getElementById('coachMsgs');if(el)el.scrollTop=el.scrollHeight;}
-  }catch(e){
-    if(loadDiv)loadDiv.innerHTML=`<div class="ai-label">COACH IA</div>Erreur de connexion. Vérifie ta connexion internet.`;
-  }
-}
-
-async function generateWeeklySummary(){
-  const btn=document.getElementById('weeklyBtn');
-  const wrap=document.getElementById('weeklySummaryWrap');
-  if(!wrap)return;
-  if(btn)btn.textContent='⏳ Génération...';
-
-  const now=new Date();
-  const startOfWeek=new Date(now);
-  startOfWeek.setDate(now.getDate()-now.getDay()+1);
-  startOfWeek.setHours(0,0,0,0);
-  const weekTrades=trades.filter(t=>new Date(t.date)>=startOfWeek);
-
-  if(!weekTrades.length){
-    wrap.innerHTML=`<div class="weekly-summary"><div class="ws-body" style="color:var(--text-dim);font-style:italic">Aucun trade cette semaine. Reviens après avoir tradé !</div></div>`;
-    if(btn)btn.textContent='⚡ Générer le résumé';
-    return;
-  }
-
-  wrap.innerHTML=`<div class="weekly-summary"><div class="ws-loading">⏳ L'IA analyse ta semaine...</div></div>`;
-
-  const wins=weekTrades.filter(t=>!['SL','BE'].includes(t.result));
-  const wr=Math.round(wins.length/weekTrades.length*100);
-  const totalR=weekTrades.reduce((s,t)=>s+t.gain,0);
-  const tradeList=weekTrades.map(t=>`- ${t.date}: ${t.asset} ${t.setup} ${t.session} → ${t.result} ${t.gain>=0?'+':''}${t.gain}R ${t.plan==='OUI'?'(plan ok)':'(plan non respecté)'} ${t.errors?.length?`erreurs: ${t.errors.join(', ')}`:''}` ).join('\n');
-  const prompt=`Génère un résumé de semaine de trading pour ce trader. Ses trades cette semaine :\n${tradeList}\n\nWR: ${wr}%, P/L: ${totalR>=0?'+':''}${totalR.toFixed(1)}R, ${weekTrades.length} trades.\n\nFournis:\n1. Un résumé factuel de la semaine (2-3 lignes)\n2. Le point positif principal\n3. Le point d'amélioration principal\n4. Un conseil concret pour la semaine prochaine\n5. Une note de performance /10\n\nSois direct, précis, bienveillant.`;
-
-  try{
-    const reply=await callAI([{role:'user',content:prompt}]);
-    wrap.innerHTML=`<div class="weekly-summary"><div class="ws-title">📝 Résumé du ${startOfWeek.toLocaleDateString('fr-FR')} au ${now.toLocaleDateString('fr-FR')}</div><div class="ws-body">${reply.replace(/\n/g,'<br>')}</div></div>`;
-  }catch(e){
-    wrap.innerHTML=`<div class="weekly-summary"><div class="ws-body" style="color:var(--red)">Erreur de connexion IA. Vérifie ta connexion internet.</div></div>`;
-  }
-  if(btn)btn.textContent='⚡ Régénérer';
 }
 
 // ============================================================
