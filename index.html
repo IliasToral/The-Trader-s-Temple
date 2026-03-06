@@ -970,7 +970,7 @@ tr:hover td{background:rgba(201,168,76,.015);}
     <div class="nav-dropdown">
       <button class="nav-link nav-drop-trigger" onclick="toggleDrop('dropAnalyse')">🧠 Analyse ▾</button>
       <div class="nav-drop-menu" id="dropAnalyse">
-        <button class="nav-drop-item" onclick="closeDrop();gotoPage('matinale')">🌅 Matinale</button>
+        <button class="nav-drop-item" onclick="closeDrop();gotoPage('matinale')">📜 Parchemin</button>
         <button class="nav-drop-item" onclick="closeDrop();gotoPage('analyse')">🧠 Analyse</button>
         <button class="nav-drop-item" onclick="closeDrop();gotoPage('search')">🔍 Recherche</button>
         <button class="nav-drop-item" onclick="closeDrop();gotoPage('review')">🪞 Review</button>
@@ -1123,13 +1123,13 @@ tr:hover td{background:rgba(201,168,76,.015);}
      ============================================================ -->
 <div class="page" id="page-matinale">
 <div class="wrap">
-  <div class="sec-hdr"><span class="sec-num">—</span><h2 class="sec-title">🌅 Matinale</h2><div class="sec-line"></div></div>
+  <div class="sec-hdr"><span class="sec-num">—</span><h2 class="sec-title">📜 Le Parchemin du Matin</h2><div class="sec-line"></div></div>
   <p style="color:var(--text-dim);font-style:italic;margin-bottom:28px;font-size:16px">Ton rituel d'analyse quotidien. Suis les étapes, construis ta carte du marché, définis ton biais.</p>
 
   <!-- Date + actif -->
   <div class="mat-date-bar">
     <div>
-      <div class="mat-date-label">Matinale du</div>
+      <div class="mat-date-label">Parchemin du</div>
       <div class="mat-date-val" id="matDateDisplay">—</div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
@@ -1344,7 +1344,7 @@ tr:hover td{background:rgba(201,168,76,.015);}
   <div id="matSummaryWrap" style="display:none"></div>
 
   <div class="mat-action-bar">
-    <button class="btn green" onclick="generateMatSummary()">🌅 Générer ma Matinale</button>
+    <button class="btn green" onclick="generateMatSummary()">📜 Sceller le Parchemin</button>
     <button class="btn" onclick="exportMatPDF()">📄 Exporter PDF</button>
     <button class="btn" id="matHistBtn" onclick="openMatHistory()" style="margin-left:auto">📚 Historique</button>
   </div>
@@ -4653,7 +4653,7 @@ function saveMatinale(){
   if(idx>-1)hist[idx]=snapshot; else hist.unshift(snapshot);
   hist=hist.slice(0,30);
   localStorage.setItem(MAT_HIST_KEY,JSON.stringify(hist));
-  showToast('✅ Matinale sauvegardée !');
+  showToast('✅ Parchemin sauvegardé !');
 }
 
 function loadMatinale(){
@@ -4780,13 +4780,13 @@ function exportMatPDF(){
 </style>
 </head><body>
 <div class="header">
-  <div class="header-label">⛩ The Trader's Temple · Matinale</div>
+  <div class="header-label">⛩ The Trader's Temple · Parchemin du Matin</div>
   <div class="header-title">${assetLabel}</div>
   <div class="header-date">${date}</div>
 </div>
 ${bodyHtml}
 <div class="biais">${biaisLabel}</div>
-<div class="footer">THE TRADER'S TEMPLE · MATINALE · ${date.toUpperCase()}</div>
+<div class="footer">THE TRADER'S TEMPLE · PARCHEMIN DU MATIN · ${date.toUpperCase()}</div>
 <script>window.onload=function(){window.print();}<\/script>
 </body></html>`);
   win.document.close();
@@ -4800,7 +4800,7 @@ function openMatHistory(){
   if(!hist.length){wrap.innerHTML='<div style="color:var(--text-dim);font-style:italic;padding:20px">Aucune matinale sauvegardée.</div>';wrap.style.display='block';return;}
   const biaisCls=b=>b==='bull'?'bull':b==='bear'?'bear':'neutre';
   const biaisLabel=b=>b==='bull'?'📈 Haussier':b==='bear'?'📉 Baissier':'➖ Neutre';
-  wrap.innerHTML=`<div style="font-family:'Cinzel',serif;font-size:13px;color:var(--gold-dim);letter-spacing:2px;margin-bottom:14px">📚 HISTORIQUE DES MATINALES</div>`+
+  wrap.innerHTML=`<div style="font-family:'Cinzel',serif;font-size:13px;color:var(--gold-dim);letter-spacing:2px;margin-bottom:14px">📚 HISTORIQUE DES PARCHEMINS</div>`+
     hist.map(s=>`<div style="padding:14px 18px;background:var(--panel);border:1px solid var(--border);margin-bottom:8px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;cursor:pointer" onclick="loadHistEntry('${s.date}','${s.asset}')">
       <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim)">${s.date}</span>
       <span style="font-family:'Space Mono',monospace;font-size:9px;color:var(--gold)">${s.asset==='BTC'?'₿ BTC':'🪙 XAU'}</span>
