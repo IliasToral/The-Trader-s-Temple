@@ -4723,7 +4723,74 @@ function generateMatSummary(){
   saveMatinale();
 }
 
-function exportMatPDF(){generateMatSummary();setTimeout(()=>window.print(),400);}
+function exportMatPDF(){
+  generateMatSummary();
+
+  const date=document.getElementById('matDateDisplay')?.textContent||'';
+  const assetLabel=matAsset==='BTC'?'Bitcoin (BTC/USD)':'Or (XAU/USD)';
+  const d=matData[matAsset]||{};
+  const biais=d['biais']||'neutre';
+  const biaisLabel=biais==='bull'?'Biais Haussier 📈':biais==='bear'?'Biais Baissier 📉':'Biais Neutre ➖';
+
+  const get=id=>(document.getElementById(id)?.value||'').trim();
+  const daily=get('mtxt-daily');
+  const h4=get('mtxt-h4');
+  const liq=get('mtxt-liq');
+  const zones=get('mtxt-zones');
+  const bull=get('mtxt-bull');
+  const bear=get('mtxt-bear');
+  const biais_txt=get('mtxt-biais');
+  const news=get('mtxt-news');
+
+  // Build clean text blocks — only filled sections
+  let sections=[];
+  if(daily)sections.push({title:'Daily',text:daily});
+  if(h4)sections.push({title:'Structure H4',text:h4});
+  if(liq)sections.push({title:'Liquidités',text:liq});
+  if(zones)sections.push({title:'Zones clés',text:zones});
+  if(bull)sections.push({title:'Scénario haussier',text:bull});
+  if(bear)sections.push({title:'Scénario baissier',text:bear});
+  if(news)sections.push({title:'News & Macro',text:news});
+  if(biais_txt)sections.push({title:'Biais',text:biais_txt});
+
+  const bodyHtml=sections.map(s=>`
+    <div class="section">
+      <div class="section-title">${s.title}</div>
+      <div class="section-text">${s.text.replace(/\n/g,'<br>')}</div>
+    </div>`).join('');
+
+  const win=window.open('','_blank','width=800,height=900');
+  win.document.write(`<!DOCTYPE html><html><head>
+<meta charset="UTF-8">
+<title>Matinale · ${assetLabel} · ${date}</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Space+Mono&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Cormorant Garamond',serif;font-size:15pt;color:#1a1a1a;background:#fff;padding:40px 52px;line-height:1.9;}
+  .header{border-bottom:2px solid #c9a84c;padding-bottom:18px;margin-bottom:32px;}
+  .header-label{font-family:'Space Mono',monospace;font-size:8pt;letter-spacing:3px;color:#8a6828;text-transform:uppercase;margin-bottom:4px;}
+  .header-title{font-family:'Cinzel',serif;font-size:22pt;font-weight:700;color:#1a1a1a;letter-spacing:2px;}
+  .header-date{font-family:'Space Mono',monospace;font-size:9pt;color:#6a5a40;letter-spacing:1px;margin-top:6px;}
+  .section{margin-bottom:24px;}
+  .section-title{font-family:'Space Mono',monospace;font-size:8pt;letter-spacing:3px;color:#8a6828;text-transform:uppercase;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid #e8e0d0;}
+  .section-text{font-size:13pt;color:#2a2a2a;line-height:2;}
+  .biais{margin-top:28px;padding:12px 20px;border:1.5px solid #c9a84c;display:inline-block;font-family:'Cinzel',serif;font-size:13pt;letter-spacing:2px;color:#8a5e18;}
+  .footer{margin-top:40px;padding-top:14px;border-top:1px solid #e0d8c8;font-family:'Space Mono',monospace;font-size:7pt;color:#b0a090;letter-spacing:2px;text-align:center;}
+  @media print{body{padding:24px 36px;}@page{margin:1.5cm;}}
+</style>
+</head><body>
+<div class="header">
+  <div class="header-label">⛩ The Trader's Temple · Matinale</div>
+  <div class="header-title">${assetLabel}</div>
+  <div class="header-date">${date}</div>
+</div>
+${bodyHtml}
+<div class="biais">${biaisLabel}</div>
+<div class="footer">THE TRADER'S TEMPLE · MATINALE · ${date.toUpperCase()}</div>
+<script>window.onload=function(){window.print();}<\/script>
+</body></html>`);
+  win.document.close();
+}
 
 function openMatHistory(){
   const wrap=document.getElementById('matHistoryWrap');
