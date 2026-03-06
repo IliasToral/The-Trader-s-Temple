@@ -363,6 +363,74 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .yt-track.playing .yt-track-btn{color:var(--gold);}
 
 /* ============================================================
+   MATINALE
+   ============================================================ */
+.mat-date-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:32px;padding:16px 22px;background:var(--panel);border:1px solid var(--border);}
+.mat-date-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--text-dim);text-transform:uppercase;}
+.mat-date-val{font-family:'Cinzel',serif;font-size:16px;color:var(--gold-light);letter-spacing:2px;}
+.mat-asset-tabs{display:flex;gap:0;border:1px solid var(--border);overflow:hidden;width:fit-content;margin-bottom:28px;}
+.mat-asset-tab{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;padding:8px 18px;background:transparent;border:none;border-right:1px solid var(--border);color:var(--text-dim);cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.mat-asset-tab:last-child{border-right:none;}
+.mat-asset-tab.active{background:var(--gold-faint);color:var(--gold-light);}
+
+.mat-steps{display:flex;flex-direction:column;gap:16px;}
+.mat-step{background:var(--panel);border:1px solid var(--border);overflow:hidden;transition:border-color .2s;}
+.mat-step.filled{border-color:rgba(212,168,67,.3);}
+.mat-step-header{display:flex;align-items:center;gap:14px;padding:14px 18px;cursor:pointer;user-select:none;}
+.mat-step-num{font-family:'Cinzel',serif;font-size:11px;color:var(--gold-dim);width:22px;flex-shrink:0;}
+.mat-step-title{font-family:'Cinzel',serif;font-size:14px;color:var(--white);letter-spacing:1px;flex:1;}
+.mat-step-subtitle{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:1px;}
+.mat-step-check{width:20px;height:20px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;transition:all .2s;}
+.mat-step.filled .mat-step-check{background:rgba(61,220,132,.15);border-color:rgba(61,220,132,.4);color:var(--green);}
+.mat-step-body{padding:0 18px 18px;display:none;}
+.mat-step.open .mat-step-body{display:block;}
+.mat-step-hint{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:1px;margin-bottom:12px;padding:8px 12px;background:var(--panel2);border-left:2px solid var(--gold-dim);}
+.mat-hint-q{color:var(--gold-dim);}
+
+.mat-options{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+.mat-opt{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;padding:6px 14px;border:1px solid var(--border);color:var(--text-dim);background:transparent;cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.mat-opt:hover{border-color:var(--gold-dim);color:var(--gold);}
+.mat-opt.sel{border-color:var(--gold);color:var(--gold);background:var(--gold-faint);}
+.mat-opt.sel-bear{border-color:var(--red-border);color:var(--red);background:var(--red-bg);}
+.mat-opt.sel-green{border-color:var(--green-border);color:var(--green);background:var(--green-bg);}
+
+.mat-textarea{width:100%;background:var(--panel2);border:1px solid var(--border);color:var(--white);font-family:'Cormorant Garamond',serif;font-size:16px;padding:12px;outline:none;resize:none;line-height:1.8;transition:border-color .2s;}
+.mat-textarea:focus{border-color:var(--gold-dim);}
+.mat-textarea::placeholder{color:var(--text-dim);font-style:italic;}
+
+.mat-scenario-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.mat-scenario{padding:14px;border:1px solid var(--border);background:var(--panel2);}
+.mat-scenario.bull{border-color:rgba(61,220,132,.25);background:rgba(61,220,132,.04);}
+.mat-scenario.bear{border-color:rgba(224,82,82,.25);background:rgba(224,82,82,.04);}
+.mat-scen-label{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;margin-bottom:8px;}
+.mat-scenario.bull .mat-scen-label{color:var(--green);}
+.mat-scenario.bear .mat-scen-label{color:var(--red);}
+
+.mat-news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin-bottom:12px;}
+.mat-news-item{padding:8px 10px;border:1px solid var(--border);background:var(--panel2);display:flex;align-items:center;gap:8px;cursor:pointer;transition:all .2s;}
+.mat-news-item:hover{border-color:var(--gold-dim);}
+.mat-news-item.active{border-color:var(--orange);background:rgba(240,146,58,.07);}
+.mat-news-dot{width:8px;height:8px;border-radius:50%;background:var(--border2);flex-shrink:0;}
+.mat-news-item.high .mat-news-dot{background:var(--red);}
+.mat-news-item.medium .mat-news-dot{background:var(--orange);}
+.mat-news-item.low .mat-news-dot{background:var(--green);}
+.mat-news-name{font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);}
+
+/* Summary card */
+.mat-summary{background:var(--panel);border:1px solid var(--gold-dim);padding:28px 32px;position:relative;overflow:hidden;margin-top:32px;}
+.mat-summary::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.mat-summary-title{font-family:'Cinzel',serif;font-size:18px;color:var(--gold-light);letter-spacing:3px;margin-bottom:4px;}
+.mat-summary-date{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:2px;margin-bottom:20px;}
+.mat-summary-body{font-size:16px;color:var(--text);line-height:2;white-space:pre-wrap;}
+.mat-summary-biais{display:inline-block;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;padding:6px 16px;margin-top:16px;text-transform:uppercase;}
+.mat-summary-biais.bull{border:1px solid var(--green-border);color:var(--green);background:var(--green-bg);}
+.mat-summary-biais.bear{border:1px solid var(--red-border);color:var(--red);background:var(--red-bg);}
+.mat-summary-biais.neutre{border:1px solid var(--border);color:var(--text-dim);}
+
+.mat-action-bar{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;}
+@media(max-width:600px){.mat-scenario-grid{grid-template-columns:1fr;}}
+
+/* ============================================================
    PAGE 404
    ============================================================ */
 .page-404-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px;position:relative;overflow:hidden;}
@@ -902,6 +970,7 @@ tr:hover td{background:rgba(201,168,76,.015);}
     <div class="nav-dropdown">
       <button class="nav-link nav-drop-trigger" onclick="toggleDrop('dropAnalyse')">🧠 Analyse ▾</button>
       <div class="nav-drop-menu" id="dropAnalyse">
+        <button class="nav-drop-item" onclick="closeDrop();gotoPage('matinale')">🌅 Matinale</button>
         <button class="nav-drop-item" onclick="closeDrop();gotoPage('analyse')">🧠 Analyse</button>
         <button class="nav-drop-item" onclick="closeDrop();gotoPage('search')">🔍 Recherche</button>
         <button class="nav-drop-item" onclick="closeDrop();gotoPage('review')">🪞 Review</button>
@@ -1047,6 +1116,244 @@ tr:hover td{background:rgba(201,168,76,.015);}
     <div class="ft-title">THE TRADER'S TEMPLE · V2</div>
     <p class="ft-q">« La discipline crée la liberté. »</p>
   </footer>
+</div>
+
+<!-- ============================================================
+     PAGE : MATINALE
+     ============================================================ -->
+<div class="page" id="page-matinale">
+<div class="wrap">
+  <div class="sec-hdr"><span class="sec-num">—</span><h2 class="sec-title">🌅 Matinale</h2><div class="sec-line"></div></div>
+  <p style="color:var(--text-dim);font-style:italic;margin-bottom:28px;font-size:16px">Ton rituel d'analyse quotidien. Suis les étapes, construis ta carte du marché, définis ton biais.</p>
+
+  <!-- Date + actif -->
+  <div class="mat-date-bar">
+    <div>
+      <div class="mat-date-label">Matinale du</div>
+      <div class="mat-date-val" id="matDateDisplay">—</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <input type="date" id="matDate" class="finput" style="width:160px;font-size:13px" onchange="updateMatDate()">
+      <button class="btn" onclick="resetMatinale()" style="font-size:11px;padding:8px 14px">🔄 Nouvelle</button>
+      <button class="btn green" onclick="saveMatinale()" style="font-size:11px;padding:8px 14px">💾 Sauvegarder</button>
+    </div>
+  </div>
+
+  <!-- Actif selector -->
+  <div class="mat-asset-tabs" id="matAssetTabs">
+    <button class="mat-asset-tab active" onclick="switchMatAsset('BTC',this)">₿ BTC/USD</button>
+    <button class="mat-asset-tab" onclick="switchMatAsset('XAU',this)">🪙 XAU/USD</button>
+  </div>
+
+  <!-- Steps -->
+  <div class="mat-steps" id="matSteps">
+
+    <!-- STEP 1 : DAILY -->
+    <div class="mat-step" id="mstep-1">
+      <div class="mat-step-header" onclick="toggleMatStep(1)">
+        <div class="mat-step-num">01</div>
+        <div>
+          <div class="mat-step-title">Bougie Daily</div>
+          <div class="mat-step-subtitle">CLÔTURE D'HIER · MOMENTUM</div>
+        </div>
+        <div class="mat-step-check" id="mcheck-1">—</div>
+      </div>
+      <div class="mat-step-body">
+        <div class="mat-step-hint">
+          <div class="mat-hint-q">❓ La bougie est haussière ou baissière ?&nbsp;&nbsp;❓ Quel est le momentum ?</div>
+        </div>
+        <div class="mat-options" id="mopts-daily-dir">
+          <button class="mat-opt" onclick="selectMatOpt(this,'daily-dir','bull','sel-green')">📈 Haussière</button>
+          <button class="mat-opt" onclick="selectMatOpt(this,'daily-dir','bear','sel-bear')">📉 Baissière</button>
+          <button class="mat-opt" onclick="selectMatOpt(this,'daily-dir','doji','sel')">➖ Doji / Indécis</button>
+        </div>
+        <div class="mat-options" id="mopts-daily-mom">
+          <button class="mat-opt" onclick="selectMatOpt(this,'daily-mom','fort','sel-green')">💥 Fort</button>
+          <button class="mat-opt" onclick="selectMatOpt(this,'daily-mom','faible','sel')">🌫️ Faible</button>
+          <button class="mat-opt" onclick="selectMatOpt(this,'daily-mom','rejet','sel-bear')">↩️ Rejet</button>
+        </div>
+        <textarea class="mat-textarea" id="mtxt-daily" rows="3" placeholder='Ex: "Bitcoin clôture en baisse avec une bougie Daily vendeuse avec rejet en mèche haute."' oninput="checkMatStep(1)"></textarea>
+      </div>
+    </div>
+
+    <!-- STEP 2 : H4 STRUCTURE -->
+    <div class="mat-step" id="mstep-2">
+      <div class="mat-step-header" onclick="toggleMatStep(2)">
+        <div class="mat-step-num">02</div>
+        <div>
+          <div class="mat-step-title">Structure H4</div>
+          <div class="mat-step-subtitle">RANGE · TENDANCE · PHASE</div>
+        </div>
+        <div class="mat-step-check" id="mcheck-2">—</div>
+      </div>
+      <div class="mat-step-body">
+        <div class="mat-step-hint">
+          <div class="mat-hint-q">❓ Le prix est en range, tendance ou retournement ?&nbsp;&nbsp;❓ Quelle est la phase de marché ?</div>
+        </div>
+        <div class="mat-options" id="mopts-h4-phase">
+          <button class="mat-opt" onclick="selectMatOpt(this,'h4-phase','range','sel')">↔️ Range</button>
+          <button class="mat-opt" onclick="selectMatOpt(this,'h4-phase','bull','sel-green')">🔼 Tendance haussière</button>
+          <button class="mat-opt" onclick="selectMatOpt(this,'h4-phase','bear','sel-bear')">🔽 Tendance baissière</button>
+          <button class="mat-opt" onclick="selectMatOpt(this,'h4-phase','retour','sel')">🔄 Retournement</button>
+        </div>
+        <textarea class="mat-textarea" id="mtxt-h4" rows="3" placeholder='Ex: "Le prix évolue dans un range H4 entre 65k et 72k. Structure haussière intacte."' oninput="checkMatStep(2)"></textarea>
+      </div>
+    </div>
+
+    <!-- STEP 3 : LIQUIDITÉS -->
+    <div class="mat-step" id="mstep-3">
+      <div class="mat-step-header" onclick="toggleMatStep(3)">
+        <div class="mat-step-num">03</div>
+        <div>
+          <div class="mat-step-title">Liquidités</div>
+          <div class="mat-step-subtitle">BSL · SSL · EQUAL HIGHS/LOWS</div>
+        </div>
+        <div class="mat-step-check" id="mcheck-3">—</div>
+      </div>
+      <div class="mat-step-body">
+        <div class="mat-step-hint">
+          <div class="mat-hint-q">🎯 Cherche : anciens highs · anciens lows · equal highs · equal lows · BSL/SSL visible</div>
+        </div>
+        <div class="mat-options" id="mopts-liq">
+          <button class="mat-opt" onclick="toggleMatMulti(this,'liq','bsl-taken')">✅ BSL livrée</button>
+          <button class="mat-opt" onclick="toggleMatMulti(this,'liq','ssl-taken')">✅ SSL livrée</button>
+          <button class="mat-opt" onclick="toggleMatMulti(this,'liq','bsl-above')">⬆️ BSL au-dessus</button>
+          <button class="mat-opt" onclick="toggleMatMulti(this,'liq','ssl-below')">⬇️ SSL en-dessous</button>
+          <button class="mat-opt" onclick="toggleMatMulti(this,'liq','eq-highs')">〰️ Equal Highs</button>
+          <button class="mat-opt" onclick="toggleMatMulti(this,'liq','eq-lows')">〰️ Equal Lows</button>
+        </div>
+        <textarea class="mat-textarea" id="mtxt-liq" rows="3" placeholder='Ex: "BSL à 72,300$ déjà livrée. SSL à 64k toujours intacte. Equal lows visible à 65k."' oninput="checkMatStep(3)"></textarea>
+      </div>
+    </div>
+
+    <!-- STEP 4 : ZONES -->
+    <div class="mat-step" id="mstep-4">
+      <div class="mat-step-header" onclick="toggleMatStep(4)">
+        <div class="mat-step-num">04</div>
+        <div>
+          <div class="mat-step-title">Zones Clés</div>
+          <div class="mat-step-subtitle">FVG · OB · POI · FIBONACCI</div>
+        </div>
+        <div class="mat-step-check" id="mcheck-4">—</div>
+      </div>
+      <div class="mat-step-body">
+        <div class="mat-step-hint">
+          <div class="mat-hint-q">🗺️ Trace : FVG Weekly/Daily/H4 · Order Blocks · Breaker Blocks · 50% Fibonacci</div>
+        </div>
+        <div class="mat-options" id="mopts-zones">
+          <button class="mat-opt" onclick="toggleMatMulti(this,'zones','fvg-w')">FVG Weekly</button>
+          <button class="mat-opt" onclick="toggleMatMulti(this,'zones','fvg-d')">FVG Daily</button>
+          <button class="mat-opt" onclick="toggleMatMulti(this,'zones','fvg-h4')">FVG H4</button>
+          <button class="mat-opt" onclick="toggleMatMulti(this,'zones','ob-bull')">OB Haussier</button>
+          <button class="mat-opt" onclick="toggleMatMulti(this,'zones','ob-bear')">OB Baissier</button>
+          <button class="mat-opt" onclick="toggleMatMulti(this,'zones','breaker')">Breaker Block</button>
+          <button class="mat-opt" onclick="toggleMatMulti(this,'zones','fib50')">Fibo 50%</button>
+          <button class="mat-opt" onclick="toggleMatMulti(this,'zones','poi')">POI Clé</button>
+        </div>
+        <textarea class="mat-textarea" id="mtxt-zones" rows="3" placeholder='Ex: "FVG Daily bullish à 67,200$. OB H4 haussier à 65,500$. Prix sur 50% Fibonacci de l'impulsion."' oninput="checkMatStep(4)"></textarea>
+      </div>
+    </div>
+
+    <!-- STEP 5 : SCÉNARIOS -->
+    <div class="mat-step" id="mstep-5">
+      <div class="mat-step-header" onclick="toggleMatStep(5)">
+        <div class="mat-step-num">05</div>
+        <div>
+          <div class="mat-step-title">2 Scénarios</div>
+          <div class="mat-step-subtitle">SI/ALORS · HAUSSIER & BAISSIER</div>
+        </div>
+        <div class="mat-step-check" id="mcheck-5">—</div>
+      </div>
+      <div class="mat-step-body">
+        <div class="mat-step-hint">
+          <div class="mat-hint-q">📐 Ne prédit pas — réagis. Toujours deux scénarios conditionnels.</div>
+        </div>
+        <div class="mat-scenario-grid">
+          <div class="mat-scenario bull">
+            <div class="mat-scen-label">📈 SCÉNARIO HAUSSIER</div>
+            <textarea class="mat-textarea" id="mtxt-bull" rows="4" placeholder="Si [niveau] tient → retour vers [cible]&#10;Ex: Si 65k tient → retour 70k" oninput="checkMatStep(5)"></textarea>
+          </div>
+          <div class="mat-scenario bear">
+            <div class="mat-scen-label">📉 SCÉNARIO BAISSIER</div>
+            <textarea class="mat-textarea" id="mtxt-bear" rows="4" placeholder="Si [niveau] casse → extension vers [cible]&#10;Ex: Si 65k casse → 62k" oninput="checkMatStep(5)"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 6 : BIAIS -->
+    <div class="mat-step" id="mstep-6">
+      <div class="mat-step-header" onclick="toggleMatStep(6)">
+        <div class="mat-step-num">06</div>
+        <div>
+          <div class="mat-step-title">Biais du Jour</div>
+          <div class="mat-step-subtitle">DIRECTION STATISTIQUEMENT PROBABLE</div>
+        </div>
+        <div class="mat-step-check" id="mcheck-6">—</div>
+      </div>
+      <div class="mat-step-body">
+        <div class="mat-step-hint">
+          <div class="mat-hint-q">⚠️ Ce n'est pas un signal — c'est la direction la plus probable selon ta lecture.</div>
+        </div>
+        <div class="mat-options" id="mopts-biais">
+          <button class="mat-opt" onclick="selectMatOpt(this,'biais','bull','sel-green')">📈 Biais Haussier</button>
+          <button class="mat-opt" onclick="selectMatOpt(this,'biais','bear','sel-bear')">📉 Biais Baissier</button>
+          <button class="mat-opt" onclick="selectMatOpt(this,'biais','neutre','sel')">➖ Biais Neutre</button>
+        </div>
+        <textarea class="mat-textarea" id="mtxt-biais" rows="2" placeholder='Ex: "Biais haussier tant que 67k tient en clôture H4."' oninput="checkMatStep(6)"></textarea>
+      </div>
+    </div>
+
+    <!-- STEP 7 : NEWS -->
+    <div class="mat-step" id="mstep-7">
+      <div class="mat-step-header" onclick="toggleMatStep(7)">
+        <div class="mat-step-num">07</div>
+        <div>
+          <div class="mat-step-title">News & Macro</div>
+          <div class="mat-step-subtitle">AGENDA ÉCONOMIQUE · CORRÉLATIONS</div>
+        </div>
+        <div class="mat-step-check" id="mcheck-7">—</div>
+      </div>
+      <div class="mat-step-body">
+        <div class="mat-step-hint">
+          <div class="mat-hint-q">📰 Coche les news du jour · NASDAQ ↓ → BTC ↓ &nbsp;|&nbsp; Risk off → Gold ↑</div>
+        </div>
+        <div class="mat-news-grid">
+          <div class="mat-news-item high" onclick="toggleMatNews(this)"><div class="mat-news-dot"></div><div class="mat-news-name">CPI</div></div>
+          <div class="mat-news-item high" onclick="toggleMatNews(this)"><div class="mat-news-dot"></div><div class="mat-news-name">NFP</div></div>
+          <div class="mat-news-item high" onclick="toggleMatNews(this)"><div class="mat-news-dot"></div><div class="mat-news-name">FOMC</div></div>
+          <div class="mat-news-item high" onclick="toggleMatNews(this)"><div class="mat-news-dot"></div><div class="mat-news-name">PCE</div></div>
+          <div class="mat-news-item medium" onclick="toggleMatNews(this)"><div class="mat-news-dot"></div><div class="mat-news-name">ADP</div></div>
+          <div class="mat-news-item medium" onclick="toggleMatNews(this)"><div class="mat-news-dot"></div><div class="mat-news-name">PPI</div></div>
+          <div class="mat-news-item medium" onclick="toggleMatNews(this)"><div class="mat-news-dot"></div><div class="mat-news-name">ISM</div></div>
+          <div class="mat-news-item low" onclick="toggleMatNews(this)"><div class="mat-news-dot"></div><div class="mat-news-name">Pas de news</div></div>
+        </div>
+        <div class="mat-options" id="mopts-correl">
+          <button class="mat-opt" onclick="toggleMatMulti(this,'correl','nasdaq-up')">📈 NASDAQ ↑</button>
+          <button class="mat-opt" onclick="toggleMatMulti(this,'correl','nasdaq-down')">📉 NASDAQ ↓</button>
+          <button class="mat-opt" onclick="toggleMatMulti(this,'correl','risk-on')">✅ Risk On</button>
+          <button class="mat-opt" onclick="toggleMatMulti(this,'correl','risk-off')">🔴 Risk Off</button>
+        </div>
+        <textarea class="mat-textarea" id="mtxt-news" rows="2" placeholder='Ex: "NFP ce soir à 14h30. NASDAQ en légère baisse. Risk off ambiant."' oninput="checkMatStep(7)"></textarea>
+      </div>
+    </div>
+
+  </div><!-- end mat-steps -->
+
+  <!-- SUMMARY -->
+  <div id="matSummaryWrap" style="display:none"></div>
+
+  <div class="mat-action-bar">
+    <button class="btn green" onclick="generateMatSummary()">🌅 Générer ma Matinale</button>
+    <button class="btn" onclick="exportMatPDF()">📄 Exporter PDF</button>
+    <button class="btn" id="matHistBtn" onclick="openMatHistory()" style="margin-left:auto">📚 Historique</button>
+  </div>
+
+  <!-- HISTORY -->
+  <div id="matHistoryWrap" style="display:none;margin-top:28px"></div>
+
+</div>
+<footer class="site-footer"><div class="ft-torii">⛩️</div><div class="ft-title">THE TRADER'S TEMPLE · V2</div></footer>
 </div>
 
 <!-- ============================================================
@@ -3070,6 +3377,7 @@ function gotoPage(name){
   if(name==='sanctuaire'){resetSanc();}
   if(name==='analyse'){renderAnalyse();}
   if(name==='search'){runSearch();}
+  if(name==='matinale'){initMatinale();}
 }
 
 // ============================================================
@@ -4232,6 +4540,219 @@ function ytStartFill(idx){
     if(pct>=100)pct=0;
     fill.style.width=pct+'%';
   },interval);
+}
+
+// ============================================================
+// MATINALE
+// ============================================================
+let matAsset='BTC';
+let matData={};
+const MAT_KEY='ttt_matinale_v1';
+const MAT_HIST_KEY='ttt_matinale_hist_v1';
+
+function initMatinale(){
+  const today=new Date().toISOString().split('T')[0];
+  const dateEl=document.getElementById('matDate');
+  if(dateEl&&!dateEl.value)dateEl.value=today;
+  updateMatDate();
+  loadMatinale();
+  // Open step 1 by default
+  const s=document.getElementById('mstep-1');
+  if(s&&!s.classList.contains('open'))s.classList.add('open');
+}
+
+function updateMatDate(){
+  const v=document.getElementById('matDate')?.value||new Date().toISOString().split('T')[0];
+  const d=new Date(v+'T12:00:00');
+  const DAYS=['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+  const MONTHS=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  const el=document.getElementById('matDateDisplay');
+  if(el)el.textContent=`${DAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+function switchMatAsset(asset,btn){
+  matAsset=asset;
+  document.querySelectorAll('.mat-asset-tab').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  loadMatinale();
+}
+
+function toggleMatStep(n){
+  const el=document.getElementById('mstep-'+n);
+  if(el)el.classList.toggle('open');
+}
+
+function selectMatOpt(btn,group,val,cls){
+  const parent=document.getElementById('mopts-'+group);
+  if(!parent)return;
+  parent.querySelectorAll('.mat-opt').forEach(b=>{b.classList.remove('sel','sel-bear','sel-green');});
+  btn.classList.add(cls);
+  if(!matData[matAsset])matData[matAsset]={};
+  matData[matAsset][group]=val;
+  checkMatStep(getStepForGroup(group));
+}
+
+function toggleMatMulti(btn,group,val){
+  if(!matData[matAsset])matData[matAsset]={};
+  if(!matData[matAsset][group])matData[matAsset][group]=[];
+  const arr=matData[matAsset][group];
+  const idx=arr.indexOf(val);
+  if(idx>-1){arr.splice(idx,1);btn.classList.remove('sel');}
+  else{arr.push(val);btn.classList.add('sel');}
+  checkMatStep(getStepForGroup(group));
+}
+
+function toggleMatNews(btn){
+  btn.classList.toggle('active');
+}
+
+function getStepForGroup(g){
+  const map={'daily-dir':1,'daily-mom':1,'h4-phase':2,'liq':3,'zones':4,'biais':6,'correl':7};
+  return map[g]||1;
+}
+
+function checkMatStep(n){
+  const filled=isStepFilled(n);
+  const el=document.getElementById('mstep-'+n);
+  const chk=document.getElementById('mcheck-'+n);
+  if(el){el.classList.toggle('filled',filled);}
+  if(chk)chk.textContent=filled?'✓':'—';
+}
+
+function isStepFilled(n){
+  const d=matData[matAsset]||{};
+  if(n===1)return !!(d['daily-dir']||document.getElementById('mtxt-daily')?.value.trim());
+  if(n===2)return !!(d['h4-phase']||document.getElementById('mtxt-h4')?.value.trim());
+  if(n===3)return !!(document.getElementById('mtxt-liq')?.value.trim());
+  if(n===4)return !!(document.getElementById('mtxt-zones')?.value.trim());
+  if(n===5)return !!(document.getElementById('mtxt-bull')?.value.trim()||document.getElementById('mtxt-bear')?.value.trim());
+  if(n===6)return !!(d['biais']||document.getElementById('mtxt-biais')?.value.trim());
+  if(n===7)return true; // optional
+  return false;
+}
+
+function saveMatinale(){
+  const date=document.getElementById('matDate')?.value||new Date().toISOString().split('T')[0];
+  const snapshot={
+    date,asset:matAsset,
+    opts:matData[matAsset]||{},
+    daily:document.getElementById('mtxt-daily')?.value||'',
+    h4:document.getElementById('mtxt-h4')?.value||'',
+    liq:document.getElementById('mtxt-liq')?.value||'',
+    zones:document.getElementById('mtxt-zones')?.value||'',
+    bull:document.getElementById('mtxt-bull')?.value||'',
+    bear:document.getElementById('mtxt-bear')?.value||'',
+    biais:document.getElementById('mtxt-biais')?.value||'',
+    news:document.getElementById('mtxt-news')?.value||'',
+  };
+  localStorage.setItem(MAT_KEY+'-'+date+'-'+matAsset,JSON.stringify(snapshot));
+
+  // Add to history
+  let hist=JSON.parse(localStorage.getItem(MAT_HIST_KEY)||'[]');
+  const idx=hist.findIndex(h=>h.date===date&&h.asset===matAsset);
+  if(idx>-1)hist[idx]=snapshot; else hist.unshift(snapshot);
+  hist=hist.slice(0,30);
+  localStorage.setItem(MAT_HIST_KEY,JSON.stringify(hist));
+  showToast('✅ Matinale sauvegardée !');
+}
+
+function loadMatinale(){
+  const date=document.getElementById('matDate')?.value||new Date().toISOString().split('T')[0];
+  const raw=localStorage.getItem(MAT_KEY+'-'+date+'-'+matAsset);
+  if(!raw)return;
+  const s=JSON.parse(raw);
+  if(!matData[matAsset])matData[matAsset]={};
+  matData[matAsset]=s.opts||{};
+  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.value=v||'';};
+  set('mtxt-daily',s.daily);set('mtxt-h4',s.h4);set('mtxt-liq',s.liq);
+  set('mtxt-zones',s.zones);set('mtxt-bull',s.bull);set('mtxt-bear',s.bear);
+  set('mtxt-biais',s.biais);set('mtxt-news',s.news);
+  [1,2,3,4,5,6,7].forEach(n=>checkMatStep(n));
+}
+
+function resetMatinale(){
+  if(!confirm('Réinitialiser la matinale ?'))return;
+  ['mtxt-daily','mtxt-h4','mtxt-liq','mtxt-zones','mtxt-bull','mtxt-bear','mtxt-biais','mtxt-news'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.value='';
+  });
+  document.querySelectorAll('.mat-opt').forEach(b=>b.classList.remove('sel','sel-bear','sel-green'));
+  document.querySelectorAll('.mat-news-item').forEach(b=>b.classList.remove('active'));
+  matData[matAsset]={};
+  [1,2,3,4,5,6,7].forEach(n=>checkMatStep(n));
+  document.getElementById('matSummaryWrap').style.display='none';
+}
+
+function generateMatSummary(){
+  const d=matData[matAsset]||{};
+  const daily=document.getElementById('mtxt-daily')?.value||'';
+  const h4=document.getElementById('mtxt-h4')?.value||'';
+  const liq=document.getElementById('mtxt-liq')?.value||'';
+  const zones=document.getElementById('mtxt-zones')?.value||'';
+  const bull=document.getElementById('mtxt-bull')?.value||'';
+  const bear=document.getElementById('mtxt-bear')?.value||'';
+  const biais_txt=document.getElementById('mtxt-biais')?.value||'';
+  const news=document.getElementById('mtxt-news')?.value||'';
+  const biais=d['biais']||'neutre';
+  const date=document.getElementById('matDateDisplay')?.textContent||'';
+  const assetLabel=matAsset==='BTC'?'Bitcoin (BTC/USD)':'Or (XAU/USD)';
+  const biaisLabel=biais==='bull'?'🟢 BIAIS HAUSSIER':biais==='bear'?'🔴 BIAIS BAISSIER':'⬜ BIAIS NEUTRE';
+  const biaisCls=biais==='bull'?'bull':biais==='bear'?'bear':'neutre';
+
+  let body='';
+  if(daily)body+=`📊 Daily\n${daily}\n\n`;
+  if(h4)body+=`📐 Structure H4\n${h4}\n\n`;
+  if(liq)body+=`💧 Liquidités\n${liq}\n\n`;
+  if(zones)body+=`🗺️ Zones clés\n${zones}\n\n`;
+  if(bull||bear){
+    body+=`📈 Scénario haussier\n${bull||'—'}\n\n`;
+    body+=`📉 Scénario baissier\n${bear||'—'}\n\n`;
+  }
+  if(news)body+=`📰 Macro / News\n${news}\n\n`;
+
+  const wrap=document.getElementById('matSummaryWrap');
+  if(!wrap)return;
+  wrap.style.display='block';
+  wrap.innerHTML=`<div class="mat-summary">
+    <div class="mat-summary-title">🌅 ${assetLabel}</div>
+    <div class="mat-summary-date">${date}</div>
+    <div class="mat-summary-body">${body.trim()}</div>
+    <div class="mat-summary-biais ${biaisCls}">${biaisLabel}</div>
+    ${biais_txt?`<div style="font-size:15px;color:var(--text-dim);font-style:italic;margin-top:12px">"${biais_txt}"</div>`:''}
+  </div>`;
+  wrap.scrollIntoView({behavior:'smooth',block:'start'});
+  saveMatinale();
+}
+
+function exportMatPDF(){generateMatSummary();setTimeout(()=>window.print(),400);}
+
+function openMatHistory(){
+  const wrap=document.getElementById('matHistoryWrap');
+  if(!wrap)return;
+  if(wrap.style.display==='block'){wrap.style.display='none';return;}
+  const hist=JSON.parse(localStorage.getItem(MAT_HIST_KEY)||'[]');
+  if(!hist.length){wrap.innerHTML='<div style="color:var(--text-dim);font-style:italic;padding:20px">Aucune matinale sauvegardée.</div>';wrap.style.display='block';return;}
+  const biaisCls=b=>b==='bull'?'bull':b==='bear'?'bear':'neutre';
+  const biaisLabel=b=>b==='bull'?'📈 Haussier':b==='bear'?'📉 Baissier':'➖ Neutre';
+  wrap.innerHTML=`<div style="font-family:'Cinzel',serif;font-size:13px;color:var(--gold-dim);letter-spacing:2px;margin-bottom:14px">📚 HISTORIQUE DES MATINALES</div>`+
+    hist.map(s=>`<div style="padding:14px 18px;background:var(--panel);border:1px solid var(--border);margin-bottom:8px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;cursor:pointer" onclick="loadHistEntry('${s.date}','${s.asset}')">
+      <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim)">${s.date}</span>
+      <span style="font-family:'Space Mono',monospace;font-size:9px;color:var(--gold)">${s.asset==='BTC'?'₿ BTC':'🪙 XAU'}</span>
+      <span class="mat-summary-biais ${biaisCls(s.opts?.biais)}" style="font-size:8px;padding:3px 10px">${biaisLabel(s.opts?.biais)}</span>
+      <span style="font-size:13px;color:var(--text-dim);font-style:italic;flex:1;min-width:120px">${(s.daily||'').substring(0,60)}...</span>
+      <span style="font-family:'Space Mono',monospace;font-size:8px;color:var(--gold-dim)">CHARGER →</span>
+    </div>`).join('');
+  wrap.style.display='block';
+}
+
+function loadHistEntry(date,asset){
+  document.getElementById('matDate').value=date;
+  updateMatDate();
+  matAsset=asset;
+  document.querySelectorAll('.mat-asset-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`.mat-asset-tab[onclick*="${asset}"]`)?.classList.add('active');
+  loadMatinale();
+  document.getElementById('matHistoryWrap').style.display='none';
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 // ============================================================
